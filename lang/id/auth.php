@@ -21,5 +21,14 @@ return [
     'simpan' => 'Simpan',
     'ubah_kata_sandi' => 'Ubah Kata Sandi',
     'password_sekarang' => 'Password Sekarang',
-    'password_baru' => 'Password Baru'
+    'password_baru' => 'Password Baru',
+    'beranda' => 'Beranda',
+    'berita' => 'Berita',
+    'tambah_berita' => 'Tambah Berita',
+    'edit_berita' => 'Edit Berita',
+    'form_edit' => 'Form Edit',
+    'kembali' => 'Kembali',
+    'form_tambah' => 'Form Tambah',
+    'tambah' => 'Tambah',
+    'perbarui' => 'Perbarui'
 ];

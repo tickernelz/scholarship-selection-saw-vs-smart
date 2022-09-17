@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
@@ -37,6 +39,14 @@ Route::group(['middleware' => 'auth'], static function () {
         // Password
         Route::get('admin/password', [PasswordController::class, 'index'])->name('get.admin.password');
         Route::post('admin/password/update/{id}', [PasswordController::class, 'update'])->name('post.admin.password.update');
+        // Berita
+        Route::get('admin/berita', [BeritaController::class, 'index'])->name('get.admin.berita.index');
+        Route::get('admin/berita/tambah', [BeritaController::class, 'tambah_index'])->name('get.admin.berita.tambah');
+        Route::post('admin/berita/tambah/post', [BeritaController::class, 'tambah'])->name('post.admin.berita.tambah');
+        Route::get('admin/berita/edit/{id}', [BeritaController::class, 'edit_index'])->name('get.admin.berita.edit');
+        Route::post('admin/berita/edit/{id}/post', [BeritaController::class, 'edit'])->name('post.admin.berita.edit');
+        Route::get('admin/berita/hapus/{id}', [BeritaController::class, 'hapus'])->name('get.admin.berita.hapus');
+        Route::get('admin/berita/hapus-berkas/{id}', [BeritaController::class, 'hapus_berkas'])->name('hapus.berkas.surat.masuk');
     });
 });
 
