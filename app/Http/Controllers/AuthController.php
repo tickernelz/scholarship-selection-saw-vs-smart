@@ -15,7 +15,7 @@ class AuthController extends Controller
             if (Auth::user()->hasRole('admin')) {
                 return redirect()->route('get.admin.dashboard');
             } else {
-                return redirect()->route('home');
+                return redirect()->route('get.home');
             }
         }
 
@@ -46,7 +46,7 @@ class AuthController extends Controller
             if (Auth::user()->hasRole('admin')) {
                 return redirect()->route('get.admin.dashboard');
             } else {
-                return redirect()->route('home');
+                return redirect()->route('get.home');
             }
         } else { // false
             Session::flash('error', 'Email atau password salah');

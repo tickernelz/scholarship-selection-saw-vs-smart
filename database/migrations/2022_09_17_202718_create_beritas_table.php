@@ -18,7 +18,9 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(\App\Models\User::class);
             $table->text('title');
+            $table->string('slug')->unique();
             $table->text('body');
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }
