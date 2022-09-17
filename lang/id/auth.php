@@ -19,4 +19,7 @@ return [
     'nama' => 'Nama',
     'konfirmasi_password' => 'Konfirmasi Password',
     'simpan' => 'Simpan',
+    'ubah_kata_sandi' => 'Ubah Kata Sandi',
+    'password_sekarang' => 'Password Sekarang',
+    'password_baru' => 'Password Baru'
 ];

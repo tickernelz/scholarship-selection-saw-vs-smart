@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -30,8 +31,12 @@ Route::group(['middleware' => 'auth'], static function () {
     Route::group(['middleware' => ['role:admin']], static function () {
         // Admin
         Route::get('admin', [DashboardController::class, 'index'])->name('get.admin.dashboard');
+        // Profile
         Route::get('admin/profile', [ProfileController::class, 'index'])->name('get.admin.profile');
         Route::post('admin/profile/update/{id}', [ProfileController::class, 'update'])->name('post.admin.profile.update');
+        // Password
+        Route::get('admin/password', [PasswordController::class, 'index'])->name('get.admin.password');
+        Route::post('admin/password/update/{id}', [PasswordController::class, 'update'])->name('post.admin.password.update');
     });
 });
 

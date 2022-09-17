@@ -14,9 +14,9 @@ return [
     |
     */
 
-    'title' => 'Skripsi Dede',
+    'title' => '',
     'title_prefix' => '',
-    'title_postfix' => '',
+    'title_postfix' => '| SPK KERINGANAN UKT IAIN',
 
     /*
     |--------------------------------------------------------------------------
@@ -326,7 +326,7 @@ return [
         ],
         [
             'text' => 'change_password',
-            'url'  => 'admin/settings',
+            'url'  => 'admin/password',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [
