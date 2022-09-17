@@ -11,5 +11,12 @@ return [
     'lupa' => 'Lupa',
     'email_password' => 'Username / Password?',
     'belum_punya_akun' => 'Belum punya akun?',
-    'daftar_sekarang' => 'Daftar sekarang'
+    'daftar_sekarang' => 'Daftar sekarang',
+    'dashboard' => 'Dashboard',
+    'kelola_admin' => 'Kelola Admin',
+    'profile' => 'Profile',
+    'profile_settings' => 'Pengaturan Profil',
+    'nama' => 'Nama',
+    'konfirmasi_password' => 'Konfirmasi Password',
+    'simpan' => 'Simpan',
 ];
