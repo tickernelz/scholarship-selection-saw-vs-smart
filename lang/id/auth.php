@@ -31,5 +31,9 @@ return [
     'form_tambah' => 'Form Tambah',
     'tambah' => 'Tambah',
     'perbarui' => 'Perbarui',
-    'kembali_ke_beranda' => 'Kembali Ke Beranda'
+    'kembali_ke_beranda' => 'Kembali Ke Beranda',
+    'nim' => 'NIM',
+    'alamat' => 'Alamat',
+    'jurusan' => 'Jurusan',
+    'prodi' => 'Prodi'
 ];

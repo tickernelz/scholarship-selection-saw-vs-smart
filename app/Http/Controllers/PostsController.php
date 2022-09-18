@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Berita;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
-class BeritaController extends Controller
+class PostsController extends Controller
 {
     public function index()
     {
         // Get Data
-        $data = Berita::get();
+        $data = Post::get();
         $judul = trans('auth.berita');
 
         return view('admin.berita.index', compact([
@@ -30,7 +30,7 @@ class BeritaController extends Controller
     public function edit_index(int $id)
     {
         // Get Data
-        $data = Berita::find($id);
+        $data = Post::find($id);
         $judul = trans('auth.edit_berita');
 
         return view('admin.berita.edit', compact([
@@ -48,7 +48,7 @@ class BeritaController extends Controller
         ]);
 
         // Kirim Data ke Database
-        $data = new Berita();
+        $data = new Post();
         $data->title = $request->title;
         $data->slug = \Str::slug($request->title);
         $data->body = $request->body;
@@ -70,7 +70,7 @@ class BeritaController extends Controller
 
     public function edit(Request $request, int $id)
     {
-        $data = Berita::find($id);
+        $data = Post::find($id);
 
         $request->validate([
             'title' => 'required|string',
@@ -106,7 +106,7 @@ class BeritaController extends Controller
 
     public function hapus(int $id)
     {
-        $data = Berita::find($id);
+        $data = Post::find($id);
         $namaberkas = $data->file;
 
         // Hapus Berkas Lama (Jika Ada)
@@ -121,7 +121,7 @@ class BeritaController extends Controller
 
     public function hapus_berkas(int $id)
     {
-        $data = Berita::find($id);
+        $data = Post::find($id);
         $namaberkas = $data->file;
 
         // Hapus Berkas Lama ()
