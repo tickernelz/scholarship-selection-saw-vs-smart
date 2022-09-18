@@ -44,9 +44,16 @@
                         </a>
                     </div>
 
-                    <div class="container-login100-form-btn">
+                    <div class="container-login100-form-btn" style="margin-bottom: 1em">
                         <button class="login100-form-btn" type="submit">
                             {{ trans('auth.masuk') }}
+                        </button>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn" type="button"
+                                onclick="location.href='{{ route('get.home.index') }}'">
+                            {{ trans('auth.kembali_ke_beranda') }}
                         </button>
                     </div>
 

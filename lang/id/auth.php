@@ -30,5 +30,6 @@ return [
     'kembali' => 'Kembali',
     'form_tambah' => 'Form Tambah',
     'tambah' => 'Tambah',
-    'perbarui' => 'Perbarui'
+    'perbarui' => 'Perbarui',
+    'kembali_ke_beranda' => 'Kembali Ke Beranda'
 ];
