@@ -63,8 +63,8 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>Panel',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo' => 'SPKKUIAINP',
+    'logo_img' => 'logo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -253,7 +253,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'admin',
+    'dashboard_url' => 'home',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -309,6 +309,7 @@ return [
         [
             'text' => 'Berita',
             'icon' => 'far fa-fw fa-newspaper',
+            'can' => 'kelola berita',
             'submenu' => [
                 [
                     'text' => 'List Berita',
@@ -324,11 +325,13 @@ return [
         [
             'text' => 'profile',
             'url' => 'admin/profile',
+            'can' => 'kelola profil',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'change_password',
             'url' => 'admin/password',
+            'can' => 'kelola password',
             'icon' => 'fas fa-fw fa-lock',
         ],
 //        [
