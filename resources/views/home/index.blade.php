@@ -43,21 +43,25 @@
                                                         </a>
                                                     </div>
                                                     <p class="text-justify">
-                                                    {!! Str::limit($li->body, 400) !!}
+                                                        {!! Str::limit($li->body, 400) !!}
                                                     </p>
                                                     @if (isset($li->file))
                                                         <p class="text-justify">
                                                             <a href="/files/{{ $li->file }}" target="_blank">Download
                                                                 File</a></p>
                                                     @else
-                                                        <p class="text-justify text-warning">
-                                                        Tidak Ada Berkas
+                                                        <p class="text-center text-warning">
+                                                            Tidak Ada Berkas
                                                         </p>
                                                     @endif
+                                                    <hr class="my-2"/>
                                                 </div>
                                             </li>
                                         @endforeach
                                     </ul>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    {!! $berita->links() !!}
                                 </div>
                             </div>
                         </div>

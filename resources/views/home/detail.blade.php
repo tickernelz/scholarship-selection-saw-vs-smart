@@ -35,9 +35,7 @@
                                 <div class="text-center text-muted mb-4">
                                     <h3 class="heading">{{ $berita->title }}</h3>
                                     <hr class="my-4"/>
-                                    <p class="text-justify">
-                                        {!! $berita->body !!}
-                                    </p>
+                                    {!! $berita->body !!}
                                     @if (isset($berita->file))
                                         <p class="text-justify">
                                             <a href="/files/{{ $berita->file }}" target="_blank">Download
