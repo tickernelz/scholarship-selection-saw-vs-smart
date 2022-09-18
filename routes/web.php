@@ -20,9 +20,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Get
-Route::get('/', [AuthController::class, 'showFormLogin']);
+Route::get('/', [HomeController::class, 'index']);
 Route::get('login', [AuthController::class, 'showFormLogin'])->name('get.login');
-Route::get('home', [HomeController::class, 'index'])->name('get.home');
+// Home
+Route::get('home', [HomeController::class, 'index'])->name('get.home.index');
+Route::get('home/detail/{slug}/{id}', [HomeController::class, 'detail'])->name('get.home.detail');
 
 // Post
 Route::post('login', [AuthController::class, 'login'])->name('post.login');
