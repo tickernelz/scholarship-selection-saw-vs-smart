@@ -309,6 +309,7 @@ return [
         [
             'text' => 'Berita',
             'icon' => 'far fa-fw fa-newspaper',
+            'can' => 'kelola berita',
             'submenu' => [
                 [
                     'text' => 'List Berita',
@@ -324,11 +325,13 @@ return [
         [
             'text' => 'profile',
             'url' => 'admin/profile',
+            'can' => 'kelola profil',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'change_password',
             'url' => 'admin/password',
+            'can' => 'kelola password',
             'icon' => 'fas fa-fw fa-lock',
         ],
 //        [

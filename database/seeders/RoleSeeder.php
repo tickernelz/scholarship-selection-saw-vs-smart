@@ -20,14 +20,14 @@ class RoleSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         // create permissions
-//        Permission::create(['name' => 'edit articles']);
-//        Permission::create(['name' => 'delete articles']);
-//        Permission::create(['name' => 'publish articles']);
-//        Permission::create(['name' => 'unpublish articles']);
+        Permission::create(['name' => 'kelola berita']);
+        Permission::create(['name' => 'kelola profil']);
+        Permission::create(['name' => 'kelola password']);
 
-        $role = Role::create(['name' => 'admin']);
-        $role->givePermissionTo(Permission::all());
+        $admin = Role::create(['name' => 'admin']);
+        $admin->givePermissionTo(Permission::all());
 
-        Role::create(['name' => 'mahasiswa']);
+        $mahasiswa = Role::create(['name' => 'mahasiswa']);
+        $mahasiswa->givePermissionTo(['kelola profil', 'kelola password']);
     }
 }

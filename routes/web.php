@@ -32,16 +32,20 @@ Route::post('logout', [AuthController::class, 'logout'])->name('post.logout');
 
 
 Route::group(['middleware' => 'auth'], static function () {
-    Route::group(['middleware' => ['role:admin']], static function () {
-        // Admin
-        Route::get('admin', [DashboardController::class, 'index'])->name('get.admin.dashboard');
-        // Profile
+    // Admin
+    Route::get('admin', [DashboardController::class, 'index'])->name('get.admin.dashboard');
+    // Profile
+    Route::group(['middleware' => ['can:kelola profil']], static function () {
         Route::get('admin/profile', [ProfileController::class, 'index'])->name('get.admin.profile');
         Route::post('admin/profile/update/{id}', [ProfileController::class, 'update'])->name('post.admin.profile.update');
-        // Password
+    });
+    // Password
+    Route::group(['middleware' => ['can:kelola password']], static function () {
         Route::get('admin/password', [PasswordController::class, 'index'])->name('get.admin.password');
         Route::post('admin/password/update/{id}', [PasswordController::class, 'update'])->name('post.admin.password.update');
-        // Berita
+    });
+    // Berita
+    Route::group(['middleware' => ['can:kelola berita']], static function () {
         Route::get('admin/berita', [BeritaController::class, 'index'])->name('get.admin.berita.index');
         Route::get('admin/berita/tambah', [BeritaController::class, 'tambah_index'])->name('get.admin.berita.tambah');
         Route::post('admin/berita/tambah/post', [BeritaController::class, 'tambah'])->name('post.admin.berita.tambah');
