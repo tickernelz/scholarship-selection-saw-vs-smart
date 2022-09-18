@@ -24,8 +24,7 @@
         <div class="row align-items-center">
             <div class="col">
                 <div class="copyright text-center text-muted">
-                    &copy2022 <a href="https://WWW.upr.ac.id" class="font-weight-bold ml-1" target="_blank">UNIVERSITAS
-                        PALANGKA RAYA</a>
+                    &copy2022 <a class="font-weight-bold ml-1">IAIN PALANGKA RAYA</a>
                 </div>
 
 
