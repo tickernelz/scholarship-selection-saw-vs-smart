@@ -34,7 +34,7 @@
                         <span class="focus-input100"></span>
                     </div>
 
-                    <div class="text-right p-t-13 p-b-23">
+                    <div class="text-right p-t-13 p-b-5">
 						<span class="txt1">
 							{{ trans('auth.lupa') }}
 						</span>
@@ -42,6 +42,11 @@
                         <a href="#" class="txt2">
                             {{ trans('auth.email_password') }}
                         </a>
+                    </div>
+
+                    <div class="text-right p-t-5 p-b-10">
+                        <input type="checkbox" class="txt1" name="remember" {{ old('remember') ? 'checked' : '' }} id="remember">
+                        <label class="form-check-label" for="remember">Ingat Saya</label>
                     </div>
 
                     <div class="container-login100-form-btn" style="margin-bottom: 1em">
@@ -62,7 +67,7 @@
 							{{ trans('auth.belum_punya_akun') }}
 						</span>
 
-                        <a href="#" class="txt3">
+                        <a href="{{ route('get.register') }}" class="txt3">
                             {{ trans('auth.daftar_sekarang') }}
                         </a>
                     </div>

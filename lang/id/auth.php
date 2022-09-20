@@ -35,5 +35,10 @@ return [
     'nim' => 'NIM',
     'alamat' => 'Alamat',
     'jurusan' => 'Jurusan',
-    'prodi' => 'Prodi'
+    'prodi' => 'Prodi',
+    'halaman_daftar' => 'Halaman Daftar',
+    'daftar' => 'Daftar',
+    'nama_lengkap' => 'Nama Lengkap',
+    'data_mahasiswa' => 'Data Mahasiswa',
+    'sudah_punya_akun' => 'Sudah punya akun?'
 ];
