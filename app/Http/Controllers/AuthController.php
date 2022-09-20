@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
@@ -20,6 +21,11 @@ class AuthController extends Controller
         }
 
         return view('login');
+    }
+
+    public function showFormRegister()
+    {
+        return view('register');
     }
 
     public function login(Request $request)
@@ -53,6 +59,40 @@ class AuthController extends Controller
 
             return redirect()->route('get.login');
         }
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'nim' => 'required|string|max:255|unique:mahasiswas',
+            'prodi' => 'nullable|string|max:255',
+            'jurusan' => 'required|string|max:255',
+        ]);
+
+        $data_user = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+        ];
+
+        $data_mahasiswa = [
+            'nim' => $request->input('nim'),
+            'prodi' => $request->input('prodi'),
+            'jurusan' => $request->input('jurusan'),
+        ];
+
+        $user = User::create($data_user)->assignRole('mahasiswa');
+        $mahasiswa = $user->mahasiswa()->create($data_mahasiswa);
+
+        if ($mahasiswa) {
+            Session::flash('success', 'Register berhasil! Silahkan login.');
+        } else {
+            Session::flash('errors', ['' => 'Register gagal! Silahkan ulangi beberapa saat lagi.']);
+        }
+        return redirect()->route('get.login');
     }
 
     public function logout()

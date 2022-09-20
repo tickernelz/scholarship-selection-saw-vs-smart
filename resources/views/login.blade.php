@@ -62,7 +62,7 @@
 							{{ trans('auth.belum_punya_akun') }}
 						</span>
 
-                        <a href="#" class="txt3">
+                        <a href="{{ route('get.register') }}" class="txt3">
                             {{ trans('auth.daftar_sekarang') }}
                         </a>
                     </div>
