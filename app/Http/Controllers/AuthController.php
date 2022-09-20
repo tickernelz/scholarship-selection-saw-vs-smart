@@ -45,8 +45,9 @@ class AuthController extends Controller
             'email' => $request->input('email'),
             'password' => $request->input('password'),
         ];
+        $remember_me = $request->has('remember');
 
-        Auth::attempt($data);
+        Auth::attempt($data, $remember_me);
 
         if (Auth::check()) { // true sekalian session field di users nanti bisa dipanggil via Auth
             if (Auth::user()->hasRole('admin')) {
