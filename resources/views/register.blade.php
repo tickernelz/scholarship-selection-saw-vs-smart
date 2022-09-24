@@ -7,7 +7,7 @@
         <div class="container-login100">
             <div class="wrap-login100">
                 <form class="login100-form validate-form p-l-55 p-r-55 p-t-178" method="POST"
-                      action="{{ route('post.register') }}">
+                      action="{{ route('post.register') }}" enctype="multipart/form-data">
                     @csrf
                     <span class="login100-form-title">
 						{{ trans('auth.daftar') }}
@@ -63,13 +63,31 @@
                     </div>
 
                     <div class="wrap-input100 m-b-16">
-                        <input class="input100" type="text" name="prodi" placeholder="{{ trans('auth.prodi') }}">
+                        <input class="input100" type="text" name="studi" placeholder="{{ trans('auth.studi') }}">
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input m-b-16">
+                        <input class="input100" type="text" name="fakultas" placeholder="{{ trans('auth.fakultas') }}">
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input m-b-16">
+                        <input class="input100" type="number" name="angkatan" placeholder="{{ trans('auth.angkatan') }}">
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input m-b-16">
+                        <select class="input100" id="jenis_kelamin" name="jenis_kelamin">
+                            <option value="L">Laki-Laki</option>
+                            <option value="P">Perempuan</option>
+                        </select>
                         <span class="focus-input100"></span>
                     </div>
 
                     <div class="wrap-input100 validate-input m-b-30">
-                        <input class="input100" type="text" name="jurusan" placeholder="{{ trans('auth.jurusan') }}">
-                        <span class="focus-input100"></span>
+                        <label for="ktm">{{ trans('auth.upload_ktm') }}</label>
+                        <input type="file" name="ktm">
                     </div>
 
                     <div class="container-login100-form-btn" style="margin-bottom: 1em">

@@ -307,7 +307,22 @@ return [
             'text' => 'search',
         ],
         [
-            'text' => 'Berita',
+            'text' => 'Kelola Mahasiswa',
+            'icon' => 'fas fa-fw fa-user-graduate',
+            'can' => 'kelola mahasiswa',
+            'submenu' => [
+                [
+                    'text' => 'Butuh Verifikasi',
+                    'url' => 'admin/mahasiswa/verifikasi',
+                ],
+                [
+                    'text' => 'List Mahasiswa',
+                    'url' => 'admin/mahasiswa',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Kelola Berita',
             'icon' => 'far fa-fw fa-newspaper',
             'can' => 'kelola berita',
             'submenu' => [
@@ -320,6 +335,12 @@ return [
                     'url' => 'admin/berita/tambah',
                 ],
             ],
+        ],
+        [
+            'text' => 'Daftar Beasiswa',
+            'icon' => 'fas fa-fw fa-file-contract',
+            'url' => 'admin/daftar-beasiswa',
+            'can' => 'daftar beasiswa',
         ],
         ['header' => 'account_settings'],
         [
