@@ -11,8 +11,15 @@ return new class extends Migration {
             $table->id();
             $table->foreignIdFor(\App\Models\User::class);
             $table->string('nim')->unique();
-            $table->string('prodi');
-            $table->string('jurusan');
+            $table->string('studi');
+            $table->string('fakultas');
+            $table->string('angkatan');
+            $table->string('semester')->nullable();
+            $table->enum('jenis_kelamin', ['L', 'P']);
+            $table->string('ttl')->nullable();
+            $table->string('telepon')->nullable();
+            $table->string('ktm')->nullable();
+            $table->boolean('is_verified')->default(false);
             $table->timestamps();
         });
     }

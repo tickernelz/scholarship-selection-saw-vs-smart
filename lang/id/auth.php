@@ -34,11 +34,20 @@ return [
     'kembali_ke_beranda' => 'Kembali Ke Beranda',
     'nim' => 'NIM',
     'alamat' => 'Alamat',
-    'jurusan' => 'Jurusan',
-    'prodi' => 'Prodi',
+    'fakultas' => 'Fakultas',
+    'studi' => 'Studi',
     'halaman_daftar' => 'Halaman Daftar',
     'daftar' => 'Daftar',
     'nama_lengkap' => 'Nama Lengkap',
     'data_mahasiswa' => 'Data Mahasiswa',
-    'sudah_punya_akun' => 'Sudah punya akun?'
+    'sudah_punya_akun' => 'Sudah punya akun?',
+    'jenis_kelamin' => 'Jenis Kelamin',
+    'tempat_tanggal_lahir' => 'Tempat Tanggal Lahir',
+    'nomor_hp' => 'Nomor HP',
+    'upload_ktm' => 'Upload KTM (PDF)',
+    'list_mahasiswa' => 'List Mahasiswa',
+    'verifikasi_mahasiswa' => 'Verifikasi Mahasiswa',
+    'edit_mahasiswa' => 'Edit Mahasiswa',
+    'angkatan' => 'Angkatan',
+    'semester' => 'Semester'
 ];

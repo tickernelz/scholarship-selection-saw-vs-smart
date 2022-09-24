@@ -52,8 +52,11 @@ class AuthController extends Controller
         if (Auth::check()) { // true sekalian session field di users nanti bisa dipanggil via Auth
             if (Auth::user()->hasRole('admin')) {
                 return redirect()->route('get.admin.dashboard');
-            } else {
+            } elseif (Auth::user()->hasRole('mahasiswa') && Auth::user()->mahasiswa->is_verified) {
                 return redirect()->route('get.home.index');
+            } else {
+                Auth::logout();
+                return redirect()->route('get.login')->with('error', 'Akun anda belum diverifikasi');
             }
         } else { // false
             Session::flash('error', 'Email atau password salah');
@@ -65,12 +68,15 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'nim' => 'required|string|max:255|unique:mahasiswas',
-            'prodi' => 'nullable|string|max:255',
-            'jurusan' => 'required|string|max:255',
+            'nim' => 'required|string|unique:mahasiswas',
+            'studi' => 'nullable|string',
+            'fakultas' => 'required|string',
+            'angkatan' => 'required|numeric',
+            'jenis_kelamin' => 'required|string',
+            'ktm' => 'required|file|mimes:pdf|max:10240',
         ]);
 
         $data_user = [
@@ -81,15 +87,24 @@ class AuthController extends Controller
 
         $data_mahasiswa = [
             'nim' => $request->input('nim'),
-            'prodi' => $request->input('prodi'),
-            'jurusan' => $request->input('jurusan'),
+            'studi' => $request->input('studi'),
+            'fakultas' => $request->input('fakultas'),
+            'angkatan' => $request->input('angkatan'),
+            'jenis_kelamin' => $request->input('jenis_kelamin'),
+            'ktm' => null,
         ];
+
+        if ($request->hasFile('ktm')) {
+            $fileName = time() . '_' . $request->ktm->getClientOriginalName();
+            $request->ktm->move(public_path('ktm'), $fileName);
+            $data_mahasiswa['ktm'] = $fileName;
+        }
 
         $user = User::create($data_user)->assignRole('mahasiswa');
         $mahasiswa = $user->mahasiswa()->create($data_mahasiswa);
 
         if ($mahasiswa) {
-            Session::flash('success', 'Register berhasil! Silahkan login.');
+            Session::flash('success', 'Register berhasil! Akun anda sedang diverifikasi oleh staff. Silahkan cek email (junk/spam) untuk informasi lebih lanjut.');
         } else {
             Session::flash('errors', ['' => 'Register gagal! Silahkan ulangi beberapa saat lagi.']);
         }

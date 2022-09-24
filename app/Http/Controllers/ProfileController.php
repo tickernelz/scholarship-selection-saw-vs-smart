@@ -22,11 +22,15 @@ class ProfileController extends Controller
     public function update(Request $request, int $id)
     {
         $data = User::firstWhere('id', $id);
+        $mahasiswa = $data->mahasiswa;
 
         $rules = [
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email,'.$data->id,
             'password' => 'required|confirmed',
+            'ttl' => 'nullable|string',
+            'telepon' => 'nullable|numeric',
+            'semester' => 'required|numeric',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -39,6 +43,12 @@ class ProfileController extends Controller
             {
                 $data->name = $request->input('name');
                 $data->email = $request->input('email');
+                if ($mahasiswa) {
+                    $mahasiswa->ttl = $request->input('ttl');
+                    $mahasiswa->telepon = $request->input('telepon');
+                    $mahasiswa->semester = $request->input('semester');
+                    $mahasiswa->save();
+                }
 
                 $data->save();
 

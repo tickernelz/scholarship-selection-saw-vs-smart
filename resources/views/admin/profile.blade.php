@@ -86,8 +86,8 @@
                                 </div>
                             </x-slot>
                         </x-adminlte-input>
-                        <x-adminlte-input name="prodi" label="{{ trans('auth.prodi') }}"
-                                          placeholder="{{ trans('auth.prodi') }}" value="{{ $user->mahasiswa->prodi }}"
+                        <x-adminlte-input name="studi" label="{{ trans('auth.studi') }}"
+                                          placeholder="{{ trans('auth.studi') }}" value="{{ $user->mahasiswa->studi }}"
                                           disabled>
                             <x-slot name="prependSlot">
                                 <div class="input-group-text">
@@ -95,12 +95,57 @@
                                 </div>
                             </x-slot>
                         </x-adminlte-input>
-                        <x-adminlte-input name="jurusan" label="{{ trans('auth.jurusan') }}"
-                                          placeholder="{{ trans('auth.jurusan') }}"
-                                          value="{{ $user->mahasiswa->jurusan }}" disabled>
+                        <x-adminlte-input name="fakultas" label="{{ trans('auth.fakultas') }}"
+                                          placeholder="{{ trans('auth.fakultas') }}"
+                                          value="{{ $user->mahasiswa->fakultas }}" disabled>
                             <x-slot name="prependSlot">
                                 <div class="input-group-text">
                                     <i class="fas fa-id-badge text-lightblue"></i>
+                                </div>
+                            </x-slot>
+                        </x-adminlte-input>
+                        <x-adminlte-input name="angkatan" label="{{ trans('auth.angkatan') }}"
+                                          placeholder="{{ trans('auth.angkatan') }}"
+                                          value="{{ $user->mahasiswa->angkatan }}" disabled>
+                            <x-slot name="prependSlot">
+                                <div class="input-group-text">
+                                    <i class="fas fa-calendar-alt text-lightblue"></i>
+                                </div>
+                            </x-slot>
+                        </x-adminlte-input>
+                        <x-adminlte-input name="jenis_kelamin" label="{{ trans('auth.jenis_kelamin') }}"
+                                          placeholder="{{ trans('auth.jenis_kelamin') }}"
+                                          value="{{ $user->mahasiswa->jenis_kelamin }}" disabled>
+                            <x-slot name="prependSlot">
+                                <div class="input-group-text">
+                                    <i class="fas fa-venus-mars text-lightblue"></i>
+                                </div>
+                            </x-slot>
+                        </x-adminlte-input>
+                        <x-adminlte-input name="semester" label="{{ trans('auth.semester') }}"
+                                          placeholder="{{ trans('auth.semester') }}"
+                                          value="{{ $user->mahasiswa->semester }}" type="number">
+                            <x-slot name="prependSlot">
+                                <div class="input-group-text">
+                                    <i class="fas fa-hourglass-half text-lightblue"></i>
+                                </div>
+                            </x-slot>
+                        </x-adminlte-input>
+                        <x-adminlte-input name="ttl" label="{{ trans('auth.tempat_tanggal_lahir') }}"
+                                          placeholder="{{ trans('auth.tempat_tanggal_lahir') }}"
+                                          value="{{ $user->mahasiswa->ttl }}">
+                            <x-slot name="prependSlot">
+                                <div class="input-group-text">
+                                    <i class="fas fa-birthday-cake text-lightblue"></i>
+                                </div>
+                            </x-slot>
+                        </x-adminlte-input>
+                        <x-adminlte-input name="telepon" label="{{ trans('auth.nomor_hp') }}"
+                                          placeholder="{{ trans('auth.nomor_hp') }}"
+                                          value="{{ $user->mahasiswa->telepon }}" type="number">
+                            <x-slot name="prependSlot">
+                                <div class="input-group-text">
+                                    <i class="fas fa-mobile text-lightblue"></i>
                                 </div>
                             </x-slot>
                         </x-adminlte-input>

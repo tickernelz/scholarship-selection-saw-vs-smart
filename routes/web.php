@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\EmailController;
+use App\Http\Controllers\MahasiswasController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
@@ -56,6 +58,20 @@ Route::group(['middleware' => 'auth'], static function () {
         Route::post('admin/berita/edit/{id}/post', [PostsController::class, 'edit'])->name('post.admin.berita.edit');
         Route::get('admin/berita/hapus/{id}', [PostsController::class, 'hapus'])->name('get.admin.berita.hapus');
         Route::get('admin/berita/hapus-berkas/{id}', [PostsController::class, 'hapus_berkas'])->name('hapus.berkas.surat.masuk');
+    });
+    // Kelola Mahasiswa
+    Route::group(['middleware' => ['can:kelola mahasiswa']], static function () {
+        Route::get('admin/mahasiswa/verifikasi', [MahasiswasController::class, 'index_verifikasi'])->name('get.admin.mahasiswa.index.verifikasi');
+        Route::get('admin/mahasiswa/verifikasi/accept/{id}', [MahasiswasController::class, 'accept'])->name('get.admin.mahasiswa.verifikasi.accept');
+        Route::get('admin/mahasiswa/verifikasi/reject/{id}', [MahasiswasController::class, 'reject'])->name('get.admin.mahasiswa.verifikasi.reject');
+        Route::get('admin/mahasiswa', [MahasiswasController::class, 'index_list'])->name('get.admin.mahasiswa.index.list');
+        Route::get('admin/mahasiswa/edit/{id}', [MahasiswasController::class, 'edit_index'])->name('get.admin.mahasiswa.edit.index');
+        Route::post('admin/mahasiswa/edit/{id}/post', [MahasiswasController::class, 'edit'])->name('post.admin.mahasiswa.edit');
+        Route::get('admin/mahasiswa/hapus/{id}', [MahasiswasController::class, 'hapus'])->name('get.admin.mahasiswa.hapus');
+    });
+    // Daftar Beasiswa
+    Route::group(['middleware' => ['can:daftar beasiswa']], static function () {
+        Route::get('admin/daftar-beasiswa', [PostsController::class, 'daftar_beasiswa'])->name('get.admin.daftar-beasiswa');
     });
 });
 
