@@ -13,10 +13,12 @@ class MahasiswasController extends Controller
         // Get Data
         $data = Mahasiswa::where('is_verified', 1)->get();
         $judul = trans('auth.list_mahasiswa');
+        $route = 'list';
 
         return view('admin.mahasiswa.index', compact([
             'data',
-            'judul'
+            'judul',
+            'route'
         ]));
     }
 
@@ -25,10 +27,12 @@ class MahasiswasController extends Controller
         // Get Data
         $data = Mahasiswa::where('is_verified', 0)->get();
         $judul = trans('auth.verifikasi_mahasiswa');
+        $route = 'verifikasi';
 
         return view('admin.mahasiswa.verifikasi', compact([
             'data',
-            'judul'
+            'judul',
+            'route'
         ]));
     }
 
@@ -60,14 +64,15 @@ class MahasiswasController extends Controller
         return redirect()->back()->with('success', 'Mahasiswa ditolak');
     }
 
-    public function edit_index(int $id)
+    public function edit_index(int $id, string $route)
     {
         $data = Mahasiswa::find($id);
         $judul = trans('auth.edit_mahasiswa');
 
         return view('admin.mahasiswa.edit', compact([
             'data',
-            'judul'
+            'judul',
+            'route'
         ]));
     }
 

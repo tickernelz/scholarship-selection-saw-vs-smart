@@ -15,9 +15,15 @@
                 <h3 class="card-title p-3">{{ trans('auth.form_edit') }}</h3>
                 <ul class="nav nav-pills ml-auto p-2">
                     <li class="nav-item">
-                        <a href="{{ redirect()->getUrlGenerator()->route('get.admin.mahasiswa.index.list') }}">
-                            <button type="button" class="btn btn-primary">{{ trans('auth.kembali') }}</button>
-                        </a>
+                        @if($route == "verifikasi")
+                            <a href="{{ redirect()->getUrlGenerator()->route('get.admin.mahasiswa.index.verifikasi') }}">
+                                <button type="button" class="btn btn-primary">{{ trans('auth.kembali') }}</button>
+                            </a>
+                        @elseif($route == "list")
+                            <a href="{{ redirect()->getUrlGenerator()->route('get.admin.mahasiswa.index.list') }}">
+                                <button type="button" class="btn btn-primary">{{ trans('auth.kembali') }}</button>
+                            </a>
+                        @endif
                     </li>
                 </ul>
             </div>
