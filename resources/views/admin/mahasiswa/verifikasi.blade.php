@@ -15,13 +15,17 @@
         '#',
         'NIM',
         'Nama',
+        'Email',
         'Jenis Kelamin',
+        'Studi',
+        'Fakultas',
+        'Angkatan',
         'KTM',
         'Aksi',
     ];
     $config = [
     'order' => [[0, 'asc']],
-    'columns' => [null, null, null, null, null, ['orderable' => false, 'className' => 'text-center']],
+    'columns' => [null, null, null, null, null, null, null, null, null, ['orderable' => false, 'className' => 'text-center']],
     ];
 @endphp
 
@@ -58,7 +62,11 @@
                         <td>{!! $loop->iteration !!}</td>
                         <td>{!! $li->nim !!}</td>
                         <td>{!! $li->user->name !!}</td>
+                        <td>{!! $li->user->email !!}</td>
                         <td>{!! $li->jenis_kelamin !!}</td>
+                        <td>{!! $li->studi !!}</td>
+                        <td>{!! $li->fakultas !!}</td>
+                        <td>{!! $li->angkatan !!}</td>
                         <td>
                             @if (isset($li->ktm))
                                 <a type="button" class="btn btn-sm btn-primary"
