@@ -84,6 +84,10 @@
                                     <i class="fa fa-check"></i>
                                 </a>
                                 <a type="button" class="btn btn-secondary"
+                                   href="{{ route('get.admin.mahasiswa.edit.index', [$li->id, $route]) }}">
+                                    Edit
+                                </a>
+                                <a type="button" class="btn btn-secondary"
                                    href="{{ route('get.admin.mahasiswa.verifikasi.reject', $li->id) }}"
                                    onclick="return confirm('Yakin Ingin Di Reject?');">
                                     <i class="fa fa-times"></i>

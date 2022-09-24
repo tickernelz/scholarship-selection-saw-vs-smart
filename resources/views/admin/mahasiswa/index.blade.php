@@ -93,7 +93,7 @@
                         <td>
                             <div class="btn-group btn-group-sm" role="group">
                                 <a type="button" class="btn btn-secondary"
-                                   href="{{ route('get.admin.mahasiswa.edit.index', $li->id) }}">
+                                   href="{{ route('get.admin.mahasiswa.edit.index', [$li->id, $route],) }}">
                                     Edit
                                 </a>
                                 <a type="button" class="btn btn-secondary"
