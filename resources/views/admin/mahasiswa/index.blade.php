@@ -21,6 +21,7 @@
         'Fakultas',
         'Angkatan',
         'Semester',
+        'UKT',
         'TTL',
         'Telepon',
         'KTM',
@@ -28,7 +29,7 @@
     ];
     $config = [
     'order' => [[0, 'asc']],
-    'columns' => [null, null, null, null, null, null, null, null, null, null, null, null, ['orderable' => false, 'className' => 'text-center']],
+    'columns' => [null, null, null, null, null, null, null, null, null, null, null, null, null, ['orderable' => false, 'className' => 'text-center']],
     ];
 @endphp
 
@@ -78,6 +79,7 @@
                         <td>{!! $li->fakultas !!}</td>
                         <td>{!! $li->angkatan !!}</td>
                         <td>{!! $li->semester !!}</td>
+                        <td>{!! $li->ukt() !!}</td>
                         <td>{!! $li->ttl !!}</td>
                         <td>{!! $li->telepon !!}</td>
                         <td>

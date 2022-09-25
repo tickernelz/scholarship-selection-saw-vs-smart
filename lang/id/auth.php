@@ -49,5 +49,6 @@ return [
     'verifikasi_mahasiswa' => 'Verifikasi Mahasiswa',
     'edit_mahasiswa' => 'Edit Mahasiswa',
     'angkatan' => 'Angkatan',
-    'semester' => 'Semester'
+    'semester' => 'Semester',
+    'ukt' => 'UKT'
 ];

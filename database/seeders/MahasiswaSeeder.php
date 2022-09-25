@@ -17,6 +17,7 @@ class MahasiswaSeeder extends Seeder
             'jenis_kelamin' => 'L',
             'ttl' => 'Jakarta, 1 Januari 2000',
             'telepon' => '081234567890',
+            'ukt' => 1000000,
             'is_verified' => 1,
             'user_id' => 2,
         ]);
@@ -28,6 +29,7 @@ class MahasiswaSeeder extends Seeder
             'jenis_kelamin' => 'L',
             'ttl' => 'Jakarta, 1 Januari 2000',
             'telepon' => '081234567890',
+            'ukt' => 3000000,
             'is_verified' => 0,
             'user_id' => 3,
         ]);

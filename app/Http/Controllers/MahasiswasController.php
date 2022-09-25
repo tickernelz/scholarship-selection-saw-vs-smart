@@ -95,6 +95,7 @@ class MahasiswasController extends Controller
             'fakultas' => 'nullable|string',
             'angkatan' => 'nullable|numeric',
             'semester' => 'nullable|numeric',
+            'ukt' => 'nullable|numeric',
             'jenis_kelamin' => 'nullable|string',
             'ttl' => 'nullable|string',
             'telepon' => 'nullable|numeric',
@@ -108,6 +109,7 @@ class MahasiswasController extends Controller
         $mahasiswa->fakultas = $request->fakultas;
         $mahasiswa->angkatan = $request->angkatan;
         $mahasiswa->semester = $request->semester;
+        $mahasiswa->ukt = $request->ukt;
         $mahasiswa->jenis_kelamin = $request->jenis_kelamin;
         $mahasiswa->ttl = $request->ttl;
         $mahasiswa->telepon = $request->telepon;
