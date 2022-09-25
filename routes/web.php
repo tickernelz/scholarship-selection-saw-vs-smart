@@ -64,6 +64,7 @@ Route::group(['middleware' => 'auth'], static function () {
         Route::get('admin/mahasiswa/verifikasi', [MahasiswasController::class, 'index_verifikasi'])->name('get.admin.mahasiswa.index.verifikasi');
         Route::get('admin/mahasiswa/verifikasi/accept/{id}', [MahasiswasController::class, 'accept'])->name('get.admin.mahasiswa.verifikasi.accept');
         Route::get('admin/mahasiswa/verifikasi/reject/{id}', [MahasiswasController::class, 'reject'])->name('get.admin.mahasiswa.verifikasi.reject');
+        Route::get('admin/mahasiswa/verifikasi/email_accept/{id}', [MahasiswasController::class, 'email_accept'])->name('get.admin.mahasiswa.verifikasi.email.accept');
         Route::get('admin/mahasiswa', [MahasiswasController::class, 'index_list'])->name('get.admin.mahasiswa.index.list');
         Route::get('admin/mahasiswa/edit/{id}/{route}', [MahasiswasController::class, 'edit_index'])->name('get.admin.mahasiswa.edit.index');
         Route::post('admin/mahasiswa/edit/{id}/post', [MahasiswasController::class, 'edit'])->name('post.admin.mahasiswa.edit');

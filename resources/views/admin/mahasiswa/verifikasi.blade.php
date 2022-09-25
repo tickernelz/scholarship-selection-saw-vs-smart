@@ -79,7 +79,7 @@
                         </td>
                         <td>
                             <div class="btn-group btn-group-sm" role="group">
-                                <a type="button" class="btn btn-secondary"
+                                <a type="button" class="btn btn-success"
                                    href="{{ route('get.admin.mahasiswa.verifikasi.accept', $li->id) }}">
                                     <i class="fa fa-check"></i>
                                 </a>
@@ -87,7 +87,7 @@
                                    href="{{ route('get.admin.mahasiswa.edit.index', [$li->id, $route]) }}">
                                     Edit
                                 </a>
-                                <a type="button" class="btn btn-secondary"
+                                <a type="button" class="btn btn-danger"
                                    href="{{ route('get.admin.mahasiswa.verifikasi.reject', $li->id) }}"
                                    onclick="return confirm('Yakin Ingin Di Reject?');">
                                     <i class="fa fa-times"></i>

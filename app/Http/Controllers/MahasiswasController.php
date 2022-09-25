@@ -64,6 +64,15 @@ class MahasiswasController extends Controller
         return redirect()->back()->with('success', 'Mahasiswa ditolak');
     }
 
+    public function email_accept(int $id)
+    {
+        $mahasiswa = Mahasiswa::find($id);
+        $user = User::find($mahasiswa->user_id);
+        EmailController::accept_verifikasi($user->id);
+
+        return redirect()->back()->with('success', 'Email berhasil dikirim');
+    }
+
     public function edit_index(int $id, string $route)
     {
         $data = Mahasiswa::find($id);
