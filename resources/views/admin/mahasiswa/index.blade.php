@@ -97,6 +97,11 @@
                                     Edit
                                 </a>
                                 <a type="button" class="btn btn-secondary"
+                                   href="{{ route('get.admin.mahasiswa.verifikasi.reject', $li->id) }}"
+                                   onclick="return confirm('Yakin Ingin Kirim Email?');">
+                                    Kirim Email
+                                </a>
+                                <a type="button" class="btn btn-danger"
                                    href="{{ route('get.admin.mahasiswa.hapus', $li->id) }}"
                                    onclick="return confirm('Yakin Mau Dihapus?');">
                                     Hapus
