@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('beasiswas', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\Mahasiswa::class, 'mahasiswa_id');
+            $table->string('berkas')->nullable();
             $table->timestamps();
         });
     }

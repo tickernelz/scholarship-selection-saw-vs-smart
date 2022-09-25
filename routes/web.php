@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BeasiswaController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\MahasiswasController;
 use App\Http\Controllers\PostsController;
@@ -72,7 +73,11 @@ Route::group(['middleware' => 'auth'], static function () {
     });
     // Daftar Beasiswa
     Route::group(['middleware' => ['can:daftar beasiswa']], static function () {
-        Route::get('admin/daftar-beasiswa', [PostsController::class, 'daftar_beasiswa'])->name('get.admin.daftar-beasiswa');
+        Route::get('admin/daftar-beasiswa', [BeasiswaController::class, 'index'])->name('get.admin.daftar-beasiswa.index');
+        Route::get('admin/daftar-beasiswa/create-step-one', [BeasiswaController::class, 'createStepOne'])->name('get.admin.daftar-beasiswa.create-step-one');
+        Route::post('admin/daftar-beasiswa/create-step-one', [BeasiswaController::class, 'postCreateStepOne'])->name('post.admin.daftar-beasiswa.create-step-one');
+
+
     });
 });
 

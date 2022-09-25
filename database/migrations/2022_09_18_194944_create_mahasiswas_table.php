@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('fakultas');
             $table->string('angkatan');
             $table->string('semester')->nullable();
+            $table->float('ukt')->nullable();
             $table->enum('jenis_kelamin', ['L', 'P']);
             $table->string('ttl')->nullable();
             $table->string('telepon')->nullable();

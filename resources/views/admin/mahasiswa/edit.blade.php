@@ -109,6 +109,15 @@
                             </div>
                         </x-slot>
                     </x-adminlte-input>
+                    <x-adminlte-input name="ukt" label="{{ trans('auth.ukt') }}"
+                                      placeholder="{{ trans('auth.ukt') }}"
+                                      value="{{ $data->ukt }}" type="number">
+                        <x-slot name="prependSlot">
+                            <div class="input-group-text">
+                                <i class="fas fa-money-bill text-lightblue"></i>
+                            </div>
+                        </x-slot>
+                    </x-adminlte-input>
                     <x-adminlte-select name="jenis_kelamin" label="{{ trans('auth.jenis_kelamin') }}">
                         <x-slot name="prependSlot">
                             <div class="input-group-text">

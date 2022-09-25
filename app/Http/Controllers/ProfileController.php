@@ -47,6 +47,7 @@ class ProfileController extends Controller
                     $mahasiswa->ttl = $request->input('ttl');
                     $mahasiswa->telepon = $request->input('telepon');
                     $mahasiswa->semester = $request->input('semester');
+                    $mahasiswa->ukt = $request->input('ukt');
                     $mahasiswa->save();
                 }
 
