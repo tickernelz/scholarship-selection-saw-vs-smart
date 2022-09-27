@@ -337,9 +337,24 @@ return [
             ],
         ],
         [
+            'text' => 'Kelola Kriteria',
+            'icon' => 'fas fa-fw fa-weight',
+            'can' => 'kelola kriteria',
+            'submenu' => [
+                [
+                    'text' => 'List Kriteria',
+                    'url' => 'admin/kriteria',
+                ],
+                [
+                    'text' => 'Tambah Kriteria',
+                    'url' => 'admin/kriteria/tambah',
+                ],
+            ],
+        ],
+        [
             'text' => 'Daftar Beasiswa',
             'icon' => 'fas fa-fw fa-file-contract',
-            'url' => 'admin/daftar-beasiswa',
+            'url' => 'admin/daftar-beasiswa/step-one',
             'can' => 'daftar beasiswa',
         ],
         ['header' => 'account_settings'],

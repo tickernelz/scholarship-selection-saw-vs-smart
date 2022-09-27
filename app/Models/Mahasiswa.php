@@ -21,4 +21,9 @@ class Mahasiswa extends Model
     {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
+
+    public function beasiswa()
+    {
+        return $this->hasMany(Beasiswa::class, 'mahasiswa_id', 'id');
+    }
 }
