@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BeasiswaController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\MahasiswasController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\DashboardController;
@@ -74,10 +75,21 @@ Route::group(['middleware' => 'auth'], static function () {
     // Daftar Beasiswa
     Route::group(['middleware' => ['can:daftar beasiswa']], static function () {
         Route::get('admin/daftar-beasiswa', [BeasiswaController::class, 'index'])->name('get.admin.daftar-beasiswa.index');
-        Route::get('admin/daftar-beasiswa/create-step-one', [BeasiswaController::class, 'createStepOne'])->name('get.admin.daftar-beasiswa.create-step-one');
-        Route::post('admin/daftar-beasiswa/create-step-one', [BeasiswaController::class, 'postCreateStepOne'])->name('post.admin.daftar-beasiswa.create-step-one');
-
-
+        Route::get('admin/daftar-beasiswa/step-one', [BeasiswaController::class, 'createStepOne'])->name('get.admin.daftar-beasiswa.step-one');
+        Route::post('admin/daftar-beasiswa/step-one', [BeasiswaController::class, 'postStepOne'])->name('post.admin.daftar-beasiswa.step-one');
+        Route::get('admin/daftar-beasiswa/step-two', [BeasiswaController::class, 'createStepTwo'])->name('get.admin.daftar-beasiswa.step-two');
+        Route::post('admin/daftar-beasiswa/step-two', [BeasiswaController::class, 'postStepTwo'])->name('post.admin.daftar-beasiswa.step-two');
+    });
+    // Kelola Kriteria
+    Route::group(['middleware' => ['can:kelola kriteria']], static function () {
+        Route::get('admin/kriteria', [KriteriaController::class, 'index'])->name('get.admin.kriteria.index');
+        Route::get('admin/kriteria/tambah', [KriteriaController::class, 'tambah_index'])->name('get.admin.kriteria.tambah');
+        Route::post('admin/kriteria/tambah/post', [KriteriaController::class, 'tambah'])->name('post.admin.kriteria.tambah');
+        Route::get('admin/kriteria/sub/hapus/{id}', [KriteriaController::class, 'hapus_subkriteria'])->name('get.admin.kriteria.sub.hapus');
+        Route::get('admin/kriteria/subkriteria', [KriteriaController::class, 'ajax_modal_subkriteria'])->name('get.admin.kriteria.subkriteria');
+        Route::get('admin/kriteria/edit/{id}', [KriteriaController::class, 'edit_index'])->name('get.admin.kriteria.edit');
+        Route::post('admin/kriteria/edit/{id}/post', [KriteriaController::class, 'edit'])->name('post.admin.kriteria.edit');
+        Route::get('admin/kriteria/hapus/{id}', [KriteriaController::class, 'hapus'])->name('get.admin.kriteria.hapus');
     });
 });
 

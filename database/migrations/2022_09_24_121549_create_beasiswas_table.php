@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Mahasiswa;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +16,8 @@ return new class extends Migration
     {
         Schema::create('beasiswas', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Mahasiswa::class, 'mahasiswa_id');
+            $table->integer('mahasiswa_id')->unsigned();
+            $table->foreign('mahasiswa_id')->references('id')->on('mahasiswas')->cascadeOnDelete();
             $table->string('berkas')->nullable();
             $table->timestamps();
         });
