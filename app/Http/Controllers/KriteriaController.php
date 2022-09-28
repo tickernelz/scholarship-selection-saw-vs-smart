@@ -130,7 +130,7 @@ class KriteriaController extends Controller
                 $kriteria['bobot_kriteria'] = $request->bobot_kriteria;
                 $request->session()->put('subkriteria', $subkriteria);
                 $request->session()->put('kriteria', $kriteria);
-                if ($request->session()->get('edit_id') !== null) {
+                if ($request->session()->get('is_edit') === true) {
                     return redirect()->route('get.admin.kriteria.edit', $request->session()->get('edit_id'))->with('success', 'Subkriteria berhasil diubah');
                 }
                 return redirect()->route('get.admin.kriteria.tambah')->with('success', 'Subkriteria berhasil ditambahkan');
@@ -163,7 +163,7 @@ class KriteriaController extends Controller
                 $kriteria['tipe_kriteria'] = $request->tipe_kriteria;
                 $kriteria['bobot_kriteria'] = $request->bobot_kriteria;
                 $request->session()->put('kriteria', $kriteria);
-                if ($request->session()->get('edit_id') !== null) {
+                if ($request->session()->get('is_edit') === true) {
                     return redirect()->route('get.admin.kriteria.edit', $request->session()->get('edit_id'))->with('success', 'Subkriteria berhasil diubah');
                 }
                 return redirect()->route('get.admin.kriteria.tambah')->with('success', 'Subkriteria berhasil diubah');
@@ -174,10 +174,15 @@ class KriteriaController extends Controller
                     'tipe_kriteria' => 'required',
                     'bobot_kriteria' => 'required|numeric',
                 ]);
+                $data_kriteria = Kriteria::all();
+                $total_bobot = $data_kriteria->sum('bobot');
                 $kriteria = $request->session()->get('kriteria');
                 $kriteria['nama_kriteria'] = $request->nama_kriteria;
                 $kriteria['tipe_kriteria'] = $request->tipe_kriteria;
                 $kriteria['bobot_kriteria'] = $request->bobot_kriteria;
+                if ($total_bobot + $kriteria['bobot_kriteria'] > 100) {
+                    return redirect()->back()->with('error', 'Total bobot kriteria tidak boleh lebih dari 100');
+                }
                 $request->session()->put('kriteria', $kriteria);
                 $subkriteria = $request->session()->get('subkriteria');
                 if (count($subkriteria) === 0) {
@@ -197,7 +202,7 @@ class KriteriaController extends Controller
                 }
                 $request->session()->forget('subkriteria');
                 $request->session()->forget('kriteria');
-                return redirect()->route('get.admin.kriteria.index')->with('success', 'Kriteria berhasil ditambahkan');
+                return redirect()->route('get.admin.kriteria.tambah')->with('success', 'Kriteria berhasil ditambahkan');
 
             case 'save_edit':
                 $request->validate([
@@ -205,6 +210,11 @@ class KriteriaController extends Controller
                     'tipe_kriteria' => 'required',
                     'bobot_kriteria' => 'required|numeric',
                 ]);
+                $data_kriteria = Kriteria::all();
+                $total_bobot = $data_kriteria->sum('bobot');
+                if ($total_bobot + $request->bobot_kriteria - $request->session()->get('kriteria')['bobot_kriteria'] > 100) {
+                    return redirect()->back()->with('error', 'Total bobot kriteria tidak boleh lebih dari 100');
+                }
                 $subkriteria = $request->session()->get('subkriteria');
                 if (count($subkriteria) === 0) {
                     return redirect()->back()->with('error', 'Subkriteria tidak boleh kosong');
@@ -225,7 +235,7 @@ class KriteriaController extends Controller
                 }
                 $request->session()->forget('subkriteria');
                 $request->session()->forget('kriteria');
-                return redirect()->route('get.admin.kriteria.index')->with('success', 'Kriteria berhasil diubah');
+                return redirect()->route('get.admin.kriteria.edit', $request->id_kriteria)->with('success', 'Kriteria berhasil diubah');
         }
     }
 
