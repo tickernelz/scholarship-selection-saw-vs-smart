@@ -88,7 +88,6 @@ Route::group(['middleware' => 'auth'], static function () {
         Route::get('admin/kriteria/sub/hapus/{id}', [KriteriaController::class, 'hapus_subkriteria'])->name('get.admin.kriteria.sub.hapus');
         Route::get('admin/kriteria/subkriteria', [KriteriaController::class, 'ajax_modal_subkriteria'])->name('get.admin.kriteria.subkriteria');
         Route::get('admin/kriteria/edit/{id}', [KriteriaController::class, 'edit_index'])->name('get.admin.kriteria.edit');
-        Route::post('admin/kriteria/edit/{id}/post', [KriteriaController::class, 'edit'])->name('post.admin.kriteria.edit');
         Route::get('admin/kriteria/hapus/{id}', [KriteriaController::class, 'hapus'])->name('get.admin.kriteria.hapus');
     });
 });

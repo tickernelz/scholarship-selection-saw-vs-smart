@@ -131,7 +131,7 @@ class KriteriaController extends Controller
                 $request->session()->put('subkriteria', $subkriteria);
                 $request->session()->put('kriteria', $kriteria);
                 if ($request->session()->get('is_edit') === true) {
-                    return redirect()->route('get.admin.kriteria.edit', $request->session()->get('edit_id'))->with('success', 'Subkriteria berhasil diubah');
+                    return redirect()->route('get.admin.kriteria.edit', $request->session()->get('edit_id'))->with('success', 'Subkriteria berhasil ditambah');
                 }
                 return redirect()->route('get.admin.kriteria.tambah')->with('success', 'Subkriteria berhasil ditambahkan');
 

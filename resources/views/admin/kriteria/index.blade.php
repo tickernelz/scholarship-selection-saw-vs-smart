@@ -26,10 +26,19 @@
 
 @section('content')
     <div class="card card-default">
-        <div class="card-header">
-            <h3 class="card-title">
-                Tabel
-            </h3>
+        <div class="card-header d-flex p-0">
+            <h3 class="card-title p-3">Tabel</h3>
+            <ul class="nav nav-pills ml-auto p-2">
+                @if ($data->sum('bobot') < 100)
+                    <x-adminlte-callout theme="warning" class="bg-gradient-warning">Total
+                        Bobot {{ $data->sum('bobot') }}%
+                    </x-adminlte-callout>
+                @else
+                    <x-adminlte-callout theme="success" class="bg-gradient-success">Total
+                        Bobot {{ $data->sum('bobot') }}%
+                    </x-adminlte-callout>
+                @endif
+            </ul>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
