@@ -53,11 +53,12 @@ class BeasiswaController extends Controller
             $berkas = new Berkas();
             $berkas->mahasiswa_id = $user->mahasiswa->id;
             $berkas->save();
+            $data = Berkas::where('mahasiswa_id', $user->mahasiswa->id)->first();
         } else {
-            $berkas = Berkas::where('mahasiswa_id', $user->mahasiswa->id)->first();
+            $data = Berkas::where('mahasiswa_id', $user->mahasiswa->id)->first();
         }
 
-        return view('admin.beasiswa.step-one', compact('judul', 'berkas'));
+        return view('admin.beasiswa.step-one', compact('judul', 'data'));
     }
 
 

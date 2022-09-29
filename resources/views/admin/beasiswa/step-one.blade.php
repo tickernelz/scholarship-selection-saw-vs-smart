@@ -48,13 +48,13 @@
                     @endif
                     @csrf
 
-                    @if ($berkas->first()->file)
+                    @if ($data->whereNotNull('file')->count() > 0)
                         <x-adminlte-modal id="modal-file" title="Lihat File" size="lg">
-                            <embed src="/beasiswa/{{ $berkas->first()->file }}" type="application/pdf"
+                            <embed src="/beasiswa/{{ $data->file }}" type="application/pdf"
                                    frameborder="0" width="100%" height="600px">
                         </x-adminlte-modal>
                         <x-adminlte-input-file name="berkas" label="Upload File Surat"
-                                               placeholder="{{ $berkas->first()->file }}"/>
+                                               placeholder="{{ $data->file }}"/>
                         <button type="button" class="btn btn-secondary" data-toggle="modal"
                                 data-target="#modal-file">
                             Lihat File
