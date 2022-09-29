@@ -23,6 +23,8 @@ return new class extends Migration {
             $table->string('telepon')->nullable();
             $table->string('ktm')->nullable();
             $table->boolean('is_verified')->default(false);
+            $table->boolean('is_beasiswa_send')->default(false);
+            $table->boolean('is_beasiswa_approved')->default(false);
             $table->timestamps();
         });
     }

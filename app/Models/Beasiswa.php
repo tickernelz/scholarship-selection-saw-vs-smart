@@ -17,4 +17,14 @@ class Beasiswa extends Model
     {
         return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id', 'id');
     }
+
+    public function kriteria()
+    {
+        return $this->belongsTo(Kriteria::class, 'kriteria_id', 'id');
+    }
+
+    public function subkriteria()
+    {
+        return $this->belongsTo(Subkriteria::class, 'subkriteria_id', 'id');
+    }
 }

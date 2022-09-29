@@ -50,5 +50,6 @@ return [
     'edit_mahasiswa' => 'Edit Mahasiswa',
     'angkatan' => 'Angkatan',
     'semester' => 'Semester',
-    'ukt' => 'UKT'
+    'ukt' => 'UKT',
+    'kirim' => 'Kirim'
 ];

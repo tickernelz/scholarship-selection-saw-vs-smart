@@ -26,7 +26,7 @@
     <div class="col-xl-12" style="float:none;margin:auto;">
         <div class="card">
             <div class="card-header d-flex p-0">
-                <h3 class="card-title p-3">{{ trans('auth.form_tambah') }}</h3>
+                <h3 class="card-title p-3">{{ trans('auth.form_edit') }}</h3>
                 <ul class="nav nav-pills ml-auto p-2">
                     <li class="nav-item">
                         <a href="{{ redirect()->getUrlGenerator()->route('get.admin.kriteria.index') }}">
