@@ -120,7 +120,7 @@ class KriteriaController extends Controller
                     return redirect()->back()->with('error', 'Prioritas subkriteria tidak boleh 0');
                 }
                 $subkriteria[] = [
-                    'id' => count($subkriteria) + 1,
+                    'id' => null,
                     'nama_subkriteria' => $request->nama_subkriteria,
                     'prioritas_subkriteria' => $request->prioritas_subkriteria,
                 ];
@@ -225,13 +225,20 @@ class KriteriaController extends Controller
                     'tipe' => $request->tipe_kriteria,
                     'bobot' => $request->bobot_kriteria,
                 ]);
-                $kriteria->subkriteria()->delete();
                 foreach ($subkriteria as $item) {
-                    Subkriteria::create([
-                        'kriteria_id' => $kriteria->id,
-                        'nama' => $item['nama_subkriteria'],
-                        'prioritas' => $item['prioritas_subkriteria'],
-                    ]);
+                    if ($item['id'] === null) {
+                        Subkriteria::create([
+                            'kriteria_id' => $kriteria->id,
+                            'nama' => $item['nama_subkriteria'],
+                            'prioritas' => $item['prioritas_subkriteria'],
+                        ]);
+                    } else {
+                        $subkriteria = Subkriteria::find($item['id']);
+                        $subkriteria->update([
+                            'nama' => $item['nama_subkriteria'],
+                            'prioritas' => $item['prioritas_subkriteria'],
+                        ]);
+                    }
                 }
                 $request->session()->forget('subkriteria');
                 $request->session()->forget('kriteria');
