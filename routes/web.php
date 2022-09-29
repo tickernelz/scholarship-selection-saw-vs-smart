@@ -79,6 +79,9 @@ Route::group(['middleware' => 'auth'], static function () {
         Route::post('admin/daftar-beasiswa/step-one', [BeasiswaController::class, 'postStepOne'])->name('post.admin.daftar-beasiswa.step-one');
         Route::get('admin/daftar-beasiswa/step-two', [BeasiswaController::class, 'createStepTwo'])->name('get.admin.daftar-beasiswa.step-two');
         Route::post('admin/daftar-beasiswa/step-two', [BeasiswaController::class, 'postStepTwo'])->name('post.admin.daftar-beasiswa.step-two');
+        Route::get('admin/daftar-beasiswa/step-three', [BeasiswaController::class, 'createStepThree'])->name('get.admin.daftar-beasiswa.step-three');
+        Route::post('admin/daftar-beasiswa/step-three', [BeasiswaController::class, 'postStepThree'])->name('post.admin.daftar-beasiswa.step-three');
+        Route::post('admin/daftar-beasiswa/send', [BeasiswaController::class, 'send'])->name('post.admin.daftar-beasiswa.send');
     });
     // Kelola Kriteria
     Route::group(['middleware' => ['can:kelola kriteria']], static function () {

@@ -8,25 +8,22 @@
     <h1>{{ $judul }}</h1>
 @stop
 
-@section('plugins.BsCustomFileInput', true)
-
 @section('content')
     <div class="col-xl-12" style="float:none;margin:auto;">
         <div class="card">
             <div class="card-header d-flex p-0">
-                <h3 class="card-title p-3">Upload Berkas</h3>
-                {{--                <ul class="nav nav-pills ml-auto p-2">--}}
-                {{--                    <li class="nav-item">--}}
-                {{--                        <a href="{{ redirect()->getUrlGenerator()->route('get.admin.berita.index') }}">--}}
-                {{--                            <button type="button" class="btn btn-primary">{{ trans('auth.kembali') }}</button>--}}
-                {{--                        </a>--}}
-                {{--                    </li>--}}
-                {{--                </ul>--}}
+                <h3 class="card-title p-3">Form Pertanyaan</h3>
+                <ul class="nav nav-pills ml-auto p-2">
+                    <li class="nav-item">
+                        <a href="{{ route('get.admin.daftar-beasiswa.step-two') }}">
+                            <button type="button" class="btn btn-primary">{{ trans('auth.kembali') }}</button>
+                        </a>
+                    </li>
+                </ul>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form action="{{ route('post.admin.daftar-beasiswa.step-one') }}" enctype="multipart/form-data"
-                  method="post">
+            <form action="{{ route('post.admin.daftar-beasiswa.step-three') }}" method="post">
                 <div class="card-body">
                     @if (Session::has('success'))
                         <div class="alert alert-success alert-dismissible">
@@ -47,22 +44,26 @@
                         </div>
                     @endif
                     @csrf
+                    @foreach($kriteria as $k)
+                        <span class="text-bold">{{ $k->nama }}</span>
+                        <input type="hidden" name="kriteria[]" value="{{ $k->id }}">
+                        {{--Radio Option Subkriteria--}}
+                        @foreach($k->subkriteria as $s => $sub)
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="subkriteria[{{ $k->id }}]"
+                                       id="{{ $sub->id }}"
+                                       value="{{ $sub->id }}" required
+                                       @if ($beasiswa->where('kriteria_id', $k->id)->where('subkriteria_id', $sub->id)->first())
+                                           checked
+                                    @endif>
+                                <label class="form-check-label" for="{{ $sub->id }}">
+                                    {{ $sub->nama }}
+                                </label>
+                            </div>
+                        @endforeach
+                        <hr>
 
-                    @if ($berkas->first()->file)
-                        <x-adminlte-modal id="modal-file" title="Lihat File" size="lg">
-                            <embed src="/beasiswa/{{ $berkas->first()->file }}" type="application/pdf"
-                                   frameborder="0" width="100%" height="600px">
-                        </x-adminlte-modal>
-                        <x-adminlte-input-file name="berkas" label="Upload File Surat"
-                                               placeholder="{{ $berkas->first()->file }}"/>
-                        <button type="button" class="btn btn-secondary" data-toggle="modal"
-                                data-target="#modal-file">
-                            Lihat File
-                        </button>
-                    @else
-                        <x-adminlte-input-file name="berkas" label="Upload File Surat"
-                                               placeholder="Pilih File..." required/>
-                    @endif
+                    @endforeach
                 </div>
                 <!-- /.card-body -->
 

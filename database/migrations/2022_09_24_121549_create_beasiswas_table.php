@@ -18,7 +18,10 @@ return new class extends Migration
             $table->id();
             $table->integer('mahasiswa_id')->unsigned();
             $table->foreign('mahasiswa_id')->references('id')->on('mahasiswas')->cascadeOnDelete();
-            $table->string('berkas')->nullable();
+            $table->integer('kriteria_id')->unsigned();
+            $table->foreign('kriteria_id')->references('id')->on('kriteria')->cascadeOnDelete();
+            $table->integer('subkriteria_id')->unsigned();
+            $table->foreign('subkriteria_id')->references('id')->on('subkriteria')->cascadeOnDelete();
             $table->timestamps();
         });
     }
