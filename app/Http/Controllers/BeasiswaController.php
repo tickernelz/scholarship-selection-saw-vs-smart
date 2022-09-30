@@ -6,6 +6,7 @@ use App\Models\Beasiswa;
 use App\Models\Berkas;
 use App\Models\Kriteria;
 use App\Models\Mahasiswa;
+use App\Models\Skor;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -28,6 +29,87 @@ class BeasiswaController extends Controller
         }
 
         return view('admin.beasiswa.index', compact('beasiswa', 'judul', 'berkas', 'mahasiswa', 'kriteria'));
+    }
+
+    public function index_admin()
+    {
+        $judul = 'List Beasiswa';
+        $beasiswa = Beasiswa::with('mahasiswas', 'kriterias', 'subkriteria')->whereHas('mahasiswas', function ($query) {
+            $query->where('is_beasiswa_send', 1);
+        })->get();
+
+        // Hitung Bobot Sub Kriteria Berdasarkan Prioritas
+        $kriteria = Kriteria::all();
+        foreach ($kriteria as $k) {
+            $sub_kriteria = $k->subkriteria;
+            $jumlah_sub_kriteria = $sub_kriteria->count();
+            $bobot_sub_kriteria = 1 / $jumlah_sub_kriteria;
+            foreach ($sub_kriteria as $sk) {
+                $bobot = 1 - ($bobot_sub_kriteria * ($sk->prioritas - 1));
+                $sk->bobot = $bobot;
+                $sk->save();
+            }
+        }
+
+        // Matrix
+        $matrix = [];
+        foreach ($beasiswa as $b) {
+            $matrix[$b->kriteria_id][$b->mahasiswa_id] = $b->subkriteria->bobot;
+        }
+
+        // Normalisasi
+        $normalisasi = [];
+        foreach ($matrix as $m => $value) {
+            // Cek Tipe Kriteria
+            $kriteria = Kriteria::find($m);
+            if ($kriteria->tipe == 'benefit') {
+                $max = max($value);
+                foreach ($value as $v => $nilai) {
+                    $normalisasi[$m][$v] = $nilai / $max;
+                }
+            } else {
+                $min = min($value);
+                foreach ($value as $v => $nilai) {
+                    $normalisasi[$m][$v] = $min / $nilai;
+                }
+            }
+        }
+
+        // Proses Perangkingan Per Mahasiswa
+        $perangkingan = [];
+        foreach ($normalisasi as $n => $value) {
+            $kriteria = Kriteria::find($n);
+            foreach ($value as $v => $nilai) {
+                $perangkingan[$v][$n] = $nilai * ($kriteria->bobot / 100);
+            }
+        }
+
+        // Proses Perangkingan Akhir
+        $perangkingan_akhir = [];
+        foreach ($perangkingan as $p => $value) {
+            $jumlah = 0;
+            foreach ($value as $v) {
+                $jumlah += $v;
+            }
+            $perangkingan_akhir[$p] = $jumlah;
+        }
+        arsort($perangkingan_akhir);
+
+        // Save Skor To Mahasiswa
+        foreach ($perangkingan_akhir as $p => $value) {
+            $mahasiswa = Mahasiswa::find($p);
+            $skor = Skor::where('mahasiswa_id', $mahasiswa->id)->first();
+            if ($skor == null) {
+                $skor = new Skor();
+                $skor->mahasiswa_id = $mahasiswa->id;
+            }
+            $skor->skor_saw = $value;
+            $skor->save();
+        }
+
+        $data = Mahasiswa::where('is_beasiswa_send', 1)->get();
+
+        return view('admin.beasiswa.index-admin', compact('data', 'judul'));
     }
 
     public function send()
@@ -53,11 +135,12 @@ class BeasiswaController extends Controller
             $berkas = new Berkas();
             $berkas->mahasiswa_id = $user->mahasiswa->id;
             $berkas->save();
+            $data = Berkas::where('mahasiswa_id', $user->mahasiswa->id)->first();
         } else {
-            $berkas = Berkas::where('mahasiswa_id', $user->mahasiswa->id)->first();
+            $data = Berkas::where('mahasiswa_id', $user->mahasiswa->id)->first();
         }
 
-        return view('admin.beasiswa.step-one', compact('judul', 'berkas'));
+        return view('admin.beasiswa.step-one', compact('judul', 'data'));
     }
 
 

@@ -352,6 +352,17 @@ return [
             ],
         ],
         [
+            'text' => 'Kelola Beasiswa',
+            'icon' => 'fas fa-fw fa-file-contract',
+            'can' => 'kelola beasiswa',
+            'submenu' => [
+                [
+                    'text' => 'List Beasiswa',
+                    'url' => 'admin/beasiswa',
+                ],
+            ],
+        ],
+        [
             'text' => 'Daftar Beasiswa',
             'icon' => 'fas fa-fw fa-file-contract',
             'url' => 'admin/daftar-beasiswa/step-one',

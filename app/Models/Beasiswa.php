@@ -13,18 +13,18 @@ class Beasiswa extends Model
         'id',
     ];
 
-    public function mahasiswa()
+    public function mahasiswas()
     {
-        return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id', 'id');
+        return $this->hasMany(Mahasiswa::class, 'id', 'mahasiswa_id');
     }
 
-    public function kriteria()
+    public function kriterias()
     {
-        return $this->belongsTo(Kriteria::class, 'kriteria_id', 'id');
+        return $this->hasMany(Kriteria::class, 'id', 'kriteria_id');
     }
 
     public function subkriteria()
     {
-        return $this->belongsTo(Subkriteria::class, 'subkriteria_id', 'id');
+        return $this->hasOne(Subkriteria::class, 'id', 'subkriteria_id');
     }
 }

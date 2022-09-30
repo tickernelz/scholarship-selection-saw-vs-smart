@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
 
 class RoleSeeder extends Seeder
 {
@@ -17,7 +18,7 @@ class RoleSeeder extends Seeder
     public function run()
     {
         // Reset cached roles and permissions
-        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         // create permissions
         Permission::create(['name' => 'kelola berita']);
@@ -25,10 +26,11 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'kelola password']);
         Permission::create(['name' => 'kelola mahasiswa']);
         Permission::create(['name' => 'kelola kriteria']);
+        Permission::create(['name' => 'kelola beasiswa']);
         Permission::create(['name' => 'daftar beasiswa']);
 
         $admin = Role::create(['name' => 'admin']);
-        $admin->givePermissionTo(['kelola berita', 'kelola profil', 'kelola password', 'kelola mahasiswa', 'kelola kriteria']);
+        $admin->givePermissionTo(['kelola berita', 'kelola profil', 'kelola password', 'kelola mahasiswa', 'kelola kriteria', 'kelola beasiswa']);
 
         $mahasiswa = Role::create(['name' => 'mahasiswa']);
         $mahasiswa->givePermissionTo(['kelola profil', 'kelola password', 'daftar beasiswa']);

@@ -33,5 +33,10 @@ class UserSeeder extends Seeder
             'email' => 'zhafronadani@gmail.com',
             'password' => Hash::make('123'),
         ])->assignRole('mahasiswa');
+        User::create([
+            'name' => 'Mahasiswa2',
+            'email' => 'mahasiswa2@local.com',
+            'password' => Hash::make('123'),
+        ])->assignRole('mahasiswa');
     }
 }
