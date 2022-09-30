@@ -93,6 +93,13 @@ Route::group(['middleware' => 'auth'], static function () {
         Route::get('admin/kriteria/edit/{id}', [KriteriaController::class, 'edit_index'])->name('get.admin.kriteria.edit');
         Route::get('admin/kriteria/hapus/{id}', [KriteriaController::class, 'hapus'])->name('get.admin.kriteria.hapus');
     });
+    // Kelola Beasiswa
+    Route::group(['middleware' => ['can:kelola beasiswa']], static function () {
+        Route::get('admin/beasiswa', [BeasiswaController::class, 'index_admin'])->name('get.admin.beasiswa.index');
+        Route::get('admin/beasiswa/edit/{id}', [BeasiswaController::class, 'edit_index'])->name('get.admin.beasiswa.edit');
+        Route::post('admin/beasiswa/edit/{id}/post', [BeasiswaController::class, 'edit'])->name('post.admin.beasiswa.edit');
+        Route::get('admin/beasiswa/hapus/{id}', [BeasiswaController::class, 'hapus'])->name('get.admin.beasiswa.hapus');
+    });
 });
 
 

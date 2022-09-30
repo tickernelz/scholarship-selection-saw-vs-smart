@@ -31,4 +31,9 @@ class Mahasiswa extends Model
     {
         return $this->hasOne(Berkas::class, 'mahasiswa_id', 'id');
     }
+
+    public function skor()
+    {
+        return $this->hasOne(Skor::class, 'mahasiswa_id', 'id');
+    }
 }

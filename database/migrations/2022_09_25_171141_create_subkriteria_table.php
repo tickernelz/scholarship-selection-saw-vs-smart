@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->foreign('kriteria_id')->references('id')->on('kriteria')->cascadeOnDelete();
             $table->string('nama');
             $table->integer('prioritas');
+            $table->float('bobot')->nullable();
             $table->timestamps();
             $table->unique(['prioritas', 'kriteria_id'], 'subkriteria_kriteria_id_prioritas_unique');
         });

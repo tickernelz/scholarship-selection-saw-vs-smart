@@ -30,8 +30,20 @@ class MahasiswaSeeder extends Seeder
             'ttl' => 'Jakarta, 1 Januari 2000',
             'telepon' => '081234567890',
             'ukt' => 3000000,
-            'is_verified' => 0,
+            'is_verified' => 1,
             'user_id' => 3,
+        ]);
+        Mahasiswa::create([
+            'nim' => 'DBC118044',
+            'studi' => 'Sistem Informasi',
+            'fakultas' => 'Teknik Informatika',
+            'angkatan' => '2019',
+            'jenis_kelamin' => 'L',
+            'ttl' => 'Jakarta, 1 Januari 2000',
+            'telepon' => '081234567890',
+            'ukt' => 5000000,
+            'is_verified' => 1,
+            'user_id' => 4,
         ]);
     }
 }
