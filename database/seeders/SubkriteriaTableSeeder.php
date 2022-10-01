@@ -25,8 +25,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Rp 0,-',
                 'prioritas' => 1,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 2,
@@ -34,8 +32,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Rp 600.000',
                 'prioritas' => 2,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 3,
@@ -43,8 +39,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Rp 600.001 s.d. 1.500.000,-',
                 'prioritas' => 3,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 4,
@@ -52,8 +46,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Rp 1.500.001 s.d. 3.000.000,-',
                 'prioritas' => 4,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 5,
@@ -61,8 +53,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Rp 3.000.001 s.d. 4.500.000,-',
                 'prioritas' => 5,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 6,
@@ -70,8 +60,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Rp 4.500.001 s.d. 6.500.000,-',
                 'prioritas' => 6,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 7,
@@ -79,8 +67,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Rp 6.500.001 s.d. 10 juta',
                 'prioritas' => 7,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 8,
@@ -88,8 +74,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Di atas Rp 10 juta',
                 'prioritas' => 8,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 9,
@@ -97,8 +81,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Lebih dari 5 orang',
                 'prioritas' => 1,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 10,
@@ -106,8 +88,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => '5 orang',
                 'prioritas' => 2,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 11,
@@ -115,8 +95,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => '4 orang',
                 'prioritas' => 3,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 12,
@@ -124,8 +102,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => '3 orang',
                 'prioritas' => 4,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 13,
@@ -133,8 +109,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => '2 orang',
                 'prioritas' => 5,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 14,
@@ -142,8 +116,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => '1 orang',
                 'prioritas' => 6,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 15,
@@ -151,8 +123,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Sungai/danau/sumur galian',
                 'prioritas' => 1,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 16,
@@ -160,8 +130,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Pompa air',
                 'prioritas' => 2,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 17,
@@ -169,8 +137,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'PDAM',
                 'prioritas' => 3,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 18,
@@ -178,8 +144,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Kemasan',
                 'prioritas' => 4,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 19,
@@ -187,8 +151,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Sungai/danau/sumur galian',
                 'prioritas' => 1,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 20,
@@ -196,8 +158,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Pompa air',
                 'prioritas' => 2,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 21,
@@ -205,8 +165,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'PDAM',
                 'prioritas' => 3,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 22,
@@ -214,8 +172,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Kemasan',
                 'prioritas' => 4,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 23,
@@ -223,8 +179,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Tanpa listrik',
                 'prioritas' => 1,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 24,
@@ -232,8 +186,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Menyambung tetangga',
                 'prioritas' => 2,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 25,
@@ -241,8 +193,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Milik sendiri',
                 'prioritas' => 3,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 26,
@@ -250,8 +200,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Tidak bayar listrik',
                 'prioritas' => 1,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 27,
@@ -259,8 +207,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Rp 20.000 ke bawah',
                 'prioritas' => 2,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 28,
@@ -268,8 +214,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Rp 20.001 s.d. 75.000',
                 'prioritas' => 3,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 29,
@@ -277,8 +221,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Rp 75.001 s.d. 125.000',
                 'prioritas' => 4,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 30,
@@ -286,8 +228,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Rp 125.001 s.d. 300.000',
                 'prioritas' => 5,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 31,
@@ -295,8 +235,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Rp 300.001 s.d. 500.000',
                 'prioritas' => 6,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 32,
@@ -304,8 +242,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Rp 500.001 s.d. 1000.000',
                 'prioritas' => 7,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 33,
@@ -313,8 +249,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Di atas Rp 1.000.001',
                 'prioritas' => 8,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 34,
@@ -322,8 +256,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Tidak memiliki',
                 'prioritas' => 1,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 35,
@@ -331,8 +263,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Memiliki 1',
                 'prioritas' => 2,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 36,
@@ -340,8 +270,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Memiliki lebih dari 1',
                 'prioritas' => 3,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 37,
@@ -349,8 +277,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Tidak memiliki',
                 'prioritas' => 1,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 38,
@@ -358,8 +284,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Memiliki 1',
                 'prioritas' => 2,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 39,
@@ -367,8 +291,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Memiliki lebih dari 1',
                 'prioritas' => 3,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 40,
@@ -376,8 +298,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Ada, dengan UKT persemester setinggi-tingginya Rp 1.000.000,-',
                 'prioritas' => 1,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 41,
@@ -385,8 +305,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Ada, dengan UKT persemester setinggi-tingginya Rp 500.000,-',
                 'prioritas' => 2,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 42,
@@ -394,8 +312,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Ada, dengan UKT persemester lebih dari Rp 1.000.000,-',
                 'prioritas' => 3,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 43,
@@ -403,8 +319,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Tidak ada',
                 'prioritas' => 4,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 44,
@@ -412,8 +326,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Menumpang',
                 'prioritas' => 1,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 45,
@@ -421,8 +333,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Sewa Rp 300.000 sd 500.00/bulan',
                 'prioritas' => 2,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 46,
@@ -430,8 +340,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Sewa > Rp 500.001',
                 'prioritas' => 3,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 47,
@@ -439,8 +347,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Milik sendiri',
                 'prioritas' => 4,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 48,
@@ -448,8 +354,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Memiliki',
                 'prioritas' => 1,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
             array(
                 'id' => 49,
@@ -457,8 +361,6 @@ class SubkriteriaTableSeeder extends Seeder
                 'nama' => 'Tidak memiliki',
                 'prioritas' => 2,
                 'bobot' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
             ),
         ));
 

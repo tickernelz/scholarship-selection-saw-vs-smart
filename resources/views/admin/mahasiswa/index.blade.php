@@ -99,7 +99,7 @@
                                     Edit
                                 </a>
                                 <a type="button" class="btn btn-secondary"
-                                   href="{{ route('get.admin.mahasiswa.verifikasi.reject', $li->id) }}"
+                                   href="{{ route('get.admin.mahasiswa.verifikasi.email.accept', $li->id) }}"
                                    onclick="return confirm('Yakin Ingin Kirim Email?');">
                                     Kirim Email
                                 </a>
