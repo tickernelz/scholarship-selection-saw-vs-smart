@@ -280,14 +280,14 @@ class KriteriaController extends Controller
         $kriteria = Kriteria::all();
         foreach ($kriteria as $k) {
             $sub_kriteria = $k->subkriteria;
-            $jumlah_sub_kriteria = $sub_kriteria->count();
-            $bobot_sub_kriteria = 1 / $jumlah_sub_kriteria;
+            $max_prioritas = $sub_kriteria->max('prioritas');
+            $min_prioritas = $sub_kriteria->min('prioritas');
             foreach ($sub_kriteria as $sk) {
                 // Cek Tipe Kriteria
                 if ($k->tipe === 'benefit'){
-                    $bobot = 1 - ($bobot_sub_kriteria * ($sk->prioritas - 1));
+                    $bobot = ($max_prioritas - $sk->prioritas) / ($max_prioritas - $min_prioritas);
                 } else {
-                    $bobot = $sk->prioritas / $jumlah_sub_kriteria;
+                    $bobot = ($sk->prioritas - $min_prioritas) / ($max_prioritas - $min_prioritas);
                 }
                 $sk->bobot = $bobot;
                 $sk->save();

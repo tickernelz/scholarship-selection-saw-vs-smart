@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             MahasiswaSeeder::class,
             KriteriaTableSeeder::class,
             SubKriteriaTableSeeder::class,
+            BeasiswasTableSeeder::class,
+            BerkasTableSeeder::class,
         ]);
     }
 }
