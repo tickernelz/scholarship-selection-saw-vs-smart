@@ -18,7 +18,9 @@ class MahasiswaSeeder extends Seeder
             'ttl' => 'Jakarta, 1 Januari 2000',
             'telepon' => '081234567890',
             'ukt' => 1000000,
+            'semester' => 6,
             'is_verified' => 1,
+            'is_beasiswa_send' => 1,
             'user_id' => 2,
         ]);
         Mahasiswa::create([
@@ -30,7 +32,9 @@ class MahasiswaSeeder extends Seeder
             'ttl' => 'Jakarta, 1 Januari 2000',
             'telepon' => '081234567890',
             'ukt' => 3000000,
+            'semester' => 6,
             'is_verified' => 1,
+            'is_beasiswa_send' => 1,
             'user_id' => 3,
         ]);
         Mahasiswa::create([
@@ -42,7 +46,9 @@ class MahasiswaSeeder extends Seeder
             'ttl' => 'Jakarta, 1 Januari 2000',
             'telepon' => '081234567890',
             'ukt' => 5000000,
+            'semester' => 6,
             'is_verified' => 1,
+            'is_beasiswa_send' => 1,
             'user_id' => 4,
         ]);
     }

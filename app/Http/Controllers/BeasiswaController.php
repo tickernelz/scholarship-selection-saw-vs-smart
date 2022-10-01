@@ -63,12 +63,20 @@ class BeasiswaController extends Controller
             if ($kriteria->tipe == 'benefit') {
                 $max = max($value);
                 foreach ($value as $v => $nilai) {
-                    $normalisasi[$m][$v] = $nilai / $max;
+                    if ($max == 0) {
+                        $normalisasi[$m][$v] = 1;
+                    } else {
+                        $normalisasi[$m][$v] = $nilai / $max;
+                    }
                 }
             } else {
                 $min = min($value);
                 foreach ($value as $v => $nilai) {
-                    $normalisasi[$m][$v] = $min / $nilai;
+                    if ($nilai == 0) {
+                        $normalisasi[$m][$v] = 1;
+                    } else {
+                        $normalisasi[$m][$v] = $min / $nilai;
+                    }
                 }
             }
         }
@@ -145,7 +153,7 @@ class BeasiswaController extends Controller
             if ($kriteria->tipe == 'benefit') {
                 foreach ($value as $v => $nilai) {
                     if ($max == $min) {
-                        $normalisasi[$m][$v] = 0;
+                        $normalisasi[$m][$v] = 1;
                     } else {
                         $normalisasi[$m][$v] = ($nilai - $min) / ($max - $min);
                     }
@@ -153,7 +161,7 @@ class BeasiswaController extends Controller
             } else {
                 foreach ($value as $v => $nilai) {
                     if ($max == $min) {
-                        $normalisasi[$m][$v] = 0;
+                        $normalisasi[$m][$v] = 1;
                     } else {
                         $normalisasi[$m][$v] = ($max - $nilai) / ($max - $min);
                     }
