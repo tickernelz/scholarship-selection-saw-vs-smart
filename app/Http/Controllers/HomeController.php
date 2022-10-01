@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pengaturan;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,8 +13,10 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $berita = Post::paginate(5);
-        return view('home.index', compact('user', 'berita'));
+        $pengaturan = Pengaturan::first();
+        return view('home.index', compact('user', 'berita', 'pengaturan'));
     }
+
     public function detail($slug, $id)
     {
         $user = Auth::user();

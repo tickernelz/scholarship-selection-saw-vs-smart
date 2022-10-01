@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pengaturan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +31,7 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        $pengaturan = Pengaturan::first();
         $rules = [
             'email' => 'required|email',
             'password' => 'required|string',
@@ -52,11 +54,14 @@ class AuthController extends Controller
         if (Auth::check()) { // true sekalian session field di users nanti bisa dipanggil via Auth
             if (Auth::user()->hasRole('admin')) {
                 return redirect()->route('get.admin.dashboard');
-            } elseif (Auth::user()->hasRole('mahasiswa') && Auth::user()->mahasiswa->is_verified) {
+            } elseif (Auth::user()->hasRole('mahasiswa') && Auth::user()->mahasiswa->is_verified && $pengaturan->is_open) {
                 return redirect()->route('get.home.index');
-            } else {
+            } elseif (Auth::user()->hasRole('mahasiswa') && !Auth::user()->mahasiswa->is_verified) {
                 Auth::logout();
                 return redirect()->route('get.login')->with('error', 'Akun anda belum diverifikasi');
+            } elseif (Auth::user()->hasRole('mahasiswa') && !$pengaturan->is_open) {
+                Auth::logout();
+                return redirect()->route('get.login')->with('error', 'Pengajuan tidak dibuka');
             }
         } else { // false
             Session::flash('error', 'Email atau password salah');
