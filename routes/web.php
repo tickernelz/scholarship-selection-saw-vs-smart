@@ -95,10 +95,11 @@ Route::group(['middleware' => 'auth'], static function () {
     });
     // Kelola Beasiswa
     Route::group(['middleware' => ['can:kelola beasiswa']], static function () {
-        Route::get('admin/beasiswa', [BeasiswaController::class, 'index_admin'])->name('get.admin.beasiswa.index');
-        Route::get('admin/beasiswa/edit/{id}', [BeasiswaController::class, 'edit_index'])->name('get.admin.beasiswa.edit');
-        Route::post('admin/beasiswa/edit/{id}/post', [BeasiswaController::class, 'edit'])->name('post.admin.beasiswa.edit');
-        Route::get('admin/beasiswa/hapus/{id}', [BeasiswaController::class, 'hapus'])->name('get.admin.beasiswa.hapus');
+        Route::get('admin/beasiswa/saw', [BeasiswaController::class, 'index_saw'])->name('get.admin.beasiswa.saw');
+        Route::get('admin/beasiswa/smart', [BeasiswaController::class, 'index_smart'])->name('get.admin.beasiswa.smart');
+        Route::get('admin/beasiswa/ajax_modal', [BeasiswaController::class, 'ajax_modal'])->name('get.admin.beasiswa.ajax_modal');
+        Route::post('admin/beasiswa/terima', [BeasiswaController::class, 'terima'])->name('post.admin.beasiswa.terima');
+        Route::post('admin/beasiswa/tolak', [BeasiswaController::class, 'tolak'])->name('post.admin.beasiswa.tolak');
     });
 });
 

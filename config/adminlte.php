@@ -357,8 +357,12 @@ return [
             'can' => 'kelola beasiswa',
             'submenu' => [
                 [
-                    'text' => 'List Beasiswa',
-                    'url' => 'admin/beasiswa',
+                    'text' => 'List Beasiswa (SAW)',
+                    'url' => 'admin/beasiswa/saw',
+                ],
+                [
+                    'text' => 'List Beasiswa (SMART)',
+                    'url' => 'admin/beasiswa/smart',
                 ],
             ],
         ],

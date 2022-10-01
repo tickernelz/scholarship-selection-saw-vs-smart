@@ -202,6 +202,7 @@ class KriteriaController extends Controller
                 }
                 $request->session()->forget('subkriteria');
                 $request->session()->forget('kriteria');
+                self::compute_bobot();
                 return redirect()->route('get.admin.kriteria.tambah')->with('success', 'Kriteria berhasil ditambahkan');
 
             case 'save_edit':
@@ -242,6 +243,7 @@ class KriteriaController extends Controller
                 }
                 $request->session()->forget('subkriteria');
                 $request->session()->forget('kriteria');
+                self::compute_bobot();
                 return redirect()->route('get.admin.kriteria.edit', $request->id_kriteria)->with('success', 'Kriteria berhasil diubah');
         }
     }
@@ -257,6 +259,7 @@ class KriteriaController extends Controller
             }
             Session::put('subkriteria', $subkriteria);
         }
+        self::compute_bobot();
         return redirect()->back()->with('success', 'Subkriteria berhasil dihapus');
     }
 
@@ -265,8 +268,30 @@ class KriteriaController extends Controller
         $kriteria = Kriteria::find($id);
         if ($kriteria !== null) {
             $kriteria->delete();
+            self::compute_bobot();
             return redirect()->back()->with('success', 'Kriteria berhasil dihapus');
         }
+        self::compute_bobot();
         return redirect()->back()->with('error', 'Kriteria tidak ditemukan');
+    }
+
+    private function compute_bobot()
+    {
+        $kriteria = Kriteria::all();
+        foreach ($kriteria as $k) {
+            $sub_kriteria = $k->subkriteria;
+            $jumlah_sub_kriteria = $sub_kriteria->count();
+            $bobot_sub_kriteria = 1 / $jumlah_sub_kriteria;
+            foreach ($sub_kriteria as $sk) {
+                // Cek Tipe Kriteria
+                if ($k->tipe === 'benefit'){
+                    $bobot = 1 - ($bobot_sub_kriteria * ($sk->prioritas - 1));
+                } else {
+                    $bobot = $sk->prioritas / $jumlah_sub_kriteria;
+                }
+                $sk->bobot = $bobot;
+                $sk->save();
+            }
+        }
     }
 }
