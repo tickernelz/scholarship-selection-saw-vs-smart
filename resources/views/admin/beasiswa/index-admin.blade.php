@@ -40,23 +40,24 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
-            @if (Session::has('success'))
-                <div class="alert alert-success alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h5><i class="icon fas fa-check"></i> Success!</h5>
-                    {{ Session::get('success') }}
-                </div>
-            @endif
-            @if (session('errors'))
-                <div class="alert alert-danger alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h5><i class="icon fas fa-ban"></i> Error!</h5>
+            @if(session('errors'))
+                <x-adminlte-alert theme="danger" title="Error!" dismissable>
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
                     </ul>
-                </div>
+                </x-adminlte-alert>
+            @endif
+            @if (Session::has('success'))
+                <x-adminlte-alert theme="success" title="Success!" dismissable>
+                    {{ Session::get('success') }}
+                </x-adminlte-alert>
+            @endif
+            @if (Session::has('error'))
+                <x-adminlte-alert theme="danger" title="Error!" dismissable>
+                    {{ Session::get('error') }}
+                </x-adminlte-alert>
             @endif
             <form action="{{ route('post.admin.beasiswa.terima') }}" method="post">
                 @csrf
@@ -86,7 +87,7 @@
                     </x-slot>
                 </x-adminlte-modal>
             </form>
-            <x-adminlte-datatable id="table" :config="$config" :heads="$heads" {{--with-footer--}} hoverable bordered
+            <x-adminlte-datatable id="table" :config="$config" :heads="$heads" hoverable bordered
                                   beautify>
                 @if ($data !== null)
                     @foreach($data as $li)

@@ -6,9 +6,11 @@ use App\Models\Beasiswa;
 use App\Models\Berkas;
 use App\Models\Kriteria;
 use App\Models\Mahasiswa;
+use App\Models\Pengaturan;
 use App\Models\Skor;
 use App\Models\User;
 use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class BeasiswaController extends Controller
@@ -210,6 +212,10 @@ class BeasiswaController extends Controller
 
     public function send()
     {
+        $pengaturan = Pengaturan::first();
+        if ($pengaturan->batas_pengajuan <= Carbon::now()) {
+            return redirect()->back()->with('error', 'Batas Pengajuan Beasiswa Sudah Lewat');
+        }
         $user = Auth::user();
         $mahasiswa = $user->mahasiswa;
         $mahasiswa->is_beasiswa_send = true;

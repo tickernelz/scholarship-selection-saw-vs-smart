@@ -31,7 +31,7 @@
                             <div class="card-body">
                                 <div class="text-center text-muted mb-4">
                                     <h3 class="heading">Informasi Penting</h3>
-                                    <span class="mb-0 text-sm  font-weight-bold">Periode : Semester ,  | Batas Pengajuan Sampai :   </span>
+                                    <span class="mb-0 text-sm  font-weight-bold">Periode : Semester {{ $pengaturan->getSemester() }} | Batas Pengajuan Sampai : {{ $pengaturan->batasPengajuan() }}</span>
                                     <hr class="my-4"/>
                                     <ul class="list-unstyled">
                                         @foreach($berita as $li)

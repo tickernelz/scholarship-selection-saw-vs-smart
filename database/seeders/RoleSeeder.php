@@ -27,10 +27,11 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'kelola mahasiswa']);
         Permission::create(['name' => 'kelola kriteria']);
         Permission::create(['name' => 'kelola beasiswa']);
+        Permission::create(['name' => 'kelola pengaturan']);
         Permission::create(['name' => 'daftar beasiswa']);
 
         $admin = Role::create(['name' => 'admin']);
-        $admin->givePermissionTo(['kelola berita', 'kelola profil', 'kelola password', 'kelola mahasiswa', 'kelola kriteria', 'kelola beasiswa']);
+        $admin->givePermissionTo(['kelola berita', 'kelola profil', 'kelola password', 'kelola mahasiswa', 'kelola kriteria', 'kelola beasiswa', 'kelola pengaturan']);
 
         $mahasiswa = Role::create(['name' => 'mahasiswa']);
         $mahasiswa->givePermissionTo(['kelola profil', 'kelola password', 'daftar beasiswa']);

@@ -4,6 +4,7 @@ use App\Http\Controllers\BeasiswaController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\MahasiswasController;
+use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
@@ -100,6 +101,13 @@ Route::group(['middleware' => 'auth'], static function () {
         Route::get('admin/beasiswa/ajax_modal', [BeasiswaController::class, 'ajax_modal'])->name('get.admin.beasiswa.ajax_modal');
         Route::post('admin/beasiswa/terima', [BeasiswaController::class, 'terima'])->name('post.admin.beasiswa.terima');
         Route::post('admin/beasiswa/tolak', [BeasiswaController::class, 'tolak'])->name('post.admin.beasiswa.tolak');
+    });
+    // Kelola Pengaturan
+    Route::group(['middleware' => ['can:kelola pengaturan']], static function () {
+        Route::get('admin/pengaturan', [PengaturanController::class, 'index'])->name('get.admin.pengaturan.index');
+        Route::post('admin/pengaturan/update/{id}', [PengaturanController::class, 'update'])->name('post.admin.pengaturan.update');
+        Route::post('admin/pengaturan/reset_beasiswa', [PengaturanController::class, 'reset_beasiswa'])->name('post.admin.pengaturan.reset_beasiswa');
+        Route::post('admin/pengaturan/reset_berkas', [PengaturanController::class, 'reset_berkas'])->name('post.admin.pengaturan.reset_berkas');
     });
 });
 

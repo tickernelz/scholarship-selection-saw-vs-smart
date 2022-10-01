@@ -385,6 +385,16 @@ return [
             'can' => 'kelola password',
             'icon' => 'fas fa-fw fa-lock',
         ],
+        [
+            'header' => 'LAINNYA',
+            'can' => 'kelola pengaturan'
+        ],
+        [
+            'text' => 'Pengaturan',
+            'url' => 'admin/pengaturan',
+            'icon' => 'fas fa-fw fa-cog',
+            'can' => 'kelola pengaturan',
+        ],
 //        [
 //            'text'    => 'multilevel',
 //            'icon'    => 'fas fa-fw fa-share',
@@ -568,6 +578,26 @@ return [
                     'type' => 'js',
                     'asset' => true,
                     'location' => 'vendor/bs-custom-file-input/bs-custom-file-input.min.js',
+                ],
+            ],
+        ],
+        'TempusDominusBs4' => [
+            'active' => false,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/moment/moment.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css',
                 ],
             ],
         ],
