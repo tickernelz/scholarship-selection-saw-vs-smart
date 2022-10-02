@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Pengaturan extends Model
@@ -28,5 +29,17 @@ class Pengaturan extends Model
         } else {
             return strftime('%d %B %Y', strtotime($this->batas_pengajuan));
         }
+    }
+
+    public function batasPengajuanDateTime(){
+        if ($this->batas_pengajuan == null) {
+            return 'Belum diatur';
+        } else {
+            return date('d/m/Y H.i', strtotime($this->batas_pengajuan));
+        }
+    }
+
+    public function convertBatasPengajuan($date){
+        return Carbon::createFromFormat('d/m/Y H.i', $date)->format('Y-m-d H:i:s');
     }
 }
