@@ -57,7 +57,13 @@ class PengaturanController extends Controller
     public function update(Request $request, $id)
     {
         $data = Pengaturan::findOrFail($id);
-        $data->update($request->all());
+        // Tempus to DateTime
+        $batas_pengajuan = $data->convertBatasPengajuan($request->batas_pengajuan);
+        $data->update([
+            'is_open' => $request->is_open,
+            'semester' => $request->semester,
+            'batas_pengajuan' => $batas_pengajuan,
+        ]);
         return redirect()->back()->with('success', 'Pengaturan berhasil diubah');
     }
 }

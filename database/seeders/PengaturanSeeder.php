@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Pengaturan;
+use DateTime;
 use Illuminate\Database\Seeder;
 
 class PengaturanSeeder extends Seeder
@@ -12,7 +13,7 @@ class PengaturanSeeder extends Seeder
         Pengaturan::create([
             'is_open' => true,
             'semester' => 'ganjil',
-            'batas_pengajuan' => '10/31/2022 9:56 PM',
+            'batas_pengajuan' => new DateTime('2022-12-30 23:59:59'),
         ]);
     }
 }

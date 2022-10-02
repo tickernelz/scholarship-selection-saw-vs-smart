@@ -10,6 +10,17 @@
 
 @section('plugins.TempusDominusBs4', true)
 
+@php
+    $config_tempus = [
+        'locale' => 'id',
+        'useCurrent' => false,
+        'sideBySide' => true,
+        'showClear' => true,
+        'showClose' => true,
+        'showToday' => true,
+    ];
+@endphp
+
 @section('content')
 
     <div class="row">
@@ -43,7 +54,8 @@
                     </x-adminlte-select>
 
                     <x-adminlte-input-date name="batas_pengajuan" label="Batas Pengajuan"
-                                           value="{{ $data->batas_pengajuan ?? '' }}"/>
+                                           value="{{ $data->batasPengajuanDateTime() ?? '' }}"
+                                           :config="$config_tempus"/>
 
                     <x-adminlte-select name="is_open" label="Buka Pendaftaran">
                         <x-adminlte-options :options="$optionIsOpen" :selected="$is_open"/>

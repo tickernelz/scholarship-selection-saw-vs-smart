@@ -587,7 +587,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => true,
-                    'location' => 'vendor/moment/moment.min.js',
+                    'location' => 'vendor/moment/moment-with-locales.js',
                 ],
                 [
                     'type' => 'js',
