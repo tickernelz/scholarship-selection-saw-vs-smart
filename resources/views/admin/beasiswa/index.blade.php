@@ -63,23 +63,6 @@
                         </x-adminlte-alert>
                     @endif
                     @csrf
-                    <x-adminlte-card title="Berkas" theme="info" icon="fas fa-lg fa-file" collapsible>
-                        @if ($berkas->first()->file)
-                            <x-adminlte-modal id="modal-file" title="Lihat File" size="lg">
-                                <embed src="/beasiswa/{{ $berkas->first()->file }}" type="application/pdf"
-                                       frameborder="0" width="100%" height="600px">
-                            </x-adminlte-modal>
-                            <x-adminlte-input-file name="berkas" label="Upload File Surat"
-                                                   placeholder="{{ $berkas->first()->file }}" disabled/>
-                            <button type="button" class="btn btn-secondary" data-toggle="modal"
-                                    data-target="#modal-file">
-                                Lihat File
-                            </button>
-                        @else
-                            <x-adminlte-input-file name="berkas" label="Upload File Surat"
-                                                   placeholder="Pilih File..." disabled/>
-                        @endif
-                    </x-adminlte-card>
                     <x-adminlte-card title="Biodata" theme="info" icon="fas fa-lg fa-user" collapsible>
                         <x-adminlte-input name="nim" label="{{ trans('auth.nim') }}"
                                           placeholder="{{ trans('auth.nim') }}" value="{{ $mahasiswa->nim }}"
@@ -138,22 +121,56 @@
                     </x-adminlte-card>
                     <x-adminlte-card title="Pertanyaan" theme="info" icon="fas fa-lg fa-question" collapsible>
                         @foreach($kriteria as $k)
-                            <span class="text-bold">{{ $k->nama }}</span>
-                            <input type="hidden" name="kriteria[]" value="{{ $k->id }}">
-                            {{--Radio Option Subkriteria--}}
-                            @foreach($k->subkriteria as $s => $sub)
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="subkriteria[{{ $k->id }}]"
-                                           id="{{ $sub->id }}"
-                                           value="{{ $sub->id }}" required disabled
-                                           @if ($beasiswa->where('kriteria_id', $k->id)->where('subkriteria_id', $sub->id)->first())
-                                               checked
-                                        @endif>
-                                    <label class="form-check-label" for="{{ $sub->id }}">
-                                        {{ $sub->nama }}
-                                    </label>
+                            <div class="row">
+                                <div class="col-lg-8 mb-4">
+                                    <span class="text-bold">{{ $k->nama }}</span>
+                                    <input type="hidden" name="kriteria[]" value="{{ $k->id }}">
+                                    {{--Radio Option Subkriteria--}}
+                                    @foreach($k->subkriteria as $s => $sub)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio"
+                                                   name="subkriteria[{{ $k->id }}]"
+                                                   id="{{ $sub->id }}"
+                                                   value="{{ $sub->id }}" required disabled
+                                                   @if ($beasiswa->where('kriteria_id', $k->id)->where('subkriteria_id', $sub->id)->first())
+                                                       checked
+                                                @endif>
+                                            <label class="form-check-label" for="{{ $sub->id }}">
+                                                {{ $sub->nama }}
+                                            </label>
+                                        </div>
+                                    @endforeach
                                 </div>
-                            @endforeach
+                                <div class="col-lg-4">
+                                    @if ($berkas->where('kriteria_id', $k->id)->first())
+                                        <div class="form-group">
+                                            <x-adminlte-modal id="modal-file-{{$k->id}}" title="Lihat File" size="lg">
+                                                <embed
+                                                    src="{{ route('get.beasiswa.readfile', $berkas->where('kriteria_id', $k->id)->first()->id) }}"
+                                                    frameborder="0" width="100%" height="600px"
+                                                    type="application/pdf">
+                                            </x-adminlte-modal>
+                                            <x-adminlte-input-file name="berkas[{{ $k->id }}]" label="Upload File Bukti"
+                                                                   placeholder="{{ $berkas->where('kriteria_id', $k->id)->first()->file }}" disabled/>
+                                            <div class="btn-group btn-group-sm" role="group">
+                                                <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                                        data-target="#modal-file-{{$k->id}}">
+                                                    Lihat File
+                                                </button>
+                                                <a type="button" class="btn btn-primary"
+                                                   href="{{ route('get.beasiswa.download', $berkas->where('kriteria_id', $k->id)->first()->id) }}">
+                                                    Download
+                                                </a>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="form-group">
+                                            <x-adminlte-input-file name="berkas[{{ $k->id }}]" label="Upload File Bukti"
+                                                                   placeholder="Pilih File..." disabled/>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
                             <hr>
 
                         @endforeach

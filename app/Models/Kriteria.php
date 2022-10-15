@@ -16,4 +16,9 @@ class Kriteria extends Model
     {
         return $this->hasMany(Subkriteria::class, 'kriteria_id');
     }
+
+    public function berkas()
+    {
+        return $this->hasMany(Berkas::class, 'kriteria_id');
+    }
 }

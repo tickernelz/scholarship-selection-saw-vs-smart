@@ -12,6 +12,11 @@ class Berkas extends Model
 
     public function mahasiswa()
     {
-        return $this->hasOne(Mahasiswa::class, 'id', 'mahasiswa_id');
+        return $this->belongsTo(Mahasiswa::class, 'id', 'mahasiswa_id');
+    }
+
+    public function kriteria()
+    {
+        return $this->belongsTo(Kriteria::class, 'id', 'kriteria_id');
     }
 }

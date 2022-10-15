@@ -369,7 +369,7 @@ return [
         [
             'text' => 'Daftar Beasiswa',
             'icon' => 'fas fa-fw fa-file-contract',
-            'url' => 'admin/daftar-beasiswa/step-one',
+            'url' => 'admin/daftar-beasiswa/step-two',
             'can' => 'daftar beasiswa',
         ],
         ['header' => 'account_settings'],
