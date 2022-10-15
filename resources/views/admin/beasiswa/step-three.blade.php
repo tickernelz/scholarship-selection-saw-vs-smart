@@ -8,6 +8,8 @@
     <h1>{{ $judul }}</h1>
 @stop
 
+@section('plugins.BsCustomFileInput', true)
+
 @section('content')
     <div class="col-xl-12" style="float:none;margin:auto;">
         <div class="card">
@@ -23,7 +25,8 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form action="{{ route('post.admin.daftar-beasiswa.step-three') }}" method="post">
+            <form action="{{ route('post.admin.daftar-beasiswa.step-three') }}" method="post"
+                  enctype="multipart/form-data">
                 <div class="card-body">
                     @if (Session::has('success'))
                         <div class="alert alert-success alert-dismissible">
@@ -45,22 +48,55 @@
                     @endif
                     @csrf
                     @foreach($kriteria as $k)
-                        <span class="text-bold">{{ $k->nama }}</span>
-                        <input type="hidden" name="kriteria[]" value="{{ $k->id }}">
-                        {{--Radio Option Subkriteria--}}
-                        @foreach($k->subkriteria as $s => $sub)
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="subkriteria[{{ $k->id }}]"
-                                       id="{{ $sub->id }}"
-                                       value="{{ $sub->id }}" required
-                                       @if ($beasiswa->where('kriteria_id', $k->id)->where('subkriteria_id', $sub->id)->first())
-                                           checked
-                                    @endif>
-                                <label class="form-check-label" for="{{ $sub->id }}">
-                                    {{ $sub->nama }}
-                                </label>
+                        <div class="row">
+                            <div class="col-lg-8 mb-4">
+                                <span class="text-bold">{{ $k->nama }}</span>
+                                <input type="hidden" name="kriteria[]" value="{{ $k->id }}">
+                                {{--Radio Option Subkriteria--}}
+                                @foreach($k->subkriteria as $s => $sub)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="subkriteria[{{ $k->id }}]"
+                                               id="{{ $sub->id }}"
+                                               value="{{ $sub->id }}" required
+                                               @if ($beasiswa->where('kriteria_id', $k->id)->where('subkriteria_id', $sub->id)->first())
+                                                   checked
+                                            @endif>
+                                        <label class="form-check-label" for="{{ $sub->id }}">
+                                            {{ $sub->nama }}
+                                        </label>
+                                    </div>
+                                @endforeach
                             </div>
-                        @endforeach
+                            <div class="col-lg-4">
+                                @if ($berkas->where('kriteria_id', $k->id)->first())
+                                    <div class="form-group">
+                                        <x-adminlte-modal id="modal-file-{{$k->id}}" title="Lihat File" size="lg">
+                                            <embed
+                                                src="{{ route('get.beasiswa.readfile', $berkas->where('kriteria_id', $k->id)->first()->id) }}"
+                                                frameborder="0" width="100%" height="600px"
+                                                type="application/pdf">
+                                        </x-adminlte-modal>
+                                        <x-adminlte-input-file name="berkas[{{ $k->id }}]" label="Upload File Bukti"
+                                                               placeholder="{{ $berkas->where('kriteria_id', $k->id)->first()->file }}"/>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                                    data-target="#modal-file-{{$k->id}}">
+                                                Lihat File
+                                            </button>
+                                            <a type="button" class="btn btn-primary"
+                                               href="{{ route('get.beasiswa.download', $berkas->where('kriteria_id', $k->id)->first()->id) }}">
+                                                Download
+                                            </a>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="form-group">
+                                        <x-adminlte-input-file name="berkas[{{ $k->id }}]" label="Upload File Bukti"
+                                                               placeholder="Pilih File..." required/>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
                         <hr>
 
                     @endforeach

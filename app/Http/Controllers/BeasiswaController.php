@@ -12,6 +12,7 @@ use App\Models\User;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BeasiswaController extends Controller
 {
@@ -22,14 +23,7 @@ class BeasiswaController extends Controller
         $mahasiswa = $user->mahasiswa;
         $kriteria = Kriteria::all();
         $beasiswa = Beasiswa::where('mahasiswa_id', $mahasiswa->id)->get();
-        $data_berkas = Berkas::where('mahasiswa_id', $mahasiswa->id)->get();
-        if ($data_berkas == '[]') {
-            $berkas = new Berkas();
-            $berkas->mahasiswa_id = $mahasiswa->id;
-            $berkas->save();
-        } else {
-            $berkas = Berkas::where('mahasiswa_id', $mahasiswa->id)->first();
-        }
+        $berkas = Berkas::where('mahasiswa_id', $user->mahasiswa->id)->get();
 
         return view('admin.beasiswa.index', compact('beasiswa', 'judul', 'berkas', 'mahasiswa', 'kriteria'));
     }
@@ -304,8 +298,9 @@ class BeasiswaController extends Controller
         $mahasiswa = $user->mahasiswa;
         $beasiswa = Beasiswa::where('mahasiswa_id', $user->mahasiswa->id)->get();
         $kriteria = Kriteria::all();
+        $berkas = Berkas::where('mahasiswa_id', $user->mahasiswa->id)->get();
 
-        return view('admin.beasiswa.step-three', compact('mahasiswa', 'judul', 'kriteria', 'beasiswa'));
+        return view('admin.beasiswa.step-three', compact('mahasiswa', 'judul', 'kriteria', 'beasiswa', 'berkas'));
     }
 
     public function postStepThree(Request $request)
@@ -314,10 +309,12 @@ class BeasiswaController extends Controller
         $data = Mahasiswa::firstWhere('id', $user->mahasiswa->id);
         $beasiswa = Beasiswa::where('mahasiswa_id', $user->mahasiswa->id)->get();
         $kriteria = Kriteria::all();
+        $berkas = Berkas::where('mahasiswa_id', $user->mahasiswa->id)->get();
 
         $request->validate([
             'subkriteria' => 'required|array',
             'subkriteria.*' => 'required|numeric',
+            'berkas.*' => 'nullable|mimes:pdf|max:1500',
         ]);
 
         // Cek apakah sudah ada beasiswa?
@@ -329,6 +326,25 @@ class BeasiswaController extends Controller
                 $beasiswa->kriteria_id = $k->id;
                 $beasiswa->subkriteria_id = $request->subkriteria[$k->id];
                 $beasiswa->save();
+                // Cek apakah ada berkas?
+                if ($request->hasFile('berkas')) {
+                    if (array_key_exists($k->id, $request->berkas)) {
+                        // Upload File Baru
+                        $fileName = time() . '_' . $data->id . '_' . $k->id . '_' . $request->berkas[$k->id]->getClientOriginalName();
+                        Storage::disk('local')->putFileAs('public/beasiswa', $request->berkas[$k->id], $fileName);
+                        $berkas = Berkas::where([
+                            ['mahasiswa_id', $data->id],
+                            ['kriteria_id', $k->id],
+                        ])->first();
+                        if ($berkas == null) {
+                            $berkas = new Berkas();
+                            $berkas->mahasiswa_id = $data->id;
+                            $berkas->kriteria_id = $k->id;
+                        }
+                        $berkas->file = $fileName;
+                        $berkas->save();
+                    }
+                }
             }
         } else {
             // Jika sudah ada, maka update beasiswa
@@ -336,10 +352,52 @@ class BeasiswaController extends Controller
                 $beasiswa = Beasiswa::where('mahasiswa_id', $data->id)->where('kriteria_id', $k->id)->first();
                 $beasiswa->subkriteria_id = $request->subkriteria[$k->id];
                 $beasiswa->save();
+                // Cek apakah ada berkas?
+                if ($request->hasFile('berkas')) {
+                    if (array_key_exists($k->id, $request->berkas)) {
+                        // Hapus Berkas Lama (Jika Ada)
+                        $namaberkas = $berkas->where('kriteria_id', $k->id)->first();
+                        if ($namaberkas != null) {
+                            if (Storage::disk('local')->exists('public/beasiswa/' . $namaberkas->file)) {
+                                unlink(storage_path('app/public/beasiswa') . '/' . $namaberkas->file);
+                            }
+                        }
+                        // Upload File Baru
+                        $fileName = time() . '_' . $data->id . '_' . $k->id . '_' . $request->berkas[$k->id]->getClientOriginalName();
+                        Storage::disk('local')->putFileAs('public/beasiswa', $request->berkas[$k->id], $fileName);
+                        $berkas = Berkas::where([
+                            ['mahasiswa_id', $data->id],
+                            ['kriteria_id', $k->id],
+                        ])->first();
+                        if ($berkas == null) {
+                            $berkas = new Berkas();
+                            $berkas->mahasiswa_id = $data->id;
+                            $berkas->kriteria_id = $k->id;
+                        }
+                        $berkas->file = $fileName;
+                        $berkas->save();
+                    }
+                }
             }
         }
 
         return redirect()->route('get.admin.daftar-beasiswa.index');
+    }
+
+    public function download($id)
+    {
+        $berkas = Berkas::find($id);
+        $filePath = storage_path('app/public/beasiswa/' . $berkas->file);
+        return response()->download($filePath);
+    }
+
+    public function readFile($id)
+    {
+        $berkas = Berkas::find($id);
+        $filePath = storage_path('app/public/beasiswa/' . $berkas->file);
+        return response()->download($filePath, $berkas->file, [
+            'Content-Type' => 'application/pdf',
+        ], 'inline');
     }
 
     public function ajax_modal(Request $request)

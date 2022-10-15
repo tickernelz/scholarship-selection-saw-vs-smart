@@ -38,6 +38,9 @@ Route::post('login', [AuthController::class, 'login'])->name('post.login');
 Route::post('register', [AuthController::class, 'register'])->name('post.register');
 Route::post('logout', [AuthController::class, 'logout'])->name('post.logout');
 
+Route::get('beasiswa/download/{file}', [BeasiswaController::class, 'download'])->name('get.beasiswa.download');
+Route::get('beasiswa/read/{file}', [BeasiswaController::class, 'readFile'])->name('get.beasiswa.readfile');
+
 
 Route::group(['middleware' => 'auth'], static function () {
     // Admin
