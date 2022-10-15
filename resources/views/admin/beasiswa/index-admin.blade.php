@@ -27,6 +27,12 @@
     ];
     $config = [
     'order' => [[10, 'desc']],
+    'dom' => 'Bfrtip',
+    'buttons' => [
+        ['extend' => 'print', 'exportOptions' => ['columns' => [1, 2, 3, 4, 5, 6, 7, 9, 10]], 'className' => 'btn btn-default btn-sm no-corner', 'text' => '<i class="fa fa-print"></i> Print'],
+        ['extend' => 'excel', 'exportOptions' => ['columns' => [1, 2, 3, 4, 5, 6, 7, 9, 10]], 'className' => 'btn btn-success btn-sm no-corner', 'text' => '<i class="fa fa-file-excel"></i> Excel'],
+        ['extend' => 'pdf', 'orientation'=> 'landscape', 'exportOptions' => ['columns' => [1, 2, 3, 4, 5, 6, 7, 9, 10]], 'className' => 'btn btn-danger btn-sm no-corner', 'text' => '<i class="fa fa-file-pdf"></i> PDF'],
+],
     'columns' => [null, null, null, null, null, null, null, null, null, null, null, ['orderable' => false, 'className' => 'text-center']],
     ];
 @endphp
@@ -87,8 +93,7 @@
                     </x-slot>
                 </x-adminlte-modal>
             </form>
-            <x-adminlte-datatable id="table" :config="$config" :heads="$heads" hoverable bordered
-                                  beautify>
+            <x-adminlte-datatable id="table" :config="$config" :heads="$heads" hoverable bordered beautify>
                 @if ($data !== null)
                     @foreach($data as $li)
                         <tr>
