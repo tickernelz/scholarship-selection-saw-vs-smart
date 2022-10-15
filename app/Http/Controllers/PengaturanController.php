@@ -8,6 +8,7 @@ use App\Models\Mahasiswa;
 use App\Models\Pengaturan;
 use App\Models\Skor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PengaturanController extends Controller
 {
@@ -47,9 +48,11 @@ class PengaturanController extends Controller
     {
         $berkas = Berkas::get();
         foreach ($berkas as $b) {
-            $namaberkas = $b->file;
-            if (is_file(public_path('beasiswa') . '/' . $namaberkas)) {
-                unlink(public_path('beasiswa') . '/' . $namaberkas);
+            $namaberkas = $berkas->file;
+            if ($namaberkas != null) {
+                if (Storage::disk('local')->exists('public/beasiswa/' . $namaberkas->file)) {
+                    unlink(storage_path('app/public/beasiswa') . '/' . $namaberkas->file);
+                }
             }
             $b->delete();
         }
