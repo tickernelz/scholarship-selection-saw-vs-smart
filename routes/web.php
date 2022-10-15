@@ -45,6 +45,8 @@ Route::get('beasiswa/read/{file}', [BeasiswaController::class, 'readFile'])->nam
 Route::group(['middleware' => 'auth'], static function () {
     // Admin
     Route::get('admin', [DashboardController::class, 'index'])->name('get.admin.dashboard');
+    // Dashboard Mahasiswa
+    Route::get('dashboard/mahasiswa', [DashboardController::class, 'index_mahasiswa'])->name('get.dashboard.mahasiswa');
     // Profile
     Route::group(['middleware' => ['can:kelola profil']], static function () {
         Route::get('admin/profile', [ProfileController::class, 'index'])->name('get.admin.profile');
@@ -102,6 +104,8 @@ Route::group(['middleware' => 'auth'], static function () {
         Route::get('admin/beasiswa/saw', [BeasiswaController::class, 'index_saw'])->name('get.admin.beasiswa.saw');
         Route::get('admin/beasiswa/smart', [BeasiswaController::class, 'index_smart'])->name('get.admin.beasiswa.smart');
         Route::get('admin/beasiswa/ajax_modal', [BeasiswaController::class, 'ajax_modal'])->name('get.admin.beasiswa.ajax_modal');
+        Route::get('admin/beasiswa/detail_saw/{id}', [BeasiswaController::class, 'detail_saw'])->name('get.admin.beasiswa.detail_saw');
+        Route::get('admin/beasiswa/detail_smart/{id}', [BeasiswaController::class, 'detail_smart'])->name('get.admin.beasiswa.detail_smart');
         Route::post('admin/beasiswa/terima', [BeasiswaController::class, 'terima'])->name('post.admin.beasiswa.terima');
         Route::post('admin/beasiswa/tolak', [BeasiswaController::class, 'tolak'])->name('post.admin.beasiswa.tolak');
     });

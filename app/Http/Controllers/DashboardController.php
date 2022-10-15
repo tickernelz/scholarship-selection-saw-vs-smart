@@ -21,4 +21,12 @@ class DashboardController extends Controller
             return redirect()->route('get.login')->with('error', 'Akun anda belum diverifikasi');
         }
     }
+    public function index_mahasiswa()
+    {
+        $judul = trans('auth.dashboard');
+        $user = Auth::user();
+        $mahasiswa = $user->mahasiswa;
+
+        return view('admin.dashboard-mahasiswa', compact('judul', 'user', 'mahasiswa'));
+    }
 }

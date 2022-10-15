@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('angkatan');
             $table->string('semester')->nullable();
             $table->float('ukt')->nullable();
+            $table->float('ukt_penurunan')->nullable();
             $table->enum('jenis_kelamin', ['L', 'P']);
             $table->string('ttl')->nullable();
             $table->string('telepon')->nullable();
@@ -25,6 +26,7 @@ return new class extends Migration {
             $table->boolean('is_verified')->default(false);
             $table->boolean('is_beasiswa_send')->default(false);
             $table->boolean('is_beasiswa_approved')->default(false);
+            $table->boolean('is_beasiswa_declined')->default(false);
             $table->timestamps();
         });
     }

@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -21,6 +20,8 @@ class RoleSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         // create permissions
+        Permission::create(['name' => 'lihat dashboard admin']);
+        Permission::create(['name' => 'lihat dashboard mahasiswa']);
         Permission::create(['name' => 'kelola berita']);
         Permission::create(['name' => 'kelola profil']);
         Permission::create(['name' => 'kelola password']);
@@ -31,9 +32,9 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'daftar beasiswa']);
 
         $admin = Role::create(['name' => 'admin']);
-        $admin->givePermissionTo(['kelola berita', 'kelola profil', 'kelola password', 'kelola mahasiswa', 'kelola kriteria', 'kelola beasiswa', 'kelola pengaturan']);
+        $admin->givePermissionTo(['lihat dashboard admin', 'kelola berita', 'kelola profil', 'kelola password', 'kelola mahasiswa', 'kelola kriteria', 'kelola beasiswa', 'kelola pengaturan']);
 
         $mahasiswa = Role::create(['name' => 'mahasiswa']);
-        $mahasiswa->givePermissionTo(['kelola profil', 'kelola password', 'daftar beasiswa']);
+        $mahasiswa->givePermissionTo(['lihat dashboard mahasiswa', 'kelola profil', 'kelola password', 'daftar beasiswa']);
     }
 }

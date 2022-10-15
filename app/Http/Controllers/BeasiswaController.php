@@ -12,6 +12,7 @@ use App\Models\User;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
 class BeasiswaController extends Controller
@@ -37,6 +38,7 @@ class BeasiswaController extends Controller
             $query->where('is_beasiswa_send', 1);
         })->get();
         $data_kriteria = Kriteria::all();
+        $route_now = Route::currentRouteName();
 
         if ($beasiswa->count() == 0) {
             $data = null;
@@ -113,7 +115,7 @@ class BeasiswaController extends Controller
 
         $data = Mahasiswa::where('is_beasiswa_send', 1)->get();
 
-        return view('admin.beasiswa.index-admin', compact('data', 'judul', 'transpose_matrix', 'transpose_matrix_normalisasi', 'perangkingan', 'data_kriteria'));
+        return view('admin.beasiswa.index-admin', compact('data', 'judul', 'transpose_matrix', 'transpose_matrix_normalisasi', 'perangkingan', 'data_kriteria', 'route_now'));
     }
 
     public function index_smart(Request $request)
@@ -125,6 +127,7 @@ class BeasiswaController extends Controller
             $query->where('is_beasiswa_send', 1);
         })->get();
         $data_kriteria = Kriteria::all();
+        $route_now = Route::currentRouteName();
 
         if ($beasiswa->count() == 0) {
             $data = null;
@@ -201,7 +204,7 @@ class BeasiswaController extends Controller
 
         $data = Mahasiswa::where('is_beasiswa_send', 1)->get();
 
-        return view('admin.beasiswa.index-admin', compact('data', 'judul', 'data_kriteria', 'transpose_matrix', 'transpose_matrix_normalisasi', 'perangkingan',));
+        return view('admin.beasiswa.index-admin', compact('data', 'judul', 'data_kriteria', 'transpose_matrix', 'transpose_matrix_normalisasi', 'perangkingan', 'route_now'));
     }
 
     public function send()
@@ -384,6 +387,32 @@ class BeasiswaController extends Controller
         return redirect()->route('get.admin.daftar-beasiswa.index');
     }
 
+    public function detail_saw($id)
+    {
+        $judul = 'Detail Beasiswa';
+        $beasiswa = Beasiswa::where('mahasiswa_id', $id)->get();
+        $kriteria = Kriteria::all();
+        $berkas = Berkas::where('mahasiswa_id', $id)->get();
+        $mahasiswa = Mahasiswa::where('id', $id)->first();
+        $is_saw = true;
+        $is_smart = false;
+
+        return view('admin.beasiswa.detail', compact('beasiswa', 'kriteria', 'berkas', 'judul', 'mahasiswa', 'is_saw', 'is_smart'));
+    }
+
+    public function detail_smart($id)
+    {
+        $judul = 'Detail Beasiswa';
+        $beasiswa = Beasiswa::where('mahasiswa_id', $id)->get();
+        $kriteria = Kriteria::all();
+        $berkas = Berkas::where('mahasiswa_id', $id)->get();
+        $mahasiswa = Mahasiswa::where('id', $id)->first();
+        $is_saw = false;
+        $is_smart = true;
+
+        return view('admin.beasiswa.detail', compact('beasiswa', 'kriteria', 'berkas', 'judul', 'mahasiswa', 'is_saw', 'is_smart'));
+    }
+
     public function download($id)
     {
         $berkas = Berkas::find($id);
@@ -403,7 +432,11 @@ class BeasiswaController extends Controller
     public function ajax_modal(Request $request)
     {
         $data = Mahasiswa::where('id', $request->id)->first();
-        $data_json = json_decode($data);
+        $data_json = [
+            'id' => $data->id,
+            'ukt_awal' => $data->ukt,
+            'ukt' => $data->ukt / 2,
+        ];
         return response()->json($data_json);
     }
 
@@ -413,6 +446,7 @@ class BeasiswaController extends Controller
         $user = User::where('id', $data->user_id)->first();
         EmailController::accept_beasiswa($user->id, $request->ukt);
         $data->is_beasiswa_approved = true;
+        $data->ukt_penurunan = $request->ukt;
         $data->save();
         return redirect()->back()->with('success', 'Berhasil menerima beasiswa');
     }
@@ -424,6 +458,7 @@ class BeasiswaController extends Controller
         EmailController::reject_beasiswa($user->id, $request->alasan);
         $data->is_beasiswa_send = false;
         $data->is_beasiswa_approved = false;
+        $data->is_beasiswa_declined = true;
         $data->save();
         // Delete Beasiswa
         $beasiswa = Beasiswa::where('mahasiswa_id', $data->id)->get();

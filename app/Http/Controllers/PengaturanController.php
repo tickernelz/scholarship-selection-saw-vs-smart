@@ -37,6 +37,8 @@ class PengaturanController extends Controller
         foreach ($mahasiswa as $m) {
             $m->is_beasiswa_send = 0;
             $m->is_beasiswa_approved = 0;
+            $m->is_beasiswa_declined = 0;
+            $m->save();
         }
         return redirect()->back()->with('success', 'Berhasil reset beasiswa');
     }
