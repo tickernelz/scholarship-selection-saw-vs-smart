@@ -70,7 +70,8 @@
                 <x-adminlte-modal id="modal-terima" title="Terima Penurunan UKT" size="lg" theme="primary"
                                   icon="fas fa-lg fa-fw fa-plus" v-centered static-backdrop scrollable>
                     <x-adminlte-input name="id_mahasiswa_terima" value="" hidden/>
-                    <x-adminlte-input name="ukt" label="Nominal UKT" type="number"/>
+                    <x-adminlte-input name="ukt_awal" label="Nominal UKT Awal" type="number" disabled/>
+                    <x-adminlte-input name="ukt" label="Nominal UKT Penurunan" type="number"/>
                     <x-slot name="footerSlot">
                         <x-adminlte-button theme="danger" label="Close" data-dismiss="modal"/>
                         <x-adminlte-button class="ml-auto" type="submit" label="Submit" name="action"
@@ -106,13 +107,16 @@
                             <td>{!! $li->ukt() !!}</td>
                             <td>{!! $li->telepon !!}</td>
                             <td>
-                                @if (isset($li->berkas->file))
+                                @if ($route_now == 'get.admin.beasiswa.saw')
                                     <a type="button" class="btn btn-sm btn-primary"
-                                       href="/beasiswa/{{ $li->berkas->file }}" target="_blank">
+                                       href="{{route('get.admin.beasiswa.detail_saw', $li->id)}}">
                                         Lihat
                                     </a>
                                 @else
-                                    Tidak Ada Berkas
+                                    <a type="button" class="btn btn-sm btn-primary"
+                                       href="{{route('get.admin.beasiswa.detail_smart', $li->id)}}">
+                                        Lihat
+                                    </a>
                                 @endif
                             </td>
                             <td>
@@ -242,6 +246,8 @@
                 },
                 success: function (data) {
                     $('#id_mahasiswa_terima').val(data.id);
+                    $('#ukt').val(data.ukt);
+                    $('#ukt_awal').val(data.ukt_awal);
                     $('#modal-terima').modal('show');
                 }
             });

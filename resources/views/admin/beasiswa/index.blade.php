@@ -8,24 +8,6 @@
     <h1>{{ $judul }}</h1>
 @stop
 
-@php
-    $config = [
-        "height" => "500",
-        "toolbar" => [
-            // [groupName, [list of button]]
-            ['style', ['bold', 'italic', 'underline', 'clear']],
-            ['font', ['strikethrough', 'superscript', 'subscript']],
-            ['fontsize', ['fontsize']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['height', ['height']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture', 'video']],
-            ['view', ['fullscreen', 'codeview', 'help']],
-        ],
-    ]
-@endphp
-
 @section('content')
     <div class="col-xl-12" style="float:none;margin:auto;">
         <div class="card">
