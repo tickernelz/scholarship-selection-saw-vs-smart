@@ -307,6 +307,12 @@ return [
             'text' => 'search',
         ],
         [
+            'text' => 'Dashboard',
+            'icon' => 'fas fa-fw fa-tachometer-alt',
+            'can' => 'lihat dashboard mahasiswa',
+            'route' => 'get.dashboard.mahasiswa',
+        ],
+        [
             'text' => 'Kelola Mahasiswa',
             'icon' => 'fas fa-fw fa-user-graduate',
             'can' => 'kelola mahasiswa',

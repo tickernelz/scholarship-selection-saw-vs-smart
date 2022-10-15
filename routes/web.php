@@ -45,6 +45,8 @@ Route::get('beasiswa/read/{file}', [BeasiswaController::class, 'readFile'])->nam
 Route::group(['middleware' => 'auth'], static function () {
     // Admin
     Route::get('admin', [DashboardController::class, 'index'])->name('get.admin.dashboard');
+    // Dashboard Mahasiswa
+    Route::get('dashboard/mahasiswa', [DashboardController::class, 'index_mahasiswa'])->name('get.dashboard.mahasiswa');
     // Profile
     Route::group(['middleware' => ['can:kelola profil']], static function () {
         Route::get('admin/profile', [ProfileController::class, 'index'])->name('get.admin.profile');

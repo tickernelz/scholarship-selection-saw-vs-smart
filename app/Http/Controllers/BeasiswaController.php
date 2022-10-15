@@ -413,6 +413,7 @@ class BeasiswaController extends Controller
         $user = User::where('id', $data->user_id)->first();
         EmailController::accept_beasiswa($user->id, $request->ukt);
         $data->is_beasiswa_approved = true;
+        $data->ukt_penurunan = $request->ukt;
         $data->save();
         return redirect()->back()->with('success', 'Berhasil menerima beasiswa');
     }
@@ -424,6 +425,7 @@ class BeasiswaController extends Controller
         EmailController::reject_beasiswa($user->id, $request->alasan);
         $data->is_beasiswa_send = false;
         $data->is_beasiswa_approved = false;
+        $data->is_beasiswa_declined = true;
         $data->save();
         // Delete Beasiswa
         $beasiswa = Beasiswa::where('mahasiswa_id', $data->id)->get();
