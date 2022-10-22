@@ -34,15 +34,15 @@
                         <span class="focus-input100"></span>
                     </div>
 
-                    <div class="text-right p-t-13 p-b-5">
-						<span class="txt1">
-							{{ trans('auth.lupa') }}
-						</span>
+{{--                    <div class="text-right p-t-13 p-b-5">--}}
+{{--						<span class="txt1">--}}
+{{--							{{ trans('auth.lupa') }}--}}
+{{--						</span>--}}
 
-                        <a href="#" class="txt2">
-                            {{ trans('auth.email_password') }}
-                        </a>
-                    </div>
+{{--                        <a href="#" class="txt2">--}}
+{{--                            {{ trans('auth.email_password') }}--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
 
                     <div class="text-right p-t-5 p-b-10">
                         <input type="checkbox" class="txt1" name="remember" {{ old('remember') ? 'checked' : '' }} id="remember">
