@@ -39,6 +39,7 @@ Route::post('register', [AuthController::class, 'register'])->name('post.registe
 Route::post('logout', [AuthController::class, 'logout'])->name('post.logout');
 
 Route::get('beasiswa/download/{file}', [BeasiswaController::class, 'download'])->name('get.beasiswa.download');
+Route::get('beasiswa/hapus/{file}', [BeasiswaController::class, 'hapusFile'])->name('get.beasiswa.hapus');
 Route::get('beasiswa/read/{file}', [BeasiswaController::class, 'readFile'])->name('get.beasiswa.readfile');
 
 

@@ -76,8 +76,14 @@
                                                 frameborder="0" width="100%" height="600px"
                                                 type="application/pdf">
                                         </x-adminlte-modal>
-                                        <x-adminlte-input-file name="berkas[{{ $k->id }}]" label="Upload File Bukti"
-                                                               placeholder="{{ $berkas->where('kriteria_id', $k->id)->first()->file }}"/>
+                                        <x-adminlte-input-file name="berkas[{{ $k->id }}]" igroup-size="sm"
+                                                               placeholder="{{ $berkas->where('kriteria_id', $k->id)->first()->file }}">
+                                            <x-slot name="prependSlot">
+                                                <div class="input-group-text bg-lightblue">
+                                                    <i class="fas fa-upload"></i>
+                                                </div>
+                                            </x-slot>
+                                        </x-adminlte-input-file>
                                         <div class="btn-group btn-group-sm" role="group">
                                             <button type="button" class="btn btn-secondary" data-toggle="modal"
                                                     data-target="#modal-file-{{$k->id}}">
@@ -87,12 +93,36 @@
                                                href="{{ route('get.beasiswa.download', $berkas->where('kriteria_id', $k->id)->first()->id) }}">
                                                 Download
                                             </a>
+                                            <a type="button" class="btn btn-danger"
+                                               onclick="return confirm('Yakin Ingin Dihapus?');"
+                                               href="{{ route('get.beasiswa.hapus', $berkas->where('kriteria_id', $k->id)->first()->id) }}">
+                                                Hapus
+                                            </a>
                                         </div>
                                     </div>
-                                @else
+                                @elseif (!$berkas->where('kriteria_id', $k->id)->first() && $k->required == 1)
                                     <div class="form-group">
-                                        <x-adminlte-input-file name="berkas[{{ $k->id }}]" label="Upload File Bukti"
-                                                               placeholder="Pilih File..." required/>
+                                        {{-- Placeholder, sm size and prepend icon --}}
+                                        <x-adminlte-input-file name="berkas[{{ $k->id }}]" igroup-size="sm"
+                                                               placeholder="Upload File Bukti" required>
+                                            <x-slot name="prependSlot">
+                                                <div class="input-group-text bg-lightblue">
+                                                    <i class="fas fa-upload"></i>
+                                                </div>
+                                            </x-slot>
+                                        </x-adminlte-input-file>
+                                    </div>
+                                @elseif (!$berkas->where('kriteria_id', $k->id)->first() && $k->required == 0)
+                                    <div class="form-group">
+                                        {{-- Placeholder, sm size and prepend icon --}}
+                                        <x-adminlte-input-file name="berkas[{{ $k->id }}]" igroup-size="sm"
+                                                               placeholder="Upload File Bukti">
+                                            <x-slot name="prependSlot">
+                                                <div class="input-group-text bg-lightblue">
+                                                    <i class="fas fa-upload"></i>
+                                                </div>
+                                            </x-slot>
+                                        </x-adminlte-input-file>
                                     </div>
                                 @endif
                             </div>

@@ -317,7 +317,6 @@ class BeasiswaController extends Controller
         $request->validate([
             'subkriteria' => 'required|array',
             'subkriteria.*' => 'required|numeric',
-            'berkas.*' => 'nullable|mimes:pdf|max:1500',
         ]);
 
         // Cek apakah sudah ada beasiswa?
@@ -418,6 +417,16 @@ class BeasiswaController extends Controller
         $berkas = Berkas::find($id);
         $filePath = storage_path('app/public/beasiswa/' . $berkas->file);
         return response()->download($filePath);
+    }
+
+    public function hapusFile($id)
+    {
+        $berkas = Berkas::find($id);
+        if (Storage::disk('local')->exists('public/beasiswa/' . $berkas->file)) {
+            unlink(storage_path('app/public/beasiswa') . '/' . $berkas->file);
+        }
+        $berkas->delete();
+        return redirect()->back();
     }
 
     public function readFile($id)

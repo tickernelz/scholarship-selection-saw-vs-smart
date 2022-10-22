@@ -9,6 +9,7 @@
 @stop
 
 @section('plugins.Datatables', true)
+@section('plugins.BootstrapSwitch', true)
 
 @php
     $heads = [
@@ -75,6 +76,9 @@
                     </x-adminlte-select>
                     <x-adminlte-input name="bobot_kriteria" label="Bobot Kriteria" type="number"
                                       value="{{ $kriteria['bobot_kriteria'] ?? '' }}"/>
+                    <input id="is_berkas" name="is_berkas" value="{{ $kriteria['is_berkas'] ?? '' }}" hidden/>
+                    <x-adminlte-input-switch id="is_berkas_switch" name="is_berkas_switch" label="Perlu Berkas">
+                    </x-adminlte-input-switch>
                     <x-adminlte-modal id="modal-subkriteria" title="Tambah Sub Kriteria" size="lg" theme="primary"
                                       icon="fas fa-lg fa-fw fa-plus" v-centered static-backdrop scrollable>
                         <x-adminlte-input name="nama_subkriteria" label="Nama Sub Kriteria"/>
@@ -162,6 +166,22 @@
                     $('#edit-subkriteria').modal('show');
                 }
             });
+        });
+
+        $('#is_berkas_switch').bootstrapSwitch({
+            onText: 'Ya',
+            offText: 'Tidak',
+            onColor: 'success',
+            offColor: 'danger',
+            size: 'small',
+            state: $('#is_berkas').val() == 1 ? true : false,
+            onSwitchChange: function (event, state) {
+                if (state) {
+                    $('#is_berkas').val(1);
+                } else {
+                    $('#is_berkas').val(0);
+                }
+            }
         });
     </script>
 @stop
