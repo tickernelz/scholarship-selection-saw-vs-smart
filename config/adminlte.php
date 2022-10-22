@@ -325,6 +325,10 @@ return [
                     'text' => 'List Mahasiswa',
                     'url' => 'admin/mahasiswa',
                 ],
+                [
+                    'text' => 'Tambah Mahasiswa',
+                    'url' => 'admin/mahasiswa/tambah',
+                ],
             ],
         ],
         [

@@ -1,16 +1,15 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BeasiswaController;
-use App\Http\Controllers\EmailController;
-use App\Http\Controllers\KriteriaController;
-use App\Http\Controllers\MahasiswasController;
-use App\Http\Controllers\PengaturanController;
-use App\Http\Controllers\PostsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KriteriaController;
+use App\Http\Controllers\MahasiswasController;
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\PengaturanController;
+use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -75,9 +74,13 @@ Route::group(['middleware' => 'auth'], static function () {
         Route::get('admin/mahasiswa/verifikasi/reject/{id}', [MahasiswasController::class, 'reject'])->name('get.admin.mahasiswa.verifikasi.reject');
         Route::get('admin/mahasiswa/verifikasi/email_accept/{id}', [MahasiswasController::class, 'email_accept'])->name('get.admin.mahasiswa.verifikasi.email.accept');
         Route::get('admin/mahasiswa', [MahasiswasController::class, 'index_list'])->name('get.admin.mahasiswa.index.list');
+        Route::get('admin/mahasiswa/tambah', [MahasiswasController::class, 'tambah_index'])->name('get.admin.mahasiswa.tambah.index');
+        Route::post('admin/mahasiswa/tambah/post', [MahasiswasController::class, 'tambah'])->name('post.admin.mahasiswa.tambah');
         Route::get('admin/mahasiswa/edit/{id}/{route}', [MahasiswasController::class, 'edit_index'])->name('get.admin.mahasiswa.edit.index');
         Route::post('admin/mahasiswa/edit/{id}/post', [MahasiswasController::class, 'edit'])->name('post.admin.mahasiswa.edit');
         Route::get('admin/mahasiswa/hapus/{id}', [MahasiswasController::class, 'hapus'])->name('get.admin.mahasiswa.hapus');
+        Route::get('admin/mahasiswa/read/{file}', [MahasiswasController::class, 'readFile'])->name('get.admin.mahasiswa.readfile');
+
     });
     // Daftar Beasiswa
     Route::group(['middleware' => ['can:daftar beasiswa']], static function () {
