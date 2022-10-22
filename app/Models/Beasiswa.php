@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use LaravelArchivable\Archivable;
 
 class Beasiswa extends Model
 {
-    use HasFactory;
+    use HasFactory, Archivable;
 
     protected $guarded = [
         'id',

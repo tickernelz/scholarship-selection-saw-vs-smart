@@ -405,6 +405,21 @@ return [
             'icon' => 'fas fa-fw fa-cog',
             'can' => 'kelola pengaturan',
         ],
+        [
+            'text' => 'Arsip',
+            'icon' => 'fas fa-fw fa-archive',
+            'can' => 'kelola pengaturan',
+            'submenu' => [
+                [
+                    'text' => 'List Perhitungan (SAW)',
+                    'url' => 'admin/arsip/beasiswa/saw',
+                ],
+                [
+                    'text' => 'List Perhitungan (SMART)',
+                    'url' => 'admin/arsip/beasiswa/smart',
+                ],
+            ],
+        ],
 //        [
 //            'text'    => 'multilevel',
 //            'icon'    => 'fas fa-fw fa-share',

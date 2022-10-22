@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -28,6 +27,7 @@ return new class extends Migration {
             $table->boolean('is_beasiswa_approved')->default(false);
             $table->boolean('is_beasiswa_declined')->default(false);
             $table->timestamps();
+            $table->archivedAt(); // Macro
         });
     }
 
