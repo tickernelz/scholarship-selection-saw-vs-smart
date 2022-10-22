@@ -362,22 +362,22 @@ return [
             ],
         ],
         [
-            'text' => 'Kelola Beasiswa',
+            'text' => 'Kelola Perhitungan',
             'icon' => 'fas fa-fw fa-file-contract',
             'can' => 'kelola beasiswa',
             'submenu' => [
                 [
-                    'text' => 'List Beasiswa (SAW)',
+                    'text' => 'List Perhitungan (SAW)',
                     'url' => 'admin/beasiswa/saw',
                 ],
                 [
-                    'text' => 'List Beasiswa (SMART)',
+                    'text' => 'List Perhitungan (SMART)',
                     'url' => 'admin/beasiswa/smart',
                 ],
             ],
         ],
         [
-            'text' => 'Daftar Beasiswa',
+            'text' => 'Daftar',
             'icon' => 'fas fa-fw fa-file-contract',
             'url' => 'admin/daftar-beasiswa/step-two',
             'can' => 'daftar beasiswa',

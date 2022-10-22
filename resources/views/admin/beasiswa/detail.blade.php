@@ -12,7 +12,7 @@
     <div class="col-xl-12" style="float:none;margin:auto;">
         <div class="card">
             <div class="card-header d-flex p-0">
-                <h3 class="card-title p-3">Detail Berkas Beasiswa</h3>
+                <h3 class="card-title p-3">Detail Berkas Perhitungan</h3>
                 <ul class="nav nav-pills ml-auto p-2">
                     <li class="nav-item">
                         <a href="{{ redirect()->getUrlGenerator()->route('get.admin.beasiswa.saw') }}">
@@ -170,11 +170,11 @@
             <div class="card-footer">
                 @if($mahasiswa->is_beasiswa_send == 1 && $mahasiswa->is_beasiswa_approved == 1 && $mahasiswa->is_beasiswa_declined == 0)
                     <x-adminlte-alert theme="success" title="Diterima">
-                        Beasiswa telah diterima.
+                        Penurunan UKT telah diterima.
                     </x-adminlte-alert>
                 @elseif($mahasiswa->is_beasiswa_send == 0 && $mahasiswa->is_beasiswa_approved == 0 && $mahasiswa->is_beasiswa_declined == 1)
                     <x-adminlte-alert theme="danger" title="Ditolak">
-                        Beasiswa telah ditolak.
+                        Penurunan UKT telah ditolak.
                     </x-adminlte-alert>
                 @else
                     <div class="btn-group btn-group" role="group">

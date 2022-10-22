@@ -6,6 +6,7 @@ use App\Models\Pengaturan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Session;
 use Validator;
 
@@ -81,7 +82,7 @@ class AuthController extends Controller
             'fakultas' => 'required|string',
             'angkatan' => 'required|numeric',
             'jenis_kelamin' => 'required|string',
-            'ktm' => 'required|file|mimes:pdf|max:10240',
+            'ktm' => 'nullable|file|mimes:jpg,jpeg,png|max:2048'
         ]);
 
         $data_user = [
@@ -100,9 +101,10 @@ class AuthController extends Controller
         ];
 
         if ($request->hasFile('ktm')) {
-            $fileName = time() . '_' . $request->ktm->getClientOriginalName();
-            $request->ktm->move(public_path('ktm'), $fileName);
-            $data_mahasiswa['ktm'] = $fileName;
+            $ktm = $request->file('ktm');
+            $namaberkas = $data_mahasiswa['nim'] . '.' . $ktm->getClientOriginalExtension();
+            Storage::disk('local')->putFileAs('public/ktm', $ktm, $namaberkas);
+            $data_mahasiswa['ktm'] = $namaberkas;
         }
 
         $user = User::create($data_user)->assignRole('mahasiswa');

@@ -119,19 +119,19 @@
             <div class="alert alert-info alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <h5><i class="icon fas fa-info"></i> Info!</h5>
-                Anda sudah mengirimkan formulir beasiswa
+                Anda sudah mengirimkan formulir Penurunan UKT
             </div>
         @elseif($mahasiswa->is_beasiswa_send == 1 && $mahasiswa->is_beasiswa_approved == 1 && $mahasiswa->is_beasiswa_declined == 0)
             <div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <h5><i class="icon fas fa-check"></i> Success!</h5>
-                Anda sudah mendapatkan beasiswa
+                Anda sudah mendapatkan Penurunan UKT
             </div>
         @elseif($mahasiswa->is_beasiswa_send == 0 && $mahasiswa->is_beasiswa_approved == 0 && $mahasiswa->is_beasiswa_declined == 1)
             <div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <h5><i class="icon fas fa-ban"></i> Error!</h5>
-                Anda tidak mendapatkan beasiswa. Silahkan coba lagi semester depan
+                Anda tidak mendapatkan Penurunan UKT. Silahkan coba lagi semester depan
             </div>
         @endif
     </div>

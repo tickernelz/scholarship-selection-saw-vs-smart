@@ -19,7 +19,7 @@ class BeasiswaController extends Controller
 {
     public function index()
     {
-        $judul = 'Daftar Beasiswa';
+        $judul = 'Daftar';
         $user = Auth::user();
         $mahasiswa = $user->mahasiswa;
         $kriteria = Kriteria::all();
@@ -33,7 +33,7 @@ class BeasiswaController extends Controller
     {
         $request->session()->put('is_smart', false);
         $request->session()->put('is_saw', true);
-        $judul = 'List Beasiswa';
+        $judul = 'List Perhitungan SAW';
         $beasiswa = Beasiswa::with('mahasiswas', 'kriterias', 'subkriteria')->whereHas('mahasiswas', function ($query) {
             $query->where('is_beasiswa_send', 1);
         })->get();
@@ -122,7 +122,7 @@ class BeasiswaController extends Controller
     {
         $request->session()->put('is_smart', true);
         $request->session()->put('is_saw', false);
-        $judul = 'List Beasiswa';
+        $judul = 'List Perhitungan SMART';
         $beasiswa = Beasiswa::with('mahasiswas', 'kriterias', 'subkriteria')->whereHas('mahasiswas', function ($query) {
             $query->where('is_beasiswa_send', 1);
         })->get();
@@ -228,7 +228,7 @@ class BeasiswaController extends Controller
     public function createStepOne()
     {
         $user = Auth::user();
-        $judul = 'Daftar Beasiswa';
+        $judul = 'Daftar';
         $data = Berkas::where('mahasiswa_id', $user->mahasiswa->id)->get();
         if ($data == '[]') {
             $berkas = new Berkas();
@@ -268,7 +268,7 @@ class BeasiswaController extends Controller
 
     public function createStepTwo()
     {
-        $judul = 'Daftar Beasiswa';
+        $judul = 'Daftar';
         $user = Auth::user();
         $mahasiswa = $user->mahasiswa;
 
@@ -312,7 +312,7 @@ class BeasiswaController extends Controller
 
     public function createStepThree()
     {
-        $judul = 'Daftar Beasiswa';
+        $judul = 'Daftar';
         $user = Auth::user();
         $mahasiswa = $user->mahasiswa;
         $beasiswa = Beasiswa::where('mahasiswa_id', $user->mahasiswa->id)->get();
@@ -404,7 +404,7 @@ class BeasiswaController extends Controller
 
     public function detail_saw($id)
     {
-        $judul = 'Detail Beasiswa';
+        $judul = 'Detail Perhitungan SAW';
         $beasiswa = Beasiswa::where('mahasiswa_id', $id)->get();
         $kriteria = Kriteria::all();
         $berkas = Berkas::where('mahasiswa_id', $id)->get();
@@ -417,7 +417,7 @@ class BeasiswaController extends Controller
 
     public function detail_smart($id)
     {
-        $judul = 'Detail Beasiswa';
+        $judul = 'Detail Perhitungan SMART';
         $beasiswa = Beasiswa::where('mahasiswa_id', $id)->get();
         $kriteria = Kriteria::all();
         $berkas = Berkas::where('mahasiswa_id', $id)->get();

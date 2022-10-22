@@ -94,7 +94,7 @@ class MahasiswasController extends Controller
             'fakultas' => 'required',
             'ukt' => 'required',
             'jenis_kelamin' => 'required',
-            'ktm' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048'
+            'ktm' => 'nullable|file|mimes:jpg,jpeg,png|max:2048'
         ]);
 
         $user = new User;
@@ -154,7 +154,7 @@ class MahasiswasController extends Controller
             'fakultas' => 'required',
             'ukt' => 'required',
             'jenis_kelamin' => 'required',
-            'ktm' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048'
+            'ktm' => 'nullable|file|mimes:jpg,jpeg,png|max:2048'
         ]);
 
         $mahasiswa = Mahasiswa::find($id);
