@@ -325,6 +325,10 @@ return [
                     'text' => 'List Mahasiswa',
                     'url' => 'admin/mahasiswa',
                 ],
+                [
+                    'text' => 'Tambah Mahasiswa',
+                    'url' => 'admin/mahasiswa/tambah',
+                ],
             ],
         ],
         [
@@ -358,22 +362,22 @@ return [
             ],
         ],
         [
-            'text' => 'Kelola Beasiswa',
+            'text' => 'Kelola Perhitungan',
             'icon' => 'fas fa-fw fa-file-contract',
             'can' => 'kelola beasiswa',
             'submenu' => [
                 [
-                    'text' => 'List Beasiswa (SAW)',
+                    'text' => 'List Perhitungan (SAW)',
                     'url' => 'admin/beasiswa/saw',
                 ],
                 [
-                    'text' => 'List Beasiswa (SMART)',
+                    'text' => 'List Perhitungan (SMART)',
                     'url' => 'admin/beasiswa/smart',
                 ],
             ],
         ],
         [
-            'text' => 'Daftar Beasiswa',
+            'text' => 'Daftar',
             'icon' => 'fas fa-fw fa-file-contract',
             'url' => 'admin/daftar-beasiswa/step-two',
             'can' => 'daftar beasiswa',
@@ -400,6 +404,21 @@ return [
             'url' => 'admin/pengaturan',
             'icon' => 'fas fa-fw fa-cog',
             'can' => 'kelola pengaturan',
+        ],
+        [
+            'text' => 'Arsip',
+            'icon' => 'fas fa-fw fa-archive',
+            'can' => 'kelola pengaturan',
+            'submenu' => [
+                [
+                    'text' => 'List Perhitungan (SAW)',
+                    'url' => 'admin/arsip/beasiswa/saw',
+                ],
+                [
+                    'text' => 'List Perhitungan (SMART)',
+                    'url' => 'admin/arsip/beasiswa/smart',
+                ],
+            ],
         ],
 //        [
 //            'text'    => 'multilevel',
@@ -492,6 +511,16 @@ return [
     */
 
     'plugins' => [
+        'BootstrapSwitch' => [
+            'active' => false,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/bootstrap-switch/js/bootstrap-switch.min.js',
+                ],
+            ],
+        ],
         'Datatables' => [
             'active' => false,
             'files' => [

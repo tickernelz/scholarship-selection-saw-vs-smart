@@ -8,6 +8,8 @@
     <h1>{{ $judul }}</h1>
 @stop
 
+@section('plugins.BsCustomFileInput', true)
+
 @section('content')
     <div class="col-xl-12" style="float:none;margin:auto;">
         <div class="card">

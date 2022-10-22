@@ -72,19 +72,33 @@
 
         <div class="col-xl-6">
             <x-adminlte-card title="Advanced" maximizable>
-                <form action="{{ route('post.admin.pengaturan.reset_beasiswa') }}" method="post">
-                    @csrf
-                    <x-adminlte-button class="btn-lg" type="submit" label="Reset Beasiswa" theme="outline-danger"
-                                       icon="fas fa-lg fa-trash"
-                                       onclick="return confirm('Yakin Ingin Mereset Seluruh Data Beasiswa?');"/>
-                </form>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <form action="{{ route('post.admin.pengaturan.archive_beasiswa') }}" method="post">
+                            @csrf
+                            <x-adminlte-button class="btn-lg" type="submit" label="Archive Perhitungan"
+                                               theme="outline-primary"
+                                               icon="fas fa-lg fa-archive"
+                                               onclick="return confirm('Yakin Ingin Mengarsipkan Seluruh Data Perhitungan? \nIni akan memindahkan data user, mahasiswa, dan perhitungan ke arsip');"/>
+                        </form>
+                    </div>
+                    <div class="col-xl-6">
+                        <form action="{{ route('post.admin.pengaturan.reset_beasiswa') }}" method="post">
+                            @csrf
+                            <x-adminlte-button class="btn-lg" type="submit" label="Reset Perhitungan"
+                                               theme="outline-danger"
+                                               icon="fas fa-lg fa-trash"
+                                               onclick="return confirm('Yakin Ingin Mereset Seluruh Data Perhitungan?');"/>
+                        </form>
 
-                <form class="mt-3" action="{{ route('post.admin.pengaturan.reset_berkas') }}" method="post">
-                    @csrf
-                    <x-adminlte-button class="btn-lg" type="submit" label="Reset Berkas" theme="outline-danger"
-                                       icon="fas fa-lg fa-trash"
-                                       onclick="return confirm('Yakin Ingin Mereset Seluruh Data Berkas Mahasiswa?');"/>
-                </form>
+                        <form class="mt-3" action="{{ route('post.admin.pengaturan.reset_berkas') }}" method="post">
+                            @csrf
+                            <x-adminlte-button class="btn-lg" type="submit" label="Reset Berkas" theme="outline-danger"
+                                               icon="fas fa-lg fa-trash"
+                                               onclick="return confirm('Yakin Ingin Mereset Seluruh Data Berkas Mahasiswa?');"/>
+                        </form>
+                    </div>
+                </div>
             </x-adminlte-card>
         </div>
     </div>

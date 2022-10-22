@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->foreign('kriteria_id')->references('id')->on('kriteria')->cascadeOnDelete();
             $table->string('file')->nullable();
             $table->timestamps();
+            $table->archivedAt(); // Macro
         });
     }
 

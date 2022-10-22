@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MahasiswasController extends Controller
 {
@@ -73,6 +74,61 @@ class MahasiswasController extends Controller
         return redirect()->back()->with('success', 'Email berhasil dikirim');
     }
 
+    public function tambah_index()
+    {
+        $judul = 'Tambah Mahasiswa';
+
+        return view('admin.mahasiswa.tambah', compact([
+            'judul',
+        ]));
+    }
+
+    public function tambah(Request $request)
+    {
+        $request->validate([
+            'nim' => 'required|unique:mahasiswas',
+            'name' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required',
+            'studi' => 'required',
+            'fakultas' => 'required',
+            'ukt' => 'required',
+            'jenis_kelamin' => 'required',
+            'ktm' => 'nullable|file|mimes:jpg,jpeg,png|max:2048'
+        ]);
+
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        $user->assignRole('mahasiswa');
+
+        $mahasiswa = new Mahasiswa;
+        $mahasiswa->user_id = $user->id;
+        $mahasiswa->nim = $request->nim;
+        $mahasiswa->studi = $request->studi;
+        $mahasiswa->fakultas = $request->fakultas;
+        $mahasiswa->angkatan = $request->angkatan;
+        $mahasiswa->semester = $request->semester;
+        $mahasiswa->ukt = $request->ukt;
+        $mahasiswa->jenis_kelamin = $request->jenis_kelamin;
+        $mahasiswa->ttl = $request->ttl;
+        $mahasiswa->telepon = $request->telepon;
+        $mahasiswa->is_verified = 1;
+
+        // Upload KTM
+        if ($request->hasFile('ktm')) {
+            $ktm = $request->file('ktm');
+            $namaberkas = $mahasiswa->nim . '.' . $ktm->getClientOriginalExtension();
+            Storage::disk('local')->putFileAs('public/ktm', $ktm, $namaberkas);
+            $mahasiswa->ktm = $namaberkas;
+        }
+        $mahasiswa->save();
+
+        return redirect()->back()->with('success', 'Mahasiswa berhasil ditambahkan');
+    }
+
     public function edit_index(int $id, string $route)
     {
         $data = Mahasiswa::find($id);
@@ -87,23 +143,26 @@ class MahasiswasController extends Controller
 
     public function edit(Request $request, int $id)
     {
+        $mahasiswa = Mahasiswa::find($id);
+        $user = User::find($mahasiswa->user_id);
         $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email',
-            'nim' => 'required|string',
-            'studi' => 'nullable|string',
-            'fakultas' => 'nullable|string',
-            'angkatan' => 'nullable|numeric',
-            'semester' => 'nullable|numeric',
-            'ukt' => 'nullable|numeric',
-            'jenis_kelamin' => 'nullable|string',
-            'ttl' => 'nullable|string',
-            'telepon' => 'nullable|numeric',
+            'nim' => 'required|unique:mahasiswas,nim,' . $mahasiswa->id,
+            'name' => 'required',
+            'email' => 'required|unique:users,email,' . $user->id,
+            'password' => 'nullable',
+            'studi' => 'required',
+            'fakultas' => 'required',
+            'ukt' => 'required',
+            'jenis_kelamin' => 'required',
+            'ktm' => 'nullable|file|mimes:jpg,jpeg,png|max:2048'
         ]);
 
         $mahasiswa = Mahasiswa::find($id);
         $mahasiswa->user->name = $request->name;
         $mahasiswa->user->email = $request->email;
+        if ($request->password != null) {
+            $mahasiswa->user->password = bcrypt($request->password);
+        }
         $mahasiswa->nim = $request->nim;
         $mahasiswa->studi = $request->studi;
         $mahasiswa->fakultas = $request->fakultas;
@@ -113,9 +172,24 @@ class MahasiswasController extends Controller
         $mahasiswa->jenis_kelamin = $request->jenis_kelamin;
         $mahasiswa->ttl = $request->ttl;
         $mahasiswa->telepon = $request->telepon;
+
+        // Upload KTM
+        if ($request->hasFile('ktm')) {
+            $ktm = $request->file('ktm');
+            $namaberkas = $mahasiswa->nim . '.' . $ktm->getClientOriginalExtension();
+            Storage::disk('local')->putFileAs('public/ktm', $ktm, $namaberkas);
+            $mahasiswa->ktm = $namaberkas;
+        }
+
         $mahasiswa->save();
 
         return redirect()->back()->with('success', 'Mahasiswa berhasil diubah');
+    }
+
+    public function readFile($file)
+    {
+        $file = Storage::disk('local')->get('public/ktm/' . $file);
+        return response($file, 200)->header('Content-Type', 'image/jpeg');
     }
 
     public function hapus(int $id)

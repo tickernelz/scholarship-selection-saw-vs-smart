@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('subkriteria_id')->unsigned();
             $table->foreign('subkriteria_id')->references('id')->on('subkriteria')->cascadeOnDelete();
             $table->timestamps();
+            $table->archivedAt(); // Macro
         });
     }
 

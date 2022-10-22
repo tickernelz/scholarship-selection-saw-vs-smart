@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->float('skor_saw')->nullable();
             $table->float('skor_smart')->nullable();
             $table->timestamps();
+            $table->archivedAt(); // Macro
         });
     }
 

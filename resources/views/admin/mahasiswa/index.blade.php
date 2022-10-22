@@ -60,14 +60,15 @@
                     </ul>
                 </div>
             @endif
-{{--            <div>--}}
-{{--                Toggle column: <a class="toggle-vis" data-column="0">Nomor</a> - <a class="toggle-vis" data-column="1">NIM</a>--}}
-{{--                - <a class="toggle-vis" data-column="2">Nama</a> - <a class="toggle-vis" data-column="3">Email</a> - <a--}}
-{{--                    class="toggle-vis" data-column="4">Jenis Kelamin</a> - <a class="toggle-vis"--}}
-{{--                                                                              data-column="5">Studi</a> - <a--}}
-{{--                    class="toggle-vis" data-column="6">Fakultas</a>--}}
-{{--            </div>--}}
-            <x-adminlte-datatable id="table" :config="$config" :heads="$heads" {{--with-footer--}} hoverable bordered beautify>
+            {{--            <div>--}}
+            {{--                Toggle column: <a class="toggle-vis" data-column="0">Nomor</a> - <a class="toggle-vis" data-column="1">NIM</a>--}}
+            {{--                - <a class="toggle-vis" data-column="2">Nama</a> - <a class="toggle-vis" data-column="3">Email</a> - <a--}}
+            {{--                    class="toggle-vis" data-column="4">Jenis Kelamin</a> - <a class="toggle-vis"--}}
+            {{--                                                                              data-column="5">Studi</a> - <a--}}
+            {{--                    class="toggle-vis" data-column="6">Fakultas</a>--}}
+            {{--            </div>--}}
+            <x-adminlte-datatable id="table" :config="$config" :heads="$heads" {{--with-footer--}} hoverable bordered
+                                  beautify>
                 @foreach($data as $li)
                     <tr>
                         <td>{!! $loop->iteration !!}</td>
@@ -84,10 +85,17 @@
                         <td>{!! $li->telepon !!}</td>
                         <td>
                             @if (isset($li->ktm))
-                                <a type="button" class="btn btn-sm btn-primary"
-                                   href="/ktm/{{ $li->ktm }}" target="_blank">
-                                    Lihat
-                                </a>
+                                <x-adminlte-modal id="modal-file-{{$li->id}}" title="KTM {{$li->user->name}}" size="lg">
+                                    <embed
+                                        src="{{ route('get.admin.mahasiswa.readfile', $li->ktm) }}"
+                                        frameborder="0" width="100%" height="600px">
+                                </x-adminlte-modal>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#modal-file-{{$li->id}}">
+                                        Lihat
+                                    </button>
+                                </div>
                             @else
                                 Tidak Ada Berkas
                             @endif
@@ -122,37 +130,37 @@
 @stop
 
 @section('js')
-{{--    <script>--}}
-{{--        // Filter Column With Select--}}
-{{--        $(document).ready(function () {--}}
-{{--            $('#table tfoot th').each(function () {--}}
-{{--                var title = $(this).text();--}}
-{{--                $(this).html('<input type="text" placeholder="Search ' + title + '" />');--}}
-{{--            });--}}
-{{--            var table = $('#table').DataTable();--}}
-{{--            table.columns().every(function () {--}}
-{{--                var that = this;--}}
-{{--                $('input', this.footer()).on('keyup change', function () {--}}
-{{--                    if (that.search() !== this.value) {--}}
-{{--                        that.search(this.value).draw();--}}
-{{--                    }--}}
-{{--                });--}}
-{{--            });--}}
-{{--        });--}}
-{{--    </script>--}}
-{{--    <script>--}}
-{{--        $(document).ready(function () {--}}
-{{--            var table = $('#table').DataTable();--}}
+    {{--    <script>--}}
+    {{--        // Filter Column With Select--}}
+    {{--        $(document).ready(function () {--}}
+    {{--            $('#table tfoot th').each(function () {--}}
+    {{--                var title = $(this).text();--}}
+    {{--                $(this).html('<input type="text" placeholder="Search ' + title + '" />');--}}
+    {{--            });--}}
+    {{--            var table = $('#table').DataTable();--}}
+    {{--            table.columns().every(function () {--}}
+    {{--                var that = this;--}}
+    {{--                $('input', this.footer()).on('keyup change', function () {--}}
+    {{--                    if (that.search() !== this.value) {--}}
+    {{--                        that.search(this.value).draw();--}}
+    {{--                    }--}}
+    {{--                });--}}
+    {{--            });--}}
+    {{--        });--}}
+    {{--    </script>--}}
+    {{--    <script>--}}
+    {{--        $(document).ready(function () {--}}
+    {{--            var table = $('#table').DataTable();--}}
 
-{{--            $('a.toggle-vis').on('click', function (e) {--}}
-{{--                e.preventDefault();--}}
+    {{--            $('a.toggle-vis').on('click', function (e) {--}}
+    {{--                e.preventDefault();--}}
 
-{{--                // Get the column API object--}}
-{{--                var column = table.column($(this).attr('data-column'));--}}
+    {{--                // Get the column API object--}}
+    {{--                var column = table.column($(this).attr('data-column'));--}}
 
-{{--                // Toggle the visibility--}}
-{{--                column.visible(!column.visible());--}}
-{{--            });--}}
-{{--        });--}}
-{{--    </script>--}}
+    {{--                // Toggle the visibility--}}
+    {{--                column.visible(!column.visible());--}}
+    {{--            });--}}
+    {{--        });--}}
+    {{--    </script>--}}
 @stop

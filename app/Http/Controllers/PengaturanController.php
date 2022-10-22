@@ -7,6 +7,8 @@ use App\Models\Berkas;
 use App\Models\Mahasiswa;
 use App\Models\Pengaturan;
 use App\Models\Skor;
+use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,6 +24,40 @@ class PengaturanController extends Controller
         $optionIsOpen = ['0' => 'Tutup', '1' => 'Buka'];
 
         return view('admin.pengaturan', compact('judul', 'data', 'semester', 'selectedSemester', 'is_open', 'optionIsOpen'));
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function archive_beasiswa()
+    {
+        $beasiswa = Beasiswa::get();
+        $skor = Skor::get();
+        $berkas = Berkas::get();
+        $mahasiswa = Mahasiswa::get();
+        $user = User::role('mahasiswa')->get();
+
+        foreach ($beasiswa as $b) {
+            $b->archive();
+        }
+
+        foreach ($skor as $s) {
+            $s->archive();
+        }
+
+        foreach ($berkas as $b) {
+            $b->archive();
+        }
+
+        foreach ($mahasiswa as $m) {
+            $m->archive();
+        }
+
+        foreach ($user as $u) {
+            $u->archive();
+        }
+
+        return redirect()->back()->with('success', 'Data berhasil diarsipkan');
     }
 
     public function reset_beasiswa()

@@ -48,7 +48,7 @@ class MahasiswaSeeder extends Seeder
             'ukt' => 5000000,
             'semester' => 6,
             'is_verified' => 1,
-            'is_beasiswa_send' => 1,
+            'is_beasiswa_send' => 0,
             'user_id' => 4,
         ]);
     }

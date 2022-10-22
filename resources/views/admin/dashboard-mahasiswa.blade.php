@@ -114,22 +114,22 @@
             </x-adminlte-card>
         </div>
         <div class="col-xl-6">
-            <x-adminlte-card title="Status Beasiswa" icon="fas fa-lg fa-award">
+            <x-adminlte-card title="Status Penurunan UKT" icon="fas fa-lg fa-award">
                 @if ($mahasiswa->is_beasiswa_send == 1 && $mahasiswa->is_beasiswa_approved == 0 && $mahasiswa->is_beasiswa_declined == 0)
                     <x-adminlte-alert theme="info" title="Menunggu">
-                        Beasiswa sedang dalam proses verifikasi. Silahkan cek email anda secara berkala.
+                        Penurunan UKT sedang dalam proses verifikasi. Silahkan cek email anda secara berkala.
                     </x-adminlte-alert>
                 @elseif($mahasiswa->is_beasiswa_send == 1 && $mahasiswa->is_beasiswa_approved == 1 && $mahasiswa->is_beasiswa_declined == 0)
                     <x-adminlte-alert theme="success" title="Diterima">
-                        Beasiswa telah diterima. Dengan ini anda telah mendapatkan UKT menjadi sebesar Rp. {{ number_format($mahasiswa->ukt_penurunan, 0, ',', '.') }}.
+                        Penurunan UKT telah diterima. Dengan ini anda telah mendapatkan UKT menjadi sebesar Rp. {{ number_format($mahasiswa->ukt_penurunan, 0, ',', '.') }}.
                     </x-adminlte-alert>
                 @elseif($mahasiswa->is_beasiswa_send == 0 && $mahasiswa->is_beasiswa_approved == 0 && $mahasiswa->is_beasiswa_declined == 1)
                     <x-adminlte-alert theme="danger" title="Ditolak">
-                        Beasiswa telah ditolak. Silahkan cek email anda untuk informasi lebih lanjut.
+                        Penurunan UKT telah ditolak. Silahkan cek email anda untuk informasi lebih lanjut.
                     </x-adminlte-alert>
                 @else
                     <x-adminlte-alert theme="warning" title="Belum Mengajukan">
-                        Beasiswa belum diajukan.
+                        Penurunan UKT belum diajukan.
                     </x-adminlte-alert>
                 @endif
             </x-adminlte-card>

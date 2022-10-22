@@ -1,16 +1,16 @@
 <?php
 
+use App\Http\Controllers\ArsipController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BeasiswaController;
-use App\Http\Controllers\EmailController;
-use App\Http\Controllers\KriteriaController;
-use App\Http\Controllers\MahasiswasController;
-use App\Http\Controllers\PengaturanController;
-use App\Http\Controllers\PostsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KriteriaController;
+use App\Http\Controllers\MahasiswasController;
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\PengaturanController;
+use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,6 +39,7 @@ Route::post('register', [AuthController::class, 'register'])->name('post.registe
 Route::post('logout', [AuthController::class, 'logout'])->name('post.logout');
 
 Route::get('beasiswa/download/{file}', [BeasiswaController::class, 'download'])->name('get.beasiswa.download');
+Route::get('beasiswa/hapus/{file}', [BeasiswaController::class, 'hapusFile'])->name('get.beasiswa.hapus');
 Route::get('beasiswa/read/{file}', [BeasiswaController::class, 'readFile'])->name('get.beasiswa.readfile');
 
 
@@ -74,9 +75,13 @@ Route::group(['middleware' => 'auth'], static function () {
         Route::get('admin/mahasiswa/verifikasi/reject/{id}', [MahasiswasController::class, 'reject'])->name('get.admin.mahasiswa.verifikasi.reject');
         Route::get('admin/mahasiswa/verifikasi/email_accept/{id}', [MahasiswasController::class, 'email_accept'])->name('get.admin.mahasiswa.verifikasi.email.accept');
         Route::get('admin/mahasiswa', [MahasiswasController::class, 'index_list'])->name('get.admin.mahasiswa.index.list');
+        Route::get('admin/mahasiswa/tambah', [MahasiswasController::class, 'tambah_index'])->name('get.admin.mahasiswa.tambah.index');
+        Route::post('admin/mahasiswa/tambah/post', [MahasiswasController::class, 'tambah'])->name('post.admin.mahasiswa.tambah');
         Route::get('admin/mahasiswa/edit/{id}/{route}', [MahasiswasController::class, 'edit_index'])->name('get.admin.mahasiswa.edit.index');
         Route::post('admin/mahasiswa/edit/{id}/post', [MahasiswasController::class, 'edit'])->name('post.admin.mahasiswa.edit');
         Route::get('admin/mahasiswa/hapus/{id}', [MahasiswasController::class, 'hapus'])->name('get.admin.mahasiswa.hapus');
+        Route::get('admin/mahasiswa/read/{file}', [MahasiswasController::class, 'readFile'])->name('get.admin.mahasiswa.readfile');
+
     });
     // Daftar Beasiswa
     Route::group(['middleware' => ['can:daftar beasiswa']], static function () {
@@ -109,12 +114,20 @@ Route::group(['middleware' => 'auth'], static function () {
         Route::post('admin/beasiswa/terima', [BeasiswaController::class, 'terima'])->name('post.admin.beasiswa.terima');
         Route::post('admin/beasiswa/tolak', [BeasiswaController::class, 'tolak'])->name('post.admin.beasiswa.tolak');
     });
+    // Kelola Arsip Beasiswa
+    Route::group(['middleware' => ['can:kelola pengaturan']], static function () {
+        Route::get('admin/arsip/beasiswa/saw', [ArsipController::class, 'index_saw'])->name('get.admin.arsip.beasiswa.saw');
+        Route::get('admin/arsip/beasiswa/smart', [ArsipController::class, 'index_smart'])->name('get.admin.arsip.beasiswa.smart');
+        Route::get('admin/arsip/beasiswa/detail_saw/{id}', [ArsipController::class, 'detail_saw'])->name('get.admin.arsip.beasiswa.detail_saw');
+        Route::get('admin/arsip/beasiswa/detail_smart/{id}', [ArsipController::class, 'detail_smart'])->name('get.admin.arsip.beasiswa.detail_smart');
+    });
     // Kelola Pengaturan
     Route::group(['middleware' => ['can:kelola pengaturan']], static function () {
         Route::get('admin/pengaturan', [PengaturanController::class, 'index'])->name('get.admin.pengaturan.index');
         Route::post('admin/pengaturan/update/{id}', [PengaturanController::class, 'update'])->name('post.admin.pengaturan.update');
         Route::post('admin/pengaturan/reset_beasiswa', [PengaturanController::class, 'reset_beasiswa'])->name('post.admin.pengaturan.reset_beasiswa');
         Route::post('admin/pengaturan/reset_berkas', [PengaturanController::class, 'reset_berkas'])->name('post.admin.pengaturan.reset_berkas');
+        Route::post('admin/pengaturan/archive_beasiswa', [PengaturanController::class, 'archive_beasiswa'])->name('post.admin.pengaturan.archive_beasiswa');
     });
 });
 

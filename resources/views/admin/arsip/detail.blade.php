@@ -15,7 +15,7 @@
                 <h3 class="card-title p-3">Detail Berkas Perhitungan</h3>
                 <ul class="nav nav-pills ml-auto p-2">
                     <li class="nav-item">
-                        <a href="{{ redirect()->getUrlGenerator()->route('get.admin.beasiswa.saw') }}">
+                        <a href="{{ redirect()->getUrlGenerator()->route('get.admin.arsip.beasiswa.saw') }}">
                             <button type="button" class="btn btn-primary">{{ trans('auth.kembali') }}</button>
                         </a>
                     </li>
@@ -53,7 +53,8 @@
                         </x-slot>
                     </x-adminlte-input>
                     <x-adminlte-input name="name_disabled" label="{{ trans('auth.nama') }}"
-                                      placeholder="{{ trans('auth.nama') }}" value="{{ $mahasiswa->user->name }}"
+                                      placeholder="{{ trans('auth.nama') }}"
+                                      value="{{ $mahasiswa->userArchived->name }}"
                                       disabled>
                         <x-slot name="prependSlot">
                             <div class="input-group-text">
@@ -83,12 +84,12 @@
                 <x-adminlte-card title="Skor Mahasiswa" theme="info" icon="fas fa-lg fa-chart-bar" collapsible>
                     @if ($is_saw == true && $is_smart == false)
                         <x-adminlte-alert theme="success" title="Nilai Skor">
-                            Nilai skor adalah {{ round($mahasiswa->skor->skor_saw, 4) }} dari skala 0 - 1 dengan
+                            Nilai skor adalah {{ round($skor->skor_saw, 4) }} dari skala 0 - 1 dengan
                             perhitungan SAW
                         </x-adminlte-alert>
                     @else
                         <x-adminlte-alert theme="success" title="Nilai Skor">
-                            Nilai skor adalah {{ round($mahasiswa->skor->skor_smart, 4) }} dari skala 0 - 1 dengan
+                            Nilai skor adalah {{ round($skor->skor_smart, 4) }} dari skala 0 - 1 dengan
                             perhitungan SMART
                         </x-adminlte-alert>
                     @endif

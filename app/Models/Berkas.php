@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use LaravelArchivable\Archivable;
 
 class Berkas extends Model
 {
+    use Archivable;
+
     protected $guarded = [
         'id',
     ];

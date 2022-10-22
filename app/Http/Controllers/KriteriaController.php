@@ -78,6 +78,7 @@ class KriteriaController extends Controller
                 'nama_kriteria' => $data_kriteria->nama,
                 'tipe_kriteria' => $data_kriteria->tipe,
                 'bobot_kriteria' => $data_kriteria->bobot,
+                'is_berkas' => $data_kriteria->required,
             ];
             $request->session()->put('kriteria', $session_kriteria);
         }
@@ -128,6 +129,7 @@ class KriteriaController extends Controller
                 $kriteria['nama_kriteria'] = $request->nama_kriteria;
                 $kriteria['tipe_kriteria'] = $request->tipe_kriteria;
                 $kriteria['bobot_kriteria'] = $request->bobot_kriteria;
+                $kriteria['is_berkas'] = $request->is_berkas;
                 $request->session()->put('subkriteria', $subkriteria);
                 $request->session()->put('kriteria', $kriteria);
                 if ($request->session()->get('is_edit') === true) {
@@ -162,6 +164,7 @@ class KriteriaController extends Controller
                 $kriteria['nama_kriteria'] = $request->nama_kriteria;
                 $kriteria['tipe_kriteria'] = $request->tipe_kriteria;
                 $kriteria['bobot_kriteria'] = $request->bobot_kriteria;
+                $kriteria['is_berkas'] = $request->is_berkas;
                 $request->session()->put('kriteria', $kriteria);
                 if ($request->session()->get('is_edit') === true) {
                     return redirect()->route('get.admin.kriteria.edit', $request->session()->get('edit_id'))->with('success', 'Subkriteria berhasil diubah');
@@ -180,6 +183,7 @@ class KriteriaController extends Controller
                 $kriteria['nama_kriteria'] = $request->nama_kriteria;
                 $kriteria['tipe_kriteria'] = $request->tipe_kriteria;
                 $kriteria['bobot_kriteria'] = $request->bobot_kriteria;
+                $kriteria['is_berkas'] = $request->is_berkas;
                 if ($total_bobot + $kriteria['bobot_kriteria'] > 100) {
                     return redirect()->back()->with('error', 'Total bobot kriteria tidak boleh lebih dari 100');
                 }
@@ -192,6 +196,7 @@ class KriteriaController extends Controller
                     'nama' => $kriteria['nama_kriteria'],
                     'tipe' => $kriteria['tipe_kriteria'],
                     'bobot' => $kriteria['bobot_kriteria'],
+                    'required' => $kriteria['is_berkas'],
                 ]);
                 foreach ($subkriteria as $item) {
                     Subkriteria::create([
@@ -225,6 +230,7 @@ class KriteriaController extends Controller
                     'nama' => $request->nama_kriteria,
                     'tipe' => $request->tipe_kriteria,
                     'bobot' => $request->bobot_kriteria,
+                    'required' => $request->is_berkas,
                 ]);
                 foreach ($subkriteria as $item) {
                     if ($item['id'] === null) {
@@ -284,7 +290,7 @@ class KriteriaController extends Controller
             $min_prioritas = $sub_kriteria->min('prioritas');
             foreach ($sub_kriteria as $sk) {
                 // Cek Tipe Kriteria
-                if ($k->tipe === 'benefit'){
+                if ($k->tipe === 'benefit') {
                     $bobot = ($max_prioritas - $sk->prioritas) / ($max_prioritas - $min_prioritas);
                 } else {
                     $bobot = ($sk->prioritas - $min_prioritas) / ($max_prioritas - $min_prioritas);

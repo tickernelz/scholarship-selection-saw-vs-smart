@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->string('nama');
             $table->enum('tipe', ['benefit', 'cost']);
             $table->float('bobot');
+            $table->integer('required')->default(0);
             $table->timestamps();
         });
     }
