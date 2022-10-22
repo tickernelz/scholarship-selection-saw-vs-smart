@@ -279,15 +279,31 @@ class BeasiswaController extends Controller
     {
         $user = Auth::user();
         $data = Mahasiswa::firstWhere('id', $user->mahasiswa->id);
+        $semester = Pengaturan::first()->semester;
+        $semester_is_odd = $semester == 'Ganjil' || $semester == 'ganjil';
+        $semester_is_even = $semester == 'Genap' || $semester == 'genap';
 
         $request->validate([
             'name' => 'required|string',
-            'semester' => 'required|numeric',
+            'semester' => 'required|integer|min:3|max:9|',
             'ukt' => 'required|numeric',
         ]);
 
+        $req_semester = $request->semester;
+        $is_req_semester = false;
+
+        if ($semester_is_odd) {
+            $is_req_semester = $req_semester % 2 == 1;
+        } else if ($semester_is_even) {
+            $is_req_semester = $req_semester % 2 == 0;
+        }
+
+        if (!$is_req_semester) {
+            return redirect()->back()->with('error', 'Semester yang anda masukkan tidak sesuai dengan semester saat ini');
+        }
+
         $data->user->name = $request->name;
-        $data->semester = $request->semester;
+        $data->semester = $req_semester;
         $data->ukt = $request->ukt;
         $data->save();
 
