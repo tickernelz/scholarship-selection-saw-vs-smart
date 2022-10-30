@@ -135,7 +135,8 @@
                                                     type="application/pdf">
                                             </x-adminlte-modal>
                                             <x-adminlte-input-file name="berkas[{{ $k->id }}]" label="Upload File Bukti"
-                                                                   placeholder="{{ $berkas->where('kriteria_id', $k->id)->first()->file }}" disabled/>
+                                                                   placeholder="{{ $berkas->where('kriteria_id', $k->id)->first()->file }}"
+                                                                   disabled/>
                                             <div class="btn-group btn-group-sm" role="group">
                                                 <button type="button" class="btn btn-secondary" data-toggle="modal"
                                                         data-target="#modal-file-{{$k->id}}">
@@ -158,13 +159,22 @@
                             <hr>
 
                         @endforeach
+                        <div class="form-group">
+                            <p style="color: #FF0000; font-weight: bold;">Demikian formulir ini saya isi dengan
+                                sebenar-benarnya. Jika di
+                                kemudian hari terbukti bahwa data ini tidak benar dan/atau berakibat kepada kerugian
+                                Negara, maka saya bersedia menerima sanksi dan mempertanggungjawabkannya secara
+                                hukum. </p>
+                            <input type="checkbox" id="perjanjian" name="perjanjian">
+                            <label for="perjanjian">Saya Setuju</label>
+                        </div>
                     </x-adminlte-card>
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer text-right">
-                    <button type="submit" onclick="return confirm('Yakin Ingin Mengirim Form?');"
-                            class="btn btn-primary">{{ trans('auth.kirim') }}</button>
+                    <button type="submit" name="submit" onclick="return confirm('Yakin Ingin Mengirim Form?');"
+                            class="btn btn-primary" disabled>{{ trans('auth.kirim') }}</button>
                 </div>
             </form>
         </div>
@@ -175,4 +185,15 @@
 @stop
 
 @section('js')
+    <script>
+        var input = document.getElementsByName('perjanjian')[0];
+        var submit = document.getElementsByName('submit')[0];
+        input.onchange = function () {
+            if (input.checked) {
+                submit.disabled = false;
+            } else {
+                submit.disabled = true;
+            }
+        }
+    </script>
 @stop
