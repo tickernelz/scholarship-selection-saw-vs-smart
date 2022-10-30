@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Mail\SendMail;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Mail;
 use NumberFormatter;
 
@@ -30,7 +29,7 @@ class EmailController extends Controller
         $markdown = 'emails.verifikasi';
         $data = [
             'title' => 'Verifikasi Akun',
-            'body' => 'Maaf ' . $user->name . ', akun anda ditolak oleh admin. Silahkan hubungi admin untuk informasi lebih lanjut.'
+            'body' => 'Maaf ' . $user->name . ', Registrasi akun anda ditolak oleh admin. karena data tidak sesuai dengan mahasiswa Institut Agama Islam Negri Palangka Raya. Silahkan hubungi admin untuk informasi lebih lanjut.'
         ];
 
         Mail::to($user->email)->send(new SendMail($data, $subject, $markdown));
