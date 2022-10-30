@@ -213,7 +213,7 @@ class BeasiswaController extends Controller
     {
         $pengaturan = Pengaturan::first();
         if ($pengaturan->batas_pengajuan <= Carbon::now()) {
-            return redirect()->back()->with('error', 'Batas Pengajuan Beasiswa Sudah Lewat');
+            return redirect()->back()->with('error', 'Batas Pengajuan Penurunan UKT Sudah Lewat');
         }
         $user = Auth::user();
         $mahasiswa = $user->mahasiswa;
@@ -221,9 +221,9 @@ class BeasiswaController extends Controller
         $save = $mahasiswa->save();
 
         if ($save) {
-            return redirect()->route('get.admin.daftar-beasiswa.index')->with('success', 'Berhasil mengirim beasiswa');
+            return redirect()->route('get.admin.daftar-beasiswa.index')->with('success', 'Berhasil mengirim penurunan UKT');
         } else {
-            return redirect()->route('get.admin.daftar-beasiswa.index')->with('error', 'Gagal mengirim beasiswa');
+            return redirect()->route('get.admin.daftar-beasiswa.index')->with('error', 'Gagal mengirim penurunan UKT');
         }
     }
 
@@ -479,7 +479,7 @@ class BeasiswaController extends Controller
         $data->is_beasiswa_approved = true;
         $data->ukt_penurunan = $request->ukt;
         $data->save();
-        return redirect()->back()->with('success', 'Berhasil menerima beasiswa');
+        return redirect()->back()->with('success', 'Berhasil menerima penurunan UKT');
     }
 
     public function tolak(Request $request)
@@ -496,7 +496,7 @@ class BeasiswaController extends Controller
         foreach ($beasiswa as $b) {
             $b->delete();
         }
-        return redirect()->back()->with('success', 'Berhasil menolak beasiswa');
+        return redirect()->back()->with('success', 'Berhasil menolak penurunan UKT');
     }
 
     public function transpose($array)
