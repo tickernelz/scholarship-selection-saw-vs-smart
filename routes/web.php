@@ -116,7 +116,9 @@ Route::group(['middleware' => 'auth'], static function () {
     });
     // Kelola Arsip Beasiswa
     Route::group(['middleware' => ['can:kelola pengaturan']], static function () {
+        Route::get('admin/arsip/beasiswa/saw/cari', [ArsipController::class, 'cari_saw'])->name('get.admin.arsip.beasiswa.saw.cari');
         Route::get('admin/arsip/beasiswa/saw', [ArsipController::class, 'index_saw'])->name('get.admin.arsip.beasiswa.saw');
+        Route::get('admin/arsip/beasiswa/smart/cari', [ArsipController::class, 'cari_smart'])->name('get.admin.arsip.beasiswa.smart.cari');
         Route::get('admin/arsip/beasiswa/smart', [ArsipController::class, 'index_smart'])->name('get.admin.arsip.beasiswa.smart');
         Route::get('admin/arsip/beasiswa/detail_saw/{id}', [ArsipController::class, 'detail_saw'])->name('get.admin.arsip.beasiswa.detail_saw');
         Route::get('admin/arsip/beasiswa/detail_smart/{id}', [ArsipController::class, 'detail_smart'])->name('get.admin.arsip.beasiswa.detail_smart');

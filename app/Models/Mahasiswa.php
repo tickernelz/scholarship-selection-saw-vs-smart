@@ -59,4 +59,9 @@ class Mahasiswa extends Model
     {
         return $this->hasOne(Skor::class, 'mahasiswa_id', 'id')->onlyArchived();
     }
+
+    public function tahun_akademik()
+    {
+        return $this->belongsTo(TahunAkademik::class, 'id', 'tahun_akademik_id');
+    }
 }

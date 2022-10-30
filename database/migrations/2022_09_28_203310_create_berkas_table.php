@@ -13,6 +13,8 @@ return new class extends Migration {
             $table->foreign('mahasiswa_id')->references('id')->on('mahasiswas')->cascadeOnDelete();
             $table->integer('kriteria_id')->unsigned();
             $table->foreign('kriteria_id')->references('id')->on('kriteria')->cascadeOnDelete();
+            $table->integer('tahun_akademik_id')->unsigned();
+            $table->foreign('tahun_akademik_id')->references('id')->on('tahun_akademiks')->cascadeOnDelete();
             $table->string('file')->nullable();
             $table->timestamps();
             $table->archivedAt(); // Macro

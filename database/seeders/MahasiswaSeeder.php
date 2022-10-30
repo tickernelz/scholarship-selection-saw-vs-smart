@@ -22,6 +22,7 @@ class MahasiswaSeeder extends Seeder
             'is_verified' => 1,
             'is_beasiswa_send' => 1,
             'user_id' => 2,
+            'tahun_akademik_id' => 1,
         ]);
         Mahasiswa::create([
             'nim' => 'DBC118043',
@@ -36,6 +37,7 @@ class MahasiswaSeeder extends Seeder
             'is_verified' => 1,
             'is_beasiswa_send' => 1,
             'user_id' => 3,
+            'tahun_akademik_id' => 1,
         ]);
         Mahasiswa::create([
             'nim' => 'DBC118044',
@@ -50,6 +52,7 @@ class MahasiswaSeeder extends Seeder
             'is_verified' => 1,
             'is_beasiswa_send' => 0,
             'user_id' => 4,
+            'tahun_akademik_id' => 1,
         ]);
     }
 }

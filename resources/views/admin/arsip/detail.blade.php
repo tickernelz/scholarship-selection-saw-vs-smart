@@ -15,7 +15,7 @@
                 <h3 class="card-title p-3">Detail Berkas Perhitungan</h3>
                 <ul class="nav nav-pills ml-auto p-2">
                     <li class="nav-item">
-                        <a href="{{ redirect()->getUrlGenerator()->route('get.admin.arsip.beasiswa.saw') }}">
+                        <a href="{{ URL::previous() }}">
                             <button type="button" class="btn btn-primary">{{ trans('auth.kembali') }}</button>
                         </a>
                     </li>
@@ -153,42 +153,6 @@
 
                 </x-adminlte-card>
             </div>
-            <form action="{{ route('post.admin.beasiswa.terima') }}" method="post">
-                @csrf
-                <x-adminlte-modal id="modal-terima" title="Terima Penurunan UKT" size="lg" theme="primary"
-                                  icon="fas fa-lg fa-fw fa-plus" v-centered static-backdrop scrollable>
-                    <x-adminlte-input name="id_mahasiswa_terima" value="" hidden/>
-                    <x-adminlte-input name="ukt_awal" label="Nominal UKT Awal" type="number" disabled/>
-                    <x-adminlte-input name="ukt" label="Nominal UKT Penurunan" type="number"/>
-                    <x-slot name="footerSlot">
-                        <x-adminlte-button theme="danger" label="Close" data-dismiss="modal"/>
-                        <x-adminlte-button class="ml-auto" type="submit" label="Submit" name="action"
-                                           value="terima" theme="success"
-                                           icon="fas fa-lg fa-save"/>
-                    </x-slot>
-                </x-adminlte-modal>
-            </form>
-            <div class="card-footer">
-                @if($mahasiswa->is_beasiswa_send == 1 && $mahasiswa->is_beasiswa_approved == 1 && $mahasiswa->is_beasiswa_declined == 0)
-                    <x-adminlte-alert theme="success" title="Diterima">
-                        Penurunan UKT telah diterima.
-                    </x-adminlte-alert>
-                @elseif($mahasiswa->is_beasiswa_send == 0 && $mahasiswa->is_beasiswa_approved == 0 && $mahasiswa->is_beasiswa_declined == 1)
-                    <x-adminlte-alert theme="danger" title="Ditolak">
-                        Penurunan UKT telah ditolak.
-                    </x-adminlte-alert>
-                @else
-                    <div class="btn-group btn-group" role="group">
-                        <button type="button" class="btn btn-primary terima" data-id="{{ $mahasiswa->id ?? '' }}">
-                            Terima
-                        </button>
-                        <button type="button" class="btn btn-danger tolak"
-                                data-id="{{ $mahasiswa->id ?? '' }}">
-                            Tolak
-                        </button>
-                    </div>
-                @endif
-            </div>
         </div>
     </div>
 @endsection
@@ -197,37 +161,4 @@
 @stop
 
 @section('js')
-    <script type="text/javascript">
-        $(".terima").click(function () {
-            var id = $(this).attr('data-id');
-            $.ajax({
-                url: "{{ route('get.admin.beasiswa.ajax_modal') }}",
-                type: "GET",
-                data: {
-                    id: id
-                },
-                success: function (data) {
-                    $('#id_mahasiswa_terima').val(data.id);
-                    $('#ukt').val(data.ukt);
-                    $('#ukt_awal').val(data.ukt_awal);
-                    $('#modal-terima').modal('show');
-                }
-            });
-        });
-        $(".tolak").click(function () {
-            var id = $(this).attr('data-id');
-            $.ajax({
-                url: "{{ route('get.admin.beasiswa.ajax_modal') }}",
-                type: "GET",
-                data: {
-                    id: id
-                },
-                success: function (data) {
-                    $('#id_mahasiswa_tolak').val(data.id);
-                    $('#modal-tolak').modal('show');
-                }
-            });
-        });
-    </script>
-
 @stop

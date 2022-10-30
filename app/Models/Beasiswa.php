@@ -28,4 +28,9 @@ class Beasiswa extends Model
     {
         return $this->hasOne(Subkriteria::class, 'id', 'subkriteria_id');
     }
+
+    public function tahun_akademik()
+    {
+        return $this->belongsTo(TahunAkademik::class, 'id', 'tahun_akademik_id');
+    }
 }

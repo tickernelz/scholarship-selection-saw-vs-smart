@@ -23,4 +23,9 @@ class Skor extends Model
     {
         return $this->hasOne(Mahasiswa::class, 'id', 'mahasiswa_id')->onlyArchived();
     }
+
+    public function tahun_akademik()
+    {
+        return $this->belongsTo(TahunAkademik::class, 'id', 'tahun_akademik_id');
+    }
 }

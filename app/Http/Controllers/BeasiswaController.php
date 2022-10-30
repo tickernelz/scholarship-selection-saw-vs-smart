@@ -108,6 +108,7 @@ class BeasiswaController extends Controller
             if ($skor == null) {
                 $skor = new Skor();
                 $skor->mahasiswa_id = $mahasiswa->id;
+                $skor->tahun_akademik_id = $mahasiswa->tahun_akademik_id;
             }
             $skor->skor_saw = $value;
             $skor->save();
@@ -197,6 +198,7 @@ class BeasiswaController extends Controller
             if ($skor == null) {
                 $skor = new Skor();
                 $skor->mahasiswa_id = $mahasiswa->id;
+                $skor->tahun_akademik_id = $mahasiswa->tahun_akademik_id;
             }
             $skor->skor_smart = $value;
             $skor->save();
@@ -233,6 +235,7 @@ class BeasiswaController extends Controller
         if ($data == '[]') {
             $berkas = new Berkas();
             $berkas->mahasiswa_id = $user->mahasiswa->id;
+            $berkas->tahun_akademik_id = $user->mahasiswa->tahun_akademik_id;
             $berkas->save();
         }
         $data = Berkas::where('mahasiswa_id', $user->mahasiswa->id)->first();
@@ -343,6 +346,7 @@ class BeasiswaController extends Controller
                 $beasiswa->mahasiswa_id = $data->id;
                 $beasiswa->kriteria_id = $k->id;
                 $beasiswa->subkriteria_id = $request->subkriteria[$k->id];
+                $beasiswa->tahun_akademik_id = $data->tahun_akademik_id;
                 $beasiswa->save();
                 // Cek apakah ada berkas?
                 if ($request->hasFile('berkas')) {
@@ -358,6 +362,7 @@ class BeasiswaController extends Controller
                             $berkas = new Berkas();
                             $berkas->mahasiswa_id = $data->id;
                             $berkas->kriteria_id = $k->id;
+                            $berkas->tahun_akademik_id = $data->tahun_akademik_id;
                         }
                         $berkas->file = $fileName;
                         $berkas->save();
@@ -391,6 +396,7 @@ class BeasiswaController extends Controller
                             $berkas = new Berkas();
                             $berkas->mahasiswa_id = $data->id;
                             $berkas->kriteria_id = $k->id;
+                            $berkas->tahun_akademik_id = $data->tahun_akademik_id;
                         }
                         $berkas->file = $fileName;
                         $berkas->save();

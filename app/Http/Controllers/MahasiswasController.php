@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
+use App\Models\TahunAkademik;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -97,6 +98,8 @@ class MahasiswasController extends Controller
             'ktm' => 'nullable|file|mimes:jpg,jpeg,png|max:2048'
         ]);
 
+        $tahun_akademik = TahunAkademik::where('is_active', 1)->first();
+
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
@@ -115,6 +118,7 @@ class MahasiswasController extends Controller
         $mahasiswa->jenis_kelamin = $request->jenis_kelamin;
         $mahasiswa->ttl = $request->ttl;
         $mahasiswa->telepon = $request->telepon;
+        $mahasiswa->tahun_akademik_id = $tahun_akademik->id;
         $mahasiswa->is_verified = 1;
 
         // Upload KTM
@@ -189,7 +193,7 @@ class MahasiswasController extends Controller
     public function readFile($file)
     {
         $file = Storage::disk('local')->get('public/ktm/' . $file);
-        return response($file, 200)->header('Content-Type', 'image/jpeg');
+        return response($file, 200)->header('Content-Type', 'application/pdf');
     }
 
     public function hapus(int $id)
