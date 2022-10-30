@@ -30,7 +30,7 @@ class ProfileController extends Controller
             'password' => 'required|confirmed',
             'ttl' => 'nullable|string',
             'telepon' => 'nullable|numeric',
-            'semester' => 'required|numeric',
+            'semester' => 'nullable|numeric',
         ];
 
         $validator = Validator::make($request->all(), $rules);

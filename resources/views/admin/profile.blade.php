@@ -124,7 +124,7 @@
                         </x-adminlte-input>
                         <x-adminlte-input name="semester" label="{{ trans('auth.semester') }}"
                                           placeholder="{{ trans('auth.semester') }}"
-                                          value="{{ $user->mahasiswa->semester }}" type="number">
+                                          value="{{ $user->mahasiswa->semester }}" type="number" required>
                             <x-slot name="prependSlot">
                                 <div class="input-group-text">
                                     <i class="fas fa-hourglass-half text-lightblue"></i>
