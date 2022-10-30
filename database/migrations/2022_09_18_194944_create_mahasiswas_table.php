@@ -11,6 +11,8 @@ return new class extends Migration {
             $table->id();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->integer('tahun_akademik_id')->unsigned();
+            $table->foreign('tahun_akademik_id')->references('id')->on('tahun_akademiks')->cascadeOnDelete();
             $table->string('nim')->unique();
             $table->string('studi');
             $table->string('fakultas');

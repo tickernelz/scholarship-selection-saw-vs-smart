@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pengaturan;
+use App\Models\TahunAkademik;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -73,6 +74,7 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+        $tahun_akademik = TahunAkademik::where('is_active', 1)->first();
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
@@ -82,7 +84,7 @@ class AuthController extends Controller
             'fakultas' => 'required|string',
             'angkatan' => 'required|numeric',
             'jenis_kelamin' => 'required|string',
-            'ktm' => 'nullable|file|mimes:jpg,jpeg,png|max:2048'
+            'ktm' => 'nullable|file|mimes:pdf|max:3555'
         ]);
 
         $data_user = [
@@ -97,6 +99,7 @@ class AuthController extends Controller
             'fakultas' => $request->input('fakultas'),
             'angkatan' => $request->input('angkatan'),
             'jenis_kelamin' => $request->input('jenis_kelamin'),
+            'tahun_akademik_id' => $tahun_akademik->id,
             'ktm' => null,
         ];
 

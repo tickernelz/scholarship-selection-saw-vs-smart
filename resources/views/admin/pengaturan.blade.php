@@ -48,6 +48,16 @@
                             {{ Session::get('error') }}
                         </x-adminlte-alert>
                     @endif
+                    <label for="tahun_akademik">Tahun Akademik</label>
+                    <div class="form-group input-group" id="tahun_akademik">
+                        <input type="text" class="form-control" name="tahun_awal" placeholder="2021"
+                               value="{{ $tahun_akademik->tahun_awal ?? '' }}">
+                        <div class="input-group-append">
+                            <span class="input-group-text">/</span>
+                        </div>
+                        <input type="text" class="form-control" name="tahun_akhir" placeholder="2022"
+                               value="{{ $tahun_akademik->tahun_akhir ?? '' }}">
+                    </div>
                     <x-adminlte-select name="semester" label="Semester">
                         <x-adminlte-options :options="$semester" :selected="$selectedSemester"
                                             placeholder="Pilih Semester..."/>
@@ -73,16 +83,16 @@
         <div class="col-xl-6">
             <x-adminlte-card title="Advanced" maximizable>
                 <div class="row">
-                    <div class="col-xl-6">
+                    <div class="col-6">
                         <form action="{{ route('post.admin.pengaturan.archive_beasiswa') }}" method="post">
                             @csrf
-                            <x-adminlte-button class="btn-lg" type="submit" label="Archive Perhitungan"
+                            <x-adminlte-button class="btn-lg" type="submit" label="Archive Perhitungan dan Mahasiswa"
                                                theme="outline-primary"
                                                icon="fas fa-lg fa-archive"
-                                               onclick="return confirm('Yakin Ingin Mengarsipkan Seluruh Data Perhitungan? \nIni akan memindahkan data user, mahasiswa, dan perhitungan ke arsip');"/>
+                                               onclick="return confirm('Yakin Ingin Mengarsipkan Seluruh Data Perhitungan Pada Tahun Akademik Ini? \nIni akan memindahkan data user, mahasiswa, dan perhitungan ke arsip');"/>
                         </form>
                     </div>
-                    <div class="col-xl-6">
+                    <div class="col-6">
                         <form action="{{ route('post.admin.pengaturan.reset_beasiswa') }}" method="post">
                             @csrf
                             <x-adminlte-button class="btn-lg" type="submit" label="Reset Perhitungan"

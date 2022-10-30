@@ -69,10 +69,17 @@
                         <td>{!! $li->angkatan !!}</td>
                         <td>
                             @if (isset($li->ktm))
-                                <a type="button" class="btn btn-sm btn-primary"
-                                   href="/ktm/{{ $li->ktm }}" target="_blank">
-                                    Lihat
-                                </a>
+                                <x-adminlte-modal id="modal-file-{{$li->id}}" title="KTM {{$li->user->name}}" size="lg">
+                                    <embed
+                                        src="{{ route('get.admin.mahasiswa.readfile', $li->ktm) }}"
+                                        frameborder="0" width="100%" height="600px">
+                                </x-adminlte-modal>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#modal-file-{{$li->id}}">
+                                        Lihat
+                                    </button>
+                                </div>
                             @else
                                 Tidak Ada Berkas
                             @endif

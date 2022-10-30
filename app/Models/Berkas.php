@@ -22,4 +22,9 @@ class Berkas extends Model
     {
         return $this->belongsTo(Kriteria::class, 'id', 'kriteria_id');
     }
+
+    public function tahun_akademik()
+    {
+        return $this->belongsTo(TahunAkademik::class, 'id', 'tahun_akademik_id');
+    }
 }

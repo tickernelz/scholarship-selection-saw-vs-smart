@@ -22,6 +22,8 @@ return new class extends Migration
             $table->foreign('kriteria_id')->references('id')->on('kriteria')->cascadeOnDelete();
             $table->integer('subkriteria_id')->unsigned();
             $table->foreign('subkriteria_id')->references('id')->on('subkriteria')->cascadeOnDelete();
+            $table->integer('tahun_akademik_id')->unsigned();
+            $table->foreign('tahun_akademik_id')->references('id')->on('tahun_akademiks')->cascadeOnDelete();
             $table->timestamps();
             $table->archivedAt(); // Macro
         });

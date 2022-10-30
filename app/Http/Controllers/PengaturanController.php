@@ -7,7 +7,7 @@ use App\Models\Berkas;
 use App\Models\Mahasiswa;
 use App\Models\Pengaturan;
 use App\Models\Skor;
-use App\Models\User;
+use App\Models\TahunAkademik;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -22,8 +22,9 @@ class PengaturanController extends Controller
         $selectedSemester = Pengaturan::where('semester', '!=', null)->first()->semester;
         $is_open = Pengaturan::where('is_open', '!=', null)->first()->is_open;
         $optionIsOpen = ['0' => 'Tutup', '1' => 'Buka'];
+        $tahun_akademik = TahunAkademik::where('is_active', 1)->first();
 
-        return view('admin.pengaturan', compact('judul', 'data', 'semester', 'selectedSemester', 'is_open', 'optionIsOpen'));
+        return view('admin.pengaturan', compact('judul', 'data', 'semester', 'selectedSemester', 'is_open', 'optionIsOpen', 'tahun_akademik'));
     }
 
     /**
@@ -31,11 +32,11 @@ class PengaturanController extends Controller
      */
     public function archive_beasiswa()
     {
-        $beasiswa = Beasiswa::get();
-        $skor = Skor::get();
-        $berkas = Berkas::get();
-        $mahasiswa = Mahasiswa::get();
-        $user = User::role('mahasiswa')->get();
+        $tahun_akademik = TahunAkademik::where('is_active', 1)->first();
+        $beasiswa = Beasiswa::where('tahun_akademik_id', $tahun_akademik->id)->get();
+        $skor = Skor::where('tahun_akademik_id', $tahun_akademik->id)->get();
+        $berkas = Berkas::where('tahun_akademik_id', $tahun_akademik->id)->get();
+        $mahasiswa = Mahasiswa::where('tahun_akademik_id', $tahun_akademik->id)->get();
 
         foreach ($beasiswa as $b) {
             $b->archive();
@@ -51,10 +52,7 @@ class PengaturanController extends Controller
 
         foreach ($mahasiswa as $m) {
             $m->archive();
-        }
-
-        foreach ($user as $u) {
-            $u->archive();
+            $m->user->archive();
         }
 
         return redirect()->back()->with('success', 'Data berhasil diarsipkan');
@@ -100,6 +98,31 @@ class PengaturanController extends Controller
         $data = Pengaturan::findOrFail($id);
         // Tempus to DateTime
         $batas_pengajuan = $data->convertBatasPengajuan($request->batas_pengajuan);
+        // Validasi Tahun Akademik
+        $tahun_awal = $request->tahun_awal;
+        $tahun_akhir = $request->tahun_akhir;
+        $tahun_akhir_valid = $tahun_awal + 1;
+        if ($tahun_awal >= $tahun_akhir || $tahun_akhir != $tahun_akhir_valid) {
+            return redirect()->back()->with('error', 'Tahun akademik tidak valid');
+        }
+        // Cek apakah tahun akademik sudah ada
+        $tahun_akademik = TahunAkademik::where('tahun_awal', $tahun_awal)->where('tahun_akhir', $tahun_akhir)->first();
+        if ($tahun_akademik) {
+            // Set is_active = 0 untuk tahun akademik yang lain
+            TahunAkademik::where('id', '!=', $tahun_akademik->id)->update(['is_active' => 0]);
+            // Jika sudah ada, cek apakah tahun akademik yang dipilih aktif
+            $tahun_akademik->is_active = true;
+            $tahun_akademik->save();
+        } else {
+            // Set is_active = 0 untuk tahun akademik yang lain
+            TahunAkademik::query()->update(['is_active' => 0]);
+            // Jika belum ada, buat tahun akademik baru
+            TahunAkademik::create([
+                'tahun_awal' => $tahun_awal,
+                'tahun_akhir' => $tahun_akhir,
+                'is_active' => true,
+            ]);
+        }
         $data->update([
             'is_open' => $request->is_open,
             'semester' => $request->semester,

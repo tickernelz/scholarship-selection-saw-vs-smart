@@ -11,6 +11,8 @@ return new class extends Migration {
             $table->id();
             $table->integer('mahasiswa_id')->unsigned();
             $table->foreign('mahasiswa_id')->references('id')->on('mahasiswas')->cascadeOnDelete();
+            $table->integer('tahun_akademik_id')->unsigned();
+            $table->foreign('tahun_akademik_id')->references('id')->on('tahun_akademiks')->cascadeOnDelete();
             $table->float('skor_saw')->nullable();
             $table->float('skor_smart')->nullable();
             $table->timestamps();
