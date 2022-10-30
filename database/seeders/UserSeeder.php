@@ -3,11 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -20,22 +17,57 @@ class UserSeeder extends Seeder
     {
         User::create([
             'name' => 'Admin',
-            'email' => 'admin@local.com',
+            'email' => 'admin@test.com',
             'password' => Hash::make('123'),
         ])->assignRole('admin');
         User::create([
-            'name' => 'Mahasiswa',
-            'email' => 'mahasiswa@local.com',
+            'name' => 'Zahratun Nisa',
+            'email' => 'zahratunnisa@test.com',
             'password' => Hash::make('123'),
         ])->assignRole('mahasiswa');
         User::create([
-            'name' => 'Zhafron',
-            'email' => 'zhafronadani@gmail.com',
+            'name' => 'Siti Taybah',
+            'email' => 'sititaybah@test.com',
             'password' => Hash::make('123'),
         ])->assignRole('mahasiswa');
         User::create([
-            'name' => 'Mahasiswa2',
-            'email' => 'mahasiswa2@local.com',
+            'name' => 'Fahrudin',
+            'email' => 'fahrudin@test.com',
+            'password' => Hash::make('123'),
+        ])->assignRole('mahasiswa');
+        User::create([
+            'name' => 'Freny Andriani',
+            'email' => 'frenyandriani@test.com',
+            'password' => Hash::make('123'),
+        ])->assignRole('mahasiswa');
+        User::create([
+            'name' => 'Aly Hidayat',
+            'email' => 'alyhidayat@test.com',
+            'password' => Hash::make('123'),
+        ])->assignRole('mahasiswa');
+        User::create([
+            'name' => 'Ahmad Khafillah',
+            'email' => 'ahmadkhafillah@test.com',
+            'password' => Hash::make('123'),
+        ])->assignRole('mahasiswa');
+        User::create([
+            'name' => 'Asep Hermawan',
+            'email' => 'asephermawan@test.com',
+            'password' => Hash::make('123'),
+        ])->assignRole('mahasiswa');
+        User::create([
+            'name' => 'Fitria Arifin',
+            'email' => 'fitriaarifin@test.com',
+            'password' => Hash::make('123'),
+        ])->assignRole('mahasiswa');
+        User::create([
+            'name' => 'Dandi Ramadani',
+            'email' => 'dandiramadani@test.com',
+            'password' => Hash::make('123'),
+        ])->assignRole('mahasiswa');
+        User::create([
+            'name' => 'Sri Wahyuni',
+            'email' => 'sriwahyuni@test.com',
             'password' => Hash::make('123'),
         ])->assignRole('mahasiswa');
     }

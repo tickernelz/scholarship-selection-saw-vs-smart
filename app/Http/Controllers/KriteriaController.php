@@ -21,6 +21,7 @@ class KriteriaController extends Controller
         if ($request->session()->get('is_edit')) {
             $request->session()->forget('kriteria');
             $request->session()->forget('subkriteria');
+            $request->session()->forget('subkriteria_hapus');
         }
         $request->session()->put('is_tambah', true);
         $request->session()->put('is_edit', false);
@@ -30,6 +31,9 @@ class KriteriaController extends Controller
         }
         if (empty($request->session()->get('kriteria'))) {
             $request->session()->put('kriteria', []);
+        }
+        if (empty($request->session()->get('subkriteria_hapus'))) {
+            $request->session()->put('subkriteria_hapus', []);
         }
         $kriteria = $request->session()->get('kriteria');
         $subkriteria = $request->session()->get('subkriteria');
@@ -50,6 +54,7 @@ class KriteriaController extends Controller
         if ($request->session()->get('is_tambah')) {
             $request->session()->forget('kriteria');
             $request->session()->forget('subkriteria');
+            $request->session()->forget('subkriteria_hapus');
         }
         $request->session()->put('is_tambah', false);
         $request->session()->put('is_edit', true);
@@ -58,6 +63,7 @@ class KriteriaController extends Controller
         if ($request->session()->get('edit_id') != $id) {
             $request->session()->forget('kriteria');
             $request->session()->forget('subkriteria');
+            $request->session()->forget('subkriteria_hapus');
         }
         $data_subkriteria = Subkriteria::where('kriteria_id', $id)->get();
         $tipe = ['benefit' => 'Benefit', 'cost' => 'Cost'];
@@ -70,8 +76,12 @@ class KriteriaController extends Controller
         if (empty($request->session()->get('kriteria'))) {
             $request->session()->put('kriteria', []);
         }
+        if (empty($request->session()->get('subkriteria_hapus'))) {
+            $request->session()->put('subkriteria_hapus', []);
+        }
         $session_kriteria = $request->session()->get('kriteria');
         $session_subkriteria = $request->session()->get('subkriteria');
+        $session_subkriteria_hapus = $request->session()->get('subkriteria_hapus');
         if (empty($session_kriteria)) {
             $session_kriteria = [
                 'id' => $data_kriteria->id,
@@ -82,7 +92,7 @@ class KriteriaController extends Controller
             ];
             $request->session()->put('kriteria', $session_kriteria);
         }
-        if (empty($session_subkriteria)) {
+        if (empty($session_subkriteria) && $session_subkriteria_hapus == null) {
             foreach ($data_subkriteria as $key => $value) {
                 $session_subkriteria[$key] = [
                     'id' => $value->id,
@@ -222,8 +232,8 @@ class KriteriaController extends Controller
                     return redirect()->back()->with('error', 'Total bobot kriteria tidak boleh lebih dari 100');
                 }
                 $subkriteria = $request->session()->get('subkriteria');
-                if (count($subkriteria) === 0) {
-                    return redirect()->back()->with('error', 'Subkriteria tidak boleh kosong');
+                if (!(count($subkriteria) > 1)) {
+                    return redirect()->back()->with('error', 'Subkriteria harus lebih dari 1');
                 }
                 $kriteria = Kriteria::find($request->id_kriteria);
                 $kriteria->update([
@@ -232,6 +242,10 @@ class KriteriaController extends Controller
                     'bobot' => $request->bobot_kriteria,
                     'required' => $request->is_berkas,
                 ]);
+                $session_subkriteria_hapus = $request->session()->get('subkriteria_hapus');
+                foreach ($session_subkriteria_hapus as $item) {
+                    Subkriteria::find($item['id'])->delete();
+                }
                 foreach ($subkriteria as $item) {
                     if ($item['id'] === null) {
                         Subkriteria::create([
@@ -249,6 +263,7 @@ class KriteriaController extends Controller
                 }
                 $request->session()->forget('subkriteria');
                 $request->session()->forget('kriteria');
+                $request->session()->forget('subkriteria_hapus');
                 self::compute_bobot();
                 return redirect()->route('get.admin.kriteria.edit', $request->id_kriteria)->with('success', 'Kriteria berhasil diubah');
         }
@@ -257,12 +272,17 @@ class KriteriaController extends Controller
     public function hapus_subkriteria(Request $request, int $id)
     {
         $subkriteria = $request->session()->get('subkriteria');
+        $subkriteria_hapus = $request->session()->get('subkriteria_hapus');
         if ($subkriteria !== null) {
             foreach ($subkriteria as $index => $item) {
                 if ($item['id'] === $id) {
                     unset($subkriteria[$index]);
                 }
             }
+            $subkriteria_hapus[] = [
+                'id' => $id,
+            ];
+            Session::put('subkriteria_hapus', $subkriteria_hapus);
             Session::put('subkriteria', $subkriteria);
         }
         self::compute_bobot();
