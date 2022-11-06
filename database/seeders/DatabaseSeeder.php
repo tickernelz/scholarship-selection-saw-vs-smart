@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             KriteriaTableSeeder::class,
             SubKriteriaTableSeeder::class,
             BeasiswasTableSeeder::class,
+            SkorsTableSeeder::class,
             PengaturanSeeder::class,
         ]);
     }
