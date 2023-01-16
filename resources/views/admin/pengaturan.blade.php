@@ -71,6 +71,15 @@
                         <x-adminlte-options :options="$optionIsOpen" :selected="$is_open"/>
                     </x-adminlte-select>
 
+                    <x-adminlte-input name="batas_skor" type="number" label="Batas Skor"
+                                      placeholder="Batas Skor" step="0.01" value="{{ $data->batas_skor ?? 0.0 }}">
+                        <x-slot name="prependSlot">
+                            <div class="input-group-text">
+                                <i class="fas fa-sort-numeric-up"></i>
+                            </div>
+                        </x-slot>
+                    </x-adminlte-input>
+
                     <x-slot name="footerSlot">
                         <x-adminlte-button class="btn-primary d-flex ml-auto" type="submit"
                                            label="{{ trans('auth.simpan') }}"

@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->boolean('is_open')->default(false);
             $table->enum('semester', ['ganjil', 'genap'])->default('ganjil');
             $table->dateTime('batas_pengajuan')->nullable();
+            $table->float('batas_skor')->nullable();
             $table->timestamps();
         });
     }

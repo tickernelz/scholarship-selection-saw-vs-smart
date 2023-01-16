@@ -115,8 +115,9 @@ class BeasiswaController extends Controller
         }
 
         $data = Mahasiswa::where('is_beasiswa_send', 1)->get();
+        $pengaturan = Pengaturan::first();
 
-        return view('admin.beasiswa.index-admin', compact('data', 'judul', 'transpose_matrix', 'transpose_matrix_normalisasi', 'perangkingan', 'data_kriteria', 'route_now'));
+        return view('admin.beasiswa.index-admin', compact('data', 'judul', 'transpose_matrix', 'transpose_matrix_normalisasi', 'perangkingan', 'data_kriteria', 'route_now', 'pengaturan'));
     }
 
     public function index_smart(Request $request)
@@ -205,8 +206,9 @@ class BeasiswaController extends Controller
         }
 
         $data = Mahasiswa::where('is_beasiswa_send', 1)->get();
+        $pengaturan = Pengaturan::first();
 
-        return view('admin.beasiswa.index-admin', compact('data', 'judul', 'data_kriteria', 'transpose_matrix', 'transpose_matrix_normalisasi', 'perangkingan', 'route_now'));
+        return view('admin.beasiswa.index-admin', compact('data', 'judul', 'data_kriteria', 'transpose_matrix', 'transpose_matrix_normalisasi', 'perangkingan', 'route_now', 'pengaturan'));
     }
 
     public function send()

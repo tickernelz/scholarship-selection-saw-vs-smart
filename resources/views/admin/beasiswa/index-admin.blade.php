@@ -22,18 +22,19 @@
         'Telepon',
         'Berkas',
         'Status',
+        'Lolos',
         'Skor',
         'Aksi',
     ];
     $config = [
-    'order' => [[10, 'desc']],
+    'order' => [[11, 'desc']],
     'dom' => 'Bfrtip',
     'buttons' => [
-        ['extend' => 'print', 'exportOptions' => ['columns' => [1, 2, 3, 4, 5, 6, 7, 9, 10]], 'className' => 'btn btn-default btn-sm no-corner', 'text' => '<i class="fa fa-print"></i> Print'],
-        ['extend' => 'excel', 'exportOptions' => ['columns' => [1, 2, 3, 4, 5, 6, 7, 9, 10]], 'className' => 'btn btn-success btn-sm no-corner', 'text' => '<i class="fa fa-file-excel"></i> Excel'],
-        ['extend' => 'pdf', 'orientation'=> 'landscape', 'exportOptions' => ['columns' => [1, 2, 3, 4, 5, 6, 7, 9, 10]], 'className' => 'btn btn-danger btn-sm no-corner', 'text' => '<i class="fa fa-file-pdf"></i> PDF'],
+        ['extend' => 'print', 'exportOptions' => ['columns' => [1, 2, 3, 4, 5, 6, 7, 9, 10, 11]], 'className' => 'btn btn-default btn-sm no-corner', 'text' => '<i class="fa fa-print"></i> Print'],
+        ['extend' => 'excel', 'exportOptions' => ['columns' => [1, 2, 3, 4, 5, 6, 7, 9, 10, 11]], 'className' => 'btn btn-success btn-sm no-corner', 'text' => '<i class="fa fa-file-excel"></i> Excel'],
+        ['extend' => 'pdf', 'orientation'=> 'landscape', 'exportOptions' => ['columns' => [1, 2, 3, 4, 5, 6, 7, 9, 10, 11]], 'className' => 'btn btn-danger btn-sm no-corner', 'text' => '<i class="fa fa-file-pdf"></i> PDF'],
 ],
-    'columns' => [null, null, null, null, null, null, null, null, null, null, null, ['orderable' => false, 'className' => 'text-center']],
+    'columns' => [null, null, null, null, null, null, null, null, null, null, null, null, ['orderable' => false, 'className' => 'text-center']],
     ];
 @endphp
 
@@ -124,6 +125,21 @@
                                     <span class="badge badge-success">Diterima</span>
                                 @else
                                     <span class="badge badge-warning">Menunggu</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if (Session::get('is_saw') == 1)
+                                    @if (round($li->skor->skor_saw, 4) >= round($pengaturan->batas_skor, 4))
+                                        <span class="badge badge-success">Lolos</span>
+                                    @else
+                                        <span class="badge badge-danger">Tidak Lolos</span>
+                                    @endif
+                                @else
+                                    @if (round($li->skor->skor_smart, 4) >= round($pengaturan->batas_skor, 4))
+                                        <span class="badge badge-success">Lolos</span>
+                                    @else
+                                        <span class="badge badge-danger">Tidak Lolos</span>
+                                    @endif
                                 @endif
                             </td>
                             @if (Session::get('is_saw') == 1)

@@ -96,6 +96,12 @@ class PengaturanController extends Controller
     public function update(Request $request, $id)
     {
         $data = Pengaturan::findOrFail($id);
+        // Batas Skor
+        $skor = $request->batas_skor;
+        // Logic skor float 0-1
+        if ($skor < 0 || $skor > 1) {
+            return redirect()->back()->with('error', 'Skor harus 0-1');
+        }
         // Tempus to DateTime
         $batas_pengajuan = $data->convertBatasPengajuan($request->batas_pengajuan);
         // Validasi Tahun Akademik
@@ -127,6 +133,7 @@ class PengaturanController extends Controller
             'is_open' => $request->is_open,
             'semester' => $request->semester,
             'batas_pengajuan' => $batas_pengajuan,
+            'batas_skor' => $skor,
         ]);
         return redirect()->back()->with('success', 'Pengaturan berhasil diubah');
     }
