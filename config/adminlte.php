@@ -377,6 +377,12 @@ return [
             ],
         ],
         [
+            'text' => 'Grafik Perbandingan',
+            'icon' => 'fas fa-fw fa-chart-bar',
+            'url' => 'admin/grafik-perbandingan',
+            'can' => 'kelola beasiswa',
+        ],
+        [
             'text' => 'Daftar',
             'icon' => 'fas fa-fw fa-file-contract',
             'url' => 'admin/daftar-beasiswa/step-two',

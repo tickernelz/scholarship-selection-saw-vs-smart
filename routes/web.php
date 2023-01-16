@@ -113,6 +113,7 @@ Route::group(['middleware' => 'auth'], static function () {
         Route::get('admin/beasiswa/detail_smart/{id}', [BeasiswaController::class, 'detail_smart'])->name('get.admin.beasiswa.detail_smart');
         Route::post('admin/beasiswa/terima', [BeasiswaController::class, 'terima'])->name('post.admin.beasiswa.terima');
         Route::post('admin/beasiswa/tolak', [BeasiswaController::class, 'tolak'])->name('post.admin.beasiswa.tolak');
+        Route::get('admin/grafik-perbandingan', [BeasiswaController::class, 'grafik'])->name('get.admin.grafik.perbandingan');
     });
     // Kelola Arsip Beasiswa
     Route::group(['middleware' => ['can:kelola pengaturan']], static function () {
