@@ -377,9 +377,9 @@ return [
             ],
         ],
         [
-            'text' => 'Grafik Perbandingan',
+            'text' => 'Analisis Perbandingan',
             'icon' => 'fas fa-fw fa-chart-bar',
-            'url' => 'admin/grafik-perbandingan',
+            'url' => 'admin/analisis-perbandingan',
             'can' => 'kelola beasiswa',
         ],
         [

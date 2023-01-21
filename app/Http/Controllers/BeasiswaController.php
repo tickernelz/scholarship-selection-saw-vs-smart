@@ -501,11 +501,12 @@ class BeasiswaController extends Controller
         return redirect()->back()->with('success', 'Berhasil menolak penurunan UKT');
     }
 
-    public function grafik()
+    public function analisis()
     {
-        $judul = 'Grafik Perbandingan';
+        $judul = 'Analisis Perbandingan';
         $data_grafik = [];
         $data_mahasiswa = Mahasiswa::where('is_beasiswa_send', 1)->get();
+        $threshold = Pengaturan::first()->batas_skor;
         foreach ($data_mahasiswa as $m) {
             $data_grafik[$m->id] = [
                 'nama' => $m->user->name,
@@ -513,7 +514,7 @@ class BeasiswaController extends Controller
                 'skor_smart' => $m->skor->skor_smart,
             ];
         }
-        return view('admin.beasiswa.grafik-perbandingan', compact('judul', 'data_grafik'));
+        return view('admin.beasiswa.analisis-perbandingan', compact('judul', 'data_grafik', 'threshold'));
     }
 
     public function transpose($array)
