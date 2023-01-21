@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->foreign('tahun_akademik_id')->references('id')->on('tahun_akademiks')->cascadeOnDelete();
             $table->float('skor_saw')->nullable();
             $table->float('skor_smart')->nullable();
+            $table->float('skor_real')->nullable();
             $table->timestamps();
             $table->archivedAt(); // Macro
         });

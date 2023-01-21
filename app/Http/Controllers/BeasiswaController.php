@@ -506,15 +506,87 @@ class BeasiswaController extends Controller
         $judul = 'Analisis Perbandingan';
         $data_grafik = [];
         $data_mahasiswa = Mahasiswa::where('is_beasiswa_send', 1)->get();
+        $confusion_matrix_saw = [
+            'TP' => 0,
+            'FP' => 0,
+            'TN' => 0,
+            'FN' => 0,
+        ];
+        $confusion_matrix_smart = [
+            'TP' => 0,
+            'FP' => 0,
+            'TN' => 0,
+            'FN' => 0,
+        ];
         $threshold = Pengaturan::first()->batas_skor;
         foreach ($data_mahasiswa as $m) {
+            $nim = $m->nim;
+            $nama = $m->user->name;
+            $angkatan = $m->angkatan;
+            $semester = $m->semester;
+            $skor_saw = $m->skor->skor_saw;
+            $skor_smart = $m->skor->skor_smart;
+            $skor_real = $m->skor->skor_real;
+            $is_lulus_saw = $skor_saw >= $threshold;
+            $is_lulus_smart = $skor_smart >= $threshold;
+            $is_lulus_real = ($skor_real ?? 0) >= $threshold;
             $data_grafik[$m->id] = [
-                'nama' => $m->user->name,
-                'skor_saw' => $m->skor->skor_saw,
-                'skor_smart' => $m->skor->skor_smart,
+                'id' => $m->id,
+                'nim' => $nim,
+                'nama' => $nama,
+                'angkatan' => $angkatan,
+                'semester' => $semester,
+                'skor_saw' => $skor_saw,
+                'skor_smart' => $skor_smart,
+                'skor_real' => $skor_real,
+                'is_lulus_saw' => $is_lulus_saw,
+                'is_lulus_smart' => $is_lulus_smart,
+                'is_lulus_real' => $is_lulus_real,
             ];
+            $confusion_matrix_saw['TP'] += $is_lulus_saw && $is_lulus_real;
+            $confusion_matrix_saw['FP'] += $is_lulus_saw && !$is_lulus_real;
+            $confusion_matrix_saw['TN'] += !$is_lulus_saw && !$is_lulus_real;
+            $confusion_matrix_saw['FN'] += !$is_lulus_saw && $is_lulus_real;
+            $confusion_matrix_smart['TP'] += $is_lulus_smart && $is_lulus_real;
+            $confusion_matrix_smart['FP'] += $is_lulus_smart && !$is_lulus_real;
+            $confusion_matrix_smart['TN'] += !$is_lulus_smart && !$is_lulus_real;
+            $confusion_matrix_smart['FN'] += !$is_lulus_smart && $is_lulus_real;
+            $confusion_matrix_saw['akurasi'] = ($confusion_matrix_saw['TP'] + $confusion_matrix_saw['TN']) / ($confusion_matrix_saw['TP'] + $confusion_matrix_saw['TN'] + $confusion_matrix_saw['FP'] + $confusion_matrix_saw['FN']);
+            if ($confusion_matrix_saw['TP'] == 0 && $confusion_matrix_saw['FP'] == 0)
+                $confusion_matrix_saw['presisi'] = 0;
+            else
+                $confusion_matrix_saw['presisi'] = $confusion_matrix_saw['TP'] / ($confusion_matrix_saw['TP'] + $confusion_matrix_saw['FP']);
+            if ($confusion_matrix_saw['TP'] == 0 && $confusion_matrix_saw['FN'] == 0)
+                $confusion_matrix_saw['recall'] = 0;
+            else
+                $confusion_matrix_saw['recall'] = $confusion_matrix_saw['TP'] / ($confusion_matrix_saw['TP'] + $confusion_matrix_saw['FN']);
+            $confusion_matrix_smart['akurasi'] = ($confusion_matrix_smart['TP'] + $confusion_matrix_smart['TN']) / ($confusion_matrix_smart['TP'] + $confusion_matrix_smart['TN'] + $confusion_matrix_smart['FP'] + $confusion_matrix_smart['FN']);
+            if ($confusion_matrix_smart['TP'] == 0 && $confusion_matrix_smart['FP'] == 0)
+                $confusion_matrix_smart['presisi'] = 0;
+            else
+                $confusion_matrix_smart['presisi'] = $confusion_matrix_smart['TP'] / ($confusion_matrix_smart['TP'] + $confusion_matrix_smart['FP']);
+            if ($confusion_matrix_smart['TP'] == 0 && $confusion_matrix_smart['FN'] == 0)
+                $confusion_matrix_smart['recall'] = 0;
+            else
+                $confusion_matrix_smart['recall'] = $confusion_matrix_smart['TP'] / ($confusion_matrix_smart['TP'] + $confusion_matrix_smart['FN']);
         }
-        return view('admin.beasiswa.analisis-perbandingan', compact('judul', 'data_grafik', 'threshold'));
+        return view('admin.beasiswa.analisis-perbandingan', compact('judul', 'data_grafik', 'threshold', 'confusion_matrix_saw', 'confusion_matrix_smart'));
+    }
+
+    public function save_skor_real(Request $request)
+    {
+        $data = $request->all();
+        $skor_real = $data['skor_real'];
+        try {
+            foreach ($skor_real as $key => $value) {
+                $skor = Skor::where('mahasiswa_id', $key)->first();
+                $skor->skor_real = $value;
+                $skor->save();
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 'error']);
+        }
+        return response()->json(['status' => 'success']);
     }
 
     public function transpose($array)

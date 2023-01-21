@@ -114,6 +114,7 @@ Route::group(['middleware' => 'auth'], static function () {
         Route::post('admin/beasiswa/terima', [BeasiswaController::class, 'terima'])->name('post.admin.beasiswa.terima');
         Route::post('admin/beasiswa/tolak', [BeasiswaController::class, 'tolak'])->name('post.admin.beasiswa.tolak');
         Route::get('admin/analisis-perbandingan', [BeasiswaController::class, 'analisis'])->name('get.admin.analisis-perbandingan');
+        Route::post('admin/beasiswa/save/skor_real', [BeasiswaController::class, 'save_skor_real'])->name('post.admin.mahasiswa.skor_real');
     });
     // Kelola Arsip Beasiswa
     Route::group(['middleware' => ['can:kelola pengaturan']], static function () {
